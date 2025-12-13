@@ -11,7 +11,7 @@
     body{margin:0;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 700px at 20% 10%,rgba(255,179,200,.20),transparent 55%),radial-gradient(900px 700px at 90% 25%,rgba(205,180,255,.18),transparent 52%),radial-gradient(1100px 700px at 50% 110%,rgba(255,214,165,.12),transparent 55%),linear-gradient(180deg,var(--bg1),var(--bg2));overflow-x:hidden}
     a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
     .nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(10px);background:rgba(10,12,25,.55);border-bottom:1px solid rgba(255,255,255,.08)}
-    .navIn{max-width:1120px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px}
+    .navIn{max-width:1120px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;cursor:pointer}
     .badge{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--muted)}
     .links{display:flex;gap:10px;flex-wrap:wrap}.links a{text-decoration:none;font-size:13px;color:var(--muted);padding:8px 10px;border-radius:12px}
@@ -76,6 +76,26 @@
     .opt{display:block;margin-top:10px;cursor:pointer}.result{display:none;margin-top:12px;padding:12px 14px;border-radius:16px;border:1px solid rgba(167,243,208,.35);background:rgba(167,243,208,.10)}
     .loading{position:fixed;inset:0;background:var(--bg1);display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity 0.5s}.loading.hide{opacity:0;pointer-events:none}
     .loadingText{font-size:24px;font-weight:800;animation:blink 1s infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.5}}
+
+    /* ✅ Mobile menu: toggle .show */
+    @media(max-width:900px){
+      .links.show{
+        display:flex !important;
+        width:100%;
+        flex-direction:column;
+        gap:6px;
+        padding:10px 0 2px;
+      }
+      .links.show a{
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(0,0,0,.12);
+      }
+    }
+
+    /* ✅ Voice wall styling */
+    .audioCard audio{width:100%;margin-top:10px}
+    .audioMeta{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+    .audioChip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--muted)}
   </style>
 </head>
 <body>
@@ -84,7 +104,7 @@
   <canvas id="confetti"></canvas>
   <div class="confetti-icon" id="confettiIcon">🎊</div>
   <button class="music-btn" id="musicBtn" title="Bật nhạc sinh nhật">🎵</button>
-  
+
   <!-- YouTube Music Modal -->
   <div class="music-modal" id="musicModal">
     <div class="music-modal-content">
@@ -94,9 +114,18 @@
   </div>
 
   <div class="nav"><div class="navIn">
-    <div class="brand" id="brand">✨ Birthday Spotlight </div>
+    <div class="brand" id="brand">✨ Birthday Spotlight <span class="badge">Sang 65 · Hài 20 · Ấm 15</span></div>
     <button class="menuToggle" id="menuToggle">☰</button>
-    <div class="links" id="navLinks"><a href="#spotlight">Spotlight</a><a href="#awards">Dấu ấn</a><a href="#gallery">Gallery</a><a href="#messages">Lời chúc</a><a href="#scratch">Cào</a><a href="#slot">Quay số</a><a href="#finale">Finale</a></div>
+    <div class="links" id="navLinks">
+      <a href="#spotlight">Spotlight</a>
+      <a href="#awards">Dấu ấn</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#messages">Lời chúc</a>
+      <a href="#voice">Voice</a>
+      <a href="#scratch">Cào</a>
+      <a href="#slot">Quay số</a>
+      <a href="#finale">Finale</a>
+    </div>
     <div class="spacer"></div><button class="btn" id="btnConfetti2">🎊 Bắn pháo</button>
   </div></div>
 
@@ -130,15 +159,23 @@
       <div class="galleryGrid"><img src="./anh1.JPG" class="galleryItem" alt="Ảnh 1"><img src="./anh2.JPG" class="galleryItem" alt="Ảnh 2"></div>
     </section>
 
-    <section class="card" id="messages" style="margin-top:14px"><div class="kicker">FROM TEAM</div><h2>Lời chúc từ team</h2>
-      <div class="msgGrid" style="margin-top:12px">
-        <div class="msgCard"><div class="who">Member 1</div><div class="quote">"Chúc sếp tuổi mới nhiều sức khỏe!"</div></div>
-        <div class="msgCard"><div class="who">Member 2</div><div class="quote">"Cảm ơn sếp luôn tạo không gian tiến bộ."</div></div>
-        <div class="msgCard"><div class="who">Member 3</div><div class="quote">"Patch note: +1 tuổi, +100% thần thái ✨"</div></div>
-        <div class="msgCard"><div class="who">Member 4</div><div class="quote">"Leadership = caring + competence."</div></div>
-        <div class="msgCard"><div class="who">Member 5</div><div class="quote">"Chúc sếp ít meeting, nhiều coffee! 😄"</div></div>
-        <div class="msgCard"><div class="who">Member 6</div><div class="quote">"Chúc sếp đạt mọi mục tiêu!"</div></div>
-      </div>
+    <!-- ✅ TEXT GUESTBOOK (rendered by JS) -->
+    <section class="card" id="messages" style="margin-top:14px">
+      <div class="kicker">FROM TEAM</div>
+      <h2>Lời chúc từ team</h2>
+      <p style="margin-top:6px">Những lời chúc đã được team chọn lọc 💖</p>
+      <div class="msgGrid" id="msgGrid" style="margin-top:12px"></div>
+    </section>
+
+    <!-- ✅ VOICE WALL -->
+    <section class="card" id="voice" style="margin-top:14px">
+      <div class="kicker">VOICE NOTES</div>
+      <h2>🎙️ Lời chúc bằng giọng nói</h2>
+      <p>Nhấn play để nghe. (Mỗi voice 10–20s là “đắt” nhất)</p>
+      <div class="msgGrid" id="voiceGrid" style="margin-top:12px"></div>
+      <p style="margin-top:10px;font-size:13px">
+        📁 Gợi ý: để file trong <b>./audio/</b> (ví dụ: <i>audio/01_member1.mp3</i>)
+      </p>
     </section>
 
     <section class="card" id="scratch" style="margin-top:14px"><div class="kicker">BÍ MẬT</div><h2>🎫 Cào lộ lời chúc</h2><p>Dùng chuột cào để xem!</p>
@@ -167,6 +204,8 @@
   <div class="backdrop" id="backdrop"><div class="modal"><div class="modalTop"><b>🎬 Video bất ngờ</b><button class="btn closeX" id="btnClose">✕</button></div><div class="modalBody"><div class="videoBox">VIDEO PLACEHOLDER</div></div></div></div>
 
   <script>
+    const isCoarse = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+
     // COUNTDOWN
     let count=3;const countdownOverlay=document.getElementById('countdownOverlay'),countdownNum=document.getElementById('countdownNum');
     function startCountdown(){document.getElementById('loading').classList.add('hide');const i=setInterval(()=>{count--;if(count>0){countdownNum.style.animation='none';countdownNum.offsetHeight;countdownNum.style.animation='countPop 0.5s';countdownNum.textContent=count}else if(count===0){countdownNum.textContent='🎉';countdownNum.style.fontSize='120px'}else{clearInterval(i);countdownOverlay.classList.add('hide');setTimeout(boom,300);startBalloons()}},800)}
@@ -183,14 +222,18 @@
     function boom(){spawn(280);tick()}
     document.getElementById('btnBoom').onclick=boom;document.getElementById('btnConfetti').onclick=boom;document.getElementById('btnConfetti2').onclick=boom;
 
-    // CONFETTI ICON ROTATION
+    // CONFETTI ICON ROTATION (skip on mobile)
     const confettiIcon=document.getElementById('confettiIcon');
-    document.addEventListener('mousemove',e=>{const r=confettiIcon.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),angle=Math.atan2(dy,dx)*(180/Math.PI);confettiIcon.style.transform=`rotate(${angle-90}deg)`});
+    if(!isCoarse){
+      document.addEventListener('mousemove',e=>{const r=confettiIcon.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),angle=Math.atan2(dy,dx)*(180/Math.PI);confettiIcon.style.transform=`rotate(${angle-90}deg)`});
+    }
     confettiIcon.onclick=boom;
 
-    // SPARKLE
+    // SPARKLE (skip on mobile)
     const sparkles=['✨','⭐','💫','🌟'];let sparkleT=0;
-    document.addEventListener('mousemove',e=>{if(Date.now()-sparkleT<80||Math.random()>.4)return;sparkleT=Date.now();const s=document.createElement('div');s.className='sparkle';s.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];s.style.left=(e.clientX-10)+'px';s.style.top=(e.clientY-10)+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),800)});
+    if(!isCoarse){
+      document.addEventListener('mousemove',e=>{if(Date.now()-sparkleT<80||Math.random()>.4)return;sparkleT=Date.now();const s=document.createElement('div');s.className='sparkle';s.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];s.style.left=(e.clientX-10)+'px';s.style.top=(e.clientY-10)+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),800)});
+    }
 
     // BALLOONS
     const balloons=['🎈','🩷','💜','💛','🩵'];
@@ -208,14 +251,15 @@
     const musicModal=document.getElementById('musicModal');
     const musicClose=document.getElementById('musicClose');
     const ytPlayer=document.getElementById('ytPlayer');
-    
+
     // YouTube video ID - Happy Birthday Piano
     const youtubeVideoId='Uc7DfbBcfvk';
-    
+
     let musicOpen=false;
     musicBtn.onclick=()=>{
       if(!musicOpen){
-        ytPlayer.src=`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&loop=1`;
+        // ✅ loop cần playlist=videoId
+        ytPlayer.src=`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&loop=1&playlist=${youtubeVideoId}`;
         musicModal.classList.add('show');
         musicBtn.textContent='🔊';
         musicBtn.classList.add('playing');
@@ -227,7 +271,7 @@
       }
       musicOpen=!musicOpen;
     };
-    
+
     musicClose.onclick=()=>{
       ytPlayer.src='';
       musicModal.classList.remove('show');
@@ -246,28 +290,25 @@
     function initScratch(){
       const rect=scratchContainer.getBoundingClientRect();
       if(rect.width===0||rect.height===0)return;
-      
+
       scratchCanvas.width=rect.width;
       scratchCanvas.height=rect.height;
-      
-      // Reset composite operation
+
       scratchCtx.globalCompositeOperation='source-over';
-      
-      // Draw gradient background
+
       const gradient=scratchCtx.createLinearGradient(0,0,rect.width,rect.height);
       gradient.addColorStop(0,'#ffb3c8');
       gradient.addColorStop(0.5,'#cdb4ff');
       gradient.addColorStop(1,'#ffd6a5');
       scratchCtx.fillStyle=gradient;
       scratchCtx.fillRect(0,0,rect.width,rect.height);
-      
-      // Draw text
+
       scratchCtx.fillStyle='rgba(255,255,255,0.95)';
       scratchCtx.font='bold 20px system-ui';
       scratchCtx.textAlign='center';
       scratchCtx.textBaseline='middle';
       scratchCtx.fillText('🎁 Cào tại đây để xem!',rect.width/2,rect.height/2);
-      
+
       scratchReady=true;
     }
 
@@ -294,18 +335,15 @@
       doScratch(x,y);
     }
 
-    // Mouse events
     scratchCanvas.addEventListener('mousedown',e=>{isScratching=true;handleScratch(e)});
     scratchCanvas.addEventListener('mouseup',()=>isScratching=false);
     scratchCanvas.addEventListener('mouseleave',()=>isScratching=false);
     scratchCanvas.addEventListener('mousemove',handleScratch);
 
-    // Touch events
     scratchCanvas.addEventListener('touchstart',e=>{isScratching=true;handleScratch(e)},{passive:false});
     scratchCanvas.addEventListener('touchend',()=>isScratching=false);
     scratchCanvas.addEventListener('touchmove',handleScratch,{passive:false});
 
-    // Initialize after page is fully loaded
     window.addEventListener('load',()=>setTimeout(initScratch,500));
     window.addEventListener('resize',()=>{scratchReady=false;setTimeout(initScratch,100)});
 
@@ -326,6 +364,59 @@
 
     // QUIZ
     document.getElementById('btnCheck').onclick=()=>{const pick=n=>{const el=document.querySelector(`input[name="${n}"]:checked`);return el?Number(el.value):null};const a=pick('q1'),b=pick('q2'),c=pick('q3'),res=document.getElementById('quizResult');if(a===null||b===null||c===null){res.style.display='block';res.textContent='Chọn đủ 3 câu nha 😄';return}const score=a+b+c;res.style.display='block';if(score===3){res.textContent='🔥 3/3! Team hiểu sếp quá chuẩn!';boom()}else if(score===2)res.textContent='✨ 2/3! Khá đúng vibe!';else res.textContent='😄 0–1/3! Quan trọng là chân thành!'};
+
+    // ✅ DATA-DRIVEN TEXT GUESTBOOK
+    const messages = [
+      { name: "Member 1", tag: "Chân thành", text: "Chúc sếp tuổi mới nhiều sức khỏe!" },
+      { name: "Member 2", tag: "Tôn vinh", text: "Cảm ơn sếp luôn tạo không gian tiến bộ." },
+      { name: "Member 3", tag: "Vui nhẹ", text: "Patch note: +1 tuổi, +100% thần thái ✨" },
+      { name: "Member 4", tag: "Sang", text: "Leadership = caring + competence." },
+      { name: "Member 5", tag: "Vui nhẹ", text: "Chúc sếp ít meeting, nhiều coffee! 😄" },
+      { name: "Member 6", tag: "Chân thành", text: "Chúc sếp đạt mọi mục tiêu!" },
+      // TODO: thêm lời chúc ở đây
+    ];
+
+    const msgGrid = document.getElementById("msgGrid");
+    if (msgGrid) {
+      msgGrid.innerHTML = messages.map(m => `
+        <div class="msgCard">
+          <div class="who">${m.name}</div>
+          ${m.tag ? `<div class="tag">${m.tag}</div>` : ``}
+          <div class="quote">"${m.text}"</div>
+        </div>
+      `).join("");
+    }
+
+    // ✅ VOICE WALL (host audio files in ./audio/)
+    const voiceNotes = [
+      { name: "Member 1", tag: "Warm", src: "./audio/01_member1.mp3", text: "Chúc sếp luôn rực rỡ 💖" },
+      { name: "Member 2", tag: "Sang", src: "./audio/02_member2.mp3", text: "Cảm ơn sếp vì luôn lắng nghe và dẫn dắt." },
+      // TODO: thêm voice ở đây
+    ];
+
+    const voiceGrid = document.getElementById("voiceGrid");
+    if (voiceGrid) {
+      voiceGrid.innerHTML = voiceNotes.map(v => `
+        <div class="msgCard audioCard">
+          <div class="audioMeta">
+            <div class="who">${v.name}</div>
+            <span class="audioChip">${v.tag ?? "Voice"}</span>
+          </div>
+          ${v.text ? `<div class="quote">"${v.text}"</div>` : ``}
+          <audio controls preload="none">
+            <source src="${v.src}" type="audio/mpeg">
+            Trình duyệt không hỗ trợ audio.
+          </audio>
+        </div>
+      `).join("");
+
+      // play 1 cái thì pause các cái khác
+      voiceGrid.querySelectorAll("audio").forEach(a => {
+        a.addEventListener("play", () => {
+          voiceGrid.querySelectorAll("audio").forEach(b => { if (b !== a) b.pause(); });
+        });
+      });
+    }
   </script>
 </body>
 </html>
