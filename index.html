@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday, Boss ✨</title>
+  <!-- Favicon emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#1a0f2b;
+      --card:rgba(255,255,255,.08);
+      --stroke:rgba(255,255,255,.18);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --accent1:#ffb3c8;
+      --accent2:#ffd6a5;
+      --accent3:#cdb4ff;
+      --ok:#a7f3d0;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(255,179,200,.20), transparent 55%),
+        radial-gradient(900px 700px at 90% 25%, rgba(205,180,255,.18), transparent 52%),
+        radial-gradient(1100px 700px at 50% 110%, rgba(255,214,165,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+
+    /* layout */
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+    .nav{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter: blur(10px);
+      background:rgba(10,12,25,.55);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .navIn{max-width:1120px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px}
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800;letter-spacing:.4px;
+      cursor:pointer;
+    }
+    .badge{
+      font-size:12px;padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    .links a{
+      text-decoration:none;font-size:13px;color:var(--muted);
+      padding:8px 10px;border-radius:12px;border:1px solid transparent;
+    }
+    .links a:hover{border-color:rgba(255,255,255,.14);color:var(--text)}
+    .spacer{flex:1}
+    .btn{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;border-radius:14px;
+      font-weight:750;cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .btn:hover{border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btnPrimary{
+      background:linear-gradient(135deg, rgba(255,179,200,.95), rgba(255,214,165,.90));
+      color:#12131a;border:none;
+      box-shadow:0 16px 40px rgba(0,0,0,.35);
+    }
+    .btnPrimary:hover{filter:brightness(1.05);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+    .grid{display:grid;gap:14px}
+    .grid2{grid-template-columns: 1.2fr .8fr}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    
+    /* Mobile responsive */
+    @media (max-width: 900px){ 
+      .grid2,.grid3{grid-template-columns:1fr} 
+      .brand .badge{display:none}
+      .links{display:none}
+      h1{font-size:32px !important}
+    }
+    
+    /* Mobile menu toggle */
+    .menuToggle{
+      display:none;
+      background:transparent;
+      border:1px solid rgba(255,255,255,.18);
+      color:var(--text);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+    @media (max-width: 900px){
+      .menuToggle{display:block}
+      .links.show{
+        display:flex;
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        background:rgba(10,12,25,.95);
+        backdrop-filter:blur(10px);
+        padding:12px 18px;
+        flex-direction:column;
+        border-bottom:1px solid rgba(255,255,255,.1);
+      }
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 22px 70px rgba(0,0,0,.35);
+    }
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+    h1{
+      margin:10px 0 8px;
+      font-size:44px;line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    h2{margin:0 0 10px;font-size:26px;letter-spacing:-.01em}
+    p{margin:8px 0;color:var(--muted);line-height:1.6}
+    .hr{height:1px;background:rgba(255,255,255,.10);margin:14px 0;border:0}
+
+    /* hero */
+    .hero{
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .glow{
+      position:absolute;inset:-120px -120px auto auto;
+      width:520px;height:520px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(255,179,200,.35), transparent 55%);
+      filter: blur(2px);
+      pointer-events:none;
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{opacity:0.8;transform:scale(1)}
+      50%{opacity:1;transform:scale(1.05)}
+    }
+    .avatar{
+      width:100%;aspect-ratio: 4/3;border-radius:18px;
+      border:1px dashed rgba(255,255,255,.25);
+      background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      display:grid;place-items:center;
+      color:rgba(255,255,255,.65);
+      font-weight:700;
+      text-align:center;
+      padding:12px;
+    }
+    .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .pill{
+      font-size:12px;padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.18);
+      color:rgba(255,255,255,.78);
+    }
+
+    /* spotlight cards */
+    .stat{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:14px;border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .stat:hover{
+      transform:translateX(4px);
+      border-color:rgba(255,179,200,.3);
+    }
+    .dot{
+      width:11px;height:11px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      margin-top:6px;flex:0 0 auto;
+    }
+
+    /* message wall */
+    .msgGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width: 900px){ .msgGrid{grid-template-columns:1fr} }
+    .msgCard{
+      border-radius:18px;padding:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.16);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .msgCard:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 30px rgba(0,0,0,.3);
+    }
+    .who{font-weight:800}
+    .tag{font-size:12px;color:rgba(255,255,255,.72)}
+    .quote{margin-top:8px;color:rgba(255,255,255,.78)}
+
+    /* Gallery grid */
+    .galleryGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width: 700px){.galleryGrid{grid-template-columns:repeat(2,1fr)}}
+    .galleryItem{
+      aspect-ratio:1;
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.2);
+      background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:grid;
+      place-items:center;
+      color:rgba(255,255,255,.5);
+      font-size:13px;
+      text-align:center;
+      padding:12px;
+      transition: border-color 0.2s ease;
+    }
+    .galleryItem:hover{border-color:rgba(255,179,200,.4)}
+
+    /* modal */
+    .backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.62);
+      display:none;align-items:center;justify-content:center;
+      padding:18px;z-index:50;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal{
+      width:min(960px,100%);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(15,16,26,.88);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      box-shadow:0 30px 90px rgba(0,0,0,.6);
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .modalTop{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.10)}
+    .modalBody{padding:14px}
+    .closeX{margin-left:auto}
+    .videoBox{
+      width:100%;aspect-ratio:16/9;border-radius:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      display:grid;place-items:center;
+      color:rgba(255,255,255,.70);
+      background:rgba(0,0,0,.18);
+    }
+
+    /* confetti canvas */
+    canvas{position:fixed;inset:0;pointer-events:none;z-index:100}
+
+    /* easter egg note */
+    .secret{
+      display:none;margin-top:12px;
+      padding:12px 14px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.78);
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* quiz */
+    .q{
+      padding:14px;border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.16);
+      margin-top:12px;
+    }
+    .opt{display:block;margin-top:10px;cursor:pointer;transition:color 0.2s}
+    .opt:hover{color:var(--accent1)}
+    .result{
+      display:none;margin-top:12px;
+      padding:12px 14px;border-radius:16px;
+      border:1px solid rgba(167,243,208,.35);
+      background:rgba(167,243,208,.10);
+      color:rgba(255,255,255,.85);
+      animation: fadeIn 0.3s ease;
+    }
+    
+    /* Loading animation */
+    .loading{
+      position:fixed;inset:0;
+      background:var(--bg1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:200;
+      transition:opacity 0.5s ease;
+    }
+    .loading.hide{opacity:0;pointer-events:none}
+    .loadingText{
+      font-size:24px;
+      font-weight:800;
+      animation: blink 1s ease-in-out infinite;
+    }
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.5}}
+  </style>
+</head>
+
+<body>
+  <!-- Loading screen -->
+  <div class="loading" id="loading">
+    <div class="loadingText">🎂 Đang chuẩn bị bất ngờ...</div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="navIn">
+      <div class="brand" title="Double click để mở secret">
+        ✨ Birthday Spotlight <span class="badge">Sang 65 · Hài 20 · Ấm 15</span>
+      </div>
+      <button class="menuToggle" id="menuToggle">☰ Menu</button>
+      <div class="links" id="navLinks">
+        <a href="#spotlight">Spotlight</a>
+        <a href="#awards">Dấu ấn</a>
+        <a href="#video">Video</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#messages">Lời chúc</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#finale">Finale</a>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" id="btnConfetti2">🎊 Bắn pháo</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="grid grid2" id="spotlight" style="margin-top:18px">
+      <div class="card hero">
+        <div class="glow"></div>
+        <div class="kicker">SẾP & TEAM</div>
+        <h1 id="title">Happy Birthday, Boss 💖</h1>
+        <p>
+          Chúc sếp tuổi mới <b>luôn điềm tĩnh trong mọi tình huống</b>, tiếp tục <b>thực thi xuất sắc</b>,
+          và cùng team mình <b>phát triển mạnh mẽ</b> — đúng tinh thần "nữ tính nhưng có lực".
+        </p>
+
+        <div class="pillRow">
+          <span class="pill">👑 Spotlight mode: ON</span>
+          <span class="pill">🌸 Happy Birthday Girl</span>
+          <span class="pill">⚡ Calm • Excellence • Growth</span>
+        </div>
+
+        <hr class="hr" />
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btnPrimary" id="btnBoom">Bấm mở bất ngờ</button>
+          <button class="btn" id="btnOpenVideo">Mở video</button>
+          <a class="btn" href="#messages" style="text-decoration:none;display:inline-flex;align-items:center">Xem lời chúc</a>
+        </div>
+
+        <div class="secret" id="secretNote">
+          🤫 Secret note: "Sếp khó tính để team giỏi hơn — còn ngoài giờ thì sếp chỉ muốn mọi người vui và khỏe."
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Spotlight Story</h2>
+        <div class="stat">
+          <div class="dot"></div>
+          <div>
+            <div style="font-weight:850">Điềm tĩnh trong mọi tình huống</div>
+            <p style="margin:6px 0 0">Giữ vững nhịp, đưa ra quyết định rõ ràng — ngay cả lúc "deadline sát gáy".</p>
+          </div>
+        </div>
+
+        <div class="stat" style="margin-top:12px">
+          <div class="dot"></div>
+          <div>
+            <div style="font-weight:850">Thực thi xuất sắc</div>
+            <p style="margin:6px 0 0">Không chỉ nói đúng — mà làm tới nơi tới chốn, đúng chuẩn "high standard".</p>
+          </div>
+        </div>
+
+        <div class="stat" style="margin-top:12px">
+          <div class="dot"></div>
+          <div>
+            <div style="font-weight:850">Mong mọi người cùng phát triển</div>
+            <p style="margin:6px 0 0">Sếp nâng team lên bằng cách giao niềm tin + tạo cơ hội + feedback thẳng nhưng ấm.</p>
+          </div>
+        </div>
+
+        <hr class="hr" />
+        <p style="margin:0;font-size:13px">
+          💡 <b>Tip:</b> Double-click vào title hoặc logo để xem secret note!
+        </p>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="card" id="awards" style="margin-top:14px">
+      <div class="kicker">DẤU ẤN</div>
+      <h2>Awards & Achievements</h2>
+      <p>Vui nhẹ, sang là chính. Bạn thay nội dung cho đúng "chất sếp".</p>
+
+      <div class="grid grid3" style="margin-top:12px">
+        <div class="msgCard">
+          <div class="who">🏆 The Calm Captain</div>
+          <div class="tag">Giữ bình tĩnh — giữ đội hình</div>
+          <div class="quote">"Dù chuyện gì xảy ra, sếp vẫn là người làm team vững tâm nhất."</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">💎 Execution Excellence</div>
+          <div class="tag">Nói ít — làm chuẩn</div>
+          <div class="quote">"Mỗi lần sếp chốt là mọi thứ đi vào đường ray."</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">🌱 Growth Builder</div>
+          <div class="tag">Tạo cơ hội để team lớn</div>
+          <div class="quote">"Sếp không chỉ dẫn dắt dự án, sếp còn dẫn dắt con người."</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="card" id="video" style="margin-top:14px">
+      <div class="kicker">REVEAL</div>
+      <h2>Video bất ngờ</h2>
+      <p>Nhấn nút để mở video dạng popup. Bạn sẽ chèn link/iframe sau.</p>
+      <button class="btn btnPrimary" id="btnOpenVideo2">Mở video ngay</button>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="card" id="gallery" style="margin-top:14px">
+      <div class="kicker">MOMENTS</div>
+      <h2>Khoảnh khắc nổi bật</h2>
+      <p>Chèn 6 ảnh team/sếp vào đây (thay thế placeholder bên dưới)</p>
+      
+      <div class="galleryGrid">
+        <div class="galleryItem">📸<br>Ảnh 1</div>
+        <div class="galleryItem">📸<br>Ảnh 2</div>
+        <div class="galleryItem">📸<br>Ảnh 3</div>
+        <div class="galleryItem">📸<br>Ảnh 4</div>
+        <div class="galleryItem">📸<br>Ảnh 5</div>
+        <div class="galleryItem">📸<br>Ảnh 6</div>
+      </div>
+    </section>
+
+    <!-- MESSAGES -->
+    <section class="card" id="messages" style="margin-top:14px">
+      <div class="kicker">FROM TEAM</div>
+      <h2>Lời chúc (ấm 15%, sang 65%)</h2>
+      <p>Mỗi card 1–2 câu là đủ "đắt". Tránh dài quá.</p>
+
+      <div class="msgGrid" style="margin-top:12px">
+        <div class="msgCard">
+          <div class="who">Team Member 1</div>
+          <div class="tag">Chân thành</div>
+          <div class="quote">"Chúc sếp tuổi mới thật nhiều sức khỏe và luôn rực rỡ theo cách rất riêng."</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">Team Member 2</div>
+          <div class="tag">Tôn vinh</div>
+          <div class="quote">"Cảm ơn sếp vì luôn đặt chuẩn cao nhưng vẫn tạo không gian để tụi em tiến bộ."</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">Team Member 3</div>
+          <div class="tag">Vui nhẹ</div>
+          <div class="quote">"Patch note tuổi mới: +1 tuổi, +100% thần thái, +∞ may mắn ✨"</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">Team Member 4</div>
+          <div class="tag">Biết ơn</div>
+          <div class="quote">"Sếp là lý do em tin rằng leadership = caring + competence."</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">Team Member 5</div>
+          <div class="tag">Hài hước</div>
+          <div class="quote">"Chúc sếp năm nay ít meeting hơn, nhiều coffee break hơn 😄"</div>
+        </div>
+        <div class="msgCard">
+          <div class="who">Team Member 6</div>
+          <div class="tag">Chúc phúc</div>
+          <div class="quote">"Tuổi mới chúc sếp luôn tỏa sáng và đạt mọi mục tiêu đề ra!"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="card" id="quiz" style="margin-top:14px">
+      <div class="kicker">FUN CHECK</div>
+      <h2>Mini Quiz: Team hiểu sếp tới đâu?</h2>
+      <p>3 câu nhanh để test mức độ "thấu hiểu sếp" 😄</p>
+
+      <div class="q">
+        <div style="font-weight:850">Câu 1: "Mood" của sếp khi xử lý tình huống căng là…</div>
+        <label class="opt"><input type="radio" name="q1" value="0"> Tăng tốc và hơi gắt</label>
+        <label class="opt"><input type="radio" name="q1" value="1"> Điềm tĩnh, hỏi đúng vấn đề</label>
+        <label class="opt"><input type="radio" name="q1" value="0"> Im lặng rồi biến mất</label>
+      </div>
+
+      <div class="q">
+        <div style="font-weight:850">Câu 2: Điều sếp muốn team làm tốt nhất là…</div>
+        <label class="opt"><input type="radio" name="q2" value="0"> Nói hay</label>
+        <label class="opt"><input type="radio" name="q2" value="1"> Thực thi xuất sắc</label>
+        <label class="opt"><input type="radio" name="q2" value="0"> Trả lời tin nhắn siêu nhanh</label>
+      </div>
+
+      <div class="q">
+        <div style="font-weight:850">Câu 3: "Signature" của sếp là…</div>
+        <label class="opt"><input type="radio" name="q3" value="1"> Chuẩn cao + hỗ trợ team phát triển</label>
+        <label class="opt"><input type="radio" name="q3" value="0"> Vui tính toàn thời gian</label>
+        <label class="opt"><input type="radio" name="q3" value="0"> Không bao giờ feedback</label>
+      </div>
+
+      <button class="btn btnPrimary" id="btnCheck">Chấm điểm</button>
+      <div class="result" id="quizResult"></div>
+    </section>
+
+    <!-- FINALE -->
+    <section class="card" id="finale" style="margin-top:14px">
+      <div class="kicker">FINALE</div>
+      <h2>Kết lại một câu "đắt"</h2>
+      <p style="font-size:18px;color:var(--text);line-height:1.7">
+        Tụi em chúc sếp tuổi mới thật nhiều năng lượng, luôn rực rỡ và mạnh mẽ,<br>
+        và tụi em sẽ cố gắng để xứng đáng với sự kỳ vọng + sự dẫn dắt của sếp. 💖
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <button class="btn btnPrimary" id="btnConfetti">🎉 Bắn pháo giấy lần nữa</button>
+        <a class="btn" href="#spotlight" style="text-decoration:none">⬆️ Quay lại đầu trang</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modalTop">
+        <div style="font-weight:900">🎬 Video bất ngờ</div>
+        <button class="btn closeX" id="btnClose">✕ Đóng</button>
+      </div>
+      <div class="modalBody">
+        <div class="videoBox" id="videoBox">
+          VIDEO PLACEHOLDER<br/>
+          Chèn iframe YouTube/Drive ở đây
+        </div>
+        <p style="margin:10px 0 0;color:rgba(255,255,255,.72);font-size:13px">
+          💡 Tip: Không auto-play âm thanh để lịch sự (sếp có thể đang ở văn phòng).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ===== Loading screen ===== */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').classList.add('hide');
+        // Auto fire confetti on load
+        setTimeout(boom, 300);
+      }, 800);
+    });
+
+    /* ===== Mobile menu toggle ===== */
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+    
+    // Close menu when clicking a link
+    document.querySelectorAll('.links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('show');
+      });
+    });
+
+    /* ===== Confetti ===== */
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W,H,parts=[],running=false;
+
+    function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+    addEventListener('resize', resize); resize();
+
+    function spawn(n=220){
+      const colors = ['#ffb3c8','#ffd6a5','#cdb4ff','#a7f3d0','#fbbf24','#f472b6'];
+      for(let i=0;i<n;i++){
+        parts.push({
+          x: Math.random()*W,
+          y: -20 - Math.random()*H*0.25,
+          vx:(Math.random()-0.5)*2.2,
+          vy:2.8+Math.random()*5.2,
+          s: 4+Math.random()*7,
+          r: Math.random()*Math.PI,
+          vr:(Math.random()-0.5)*0.22,
+          a:1,
+          color: colors[Math.floor(Math.random()*colors.length)]
+        });
+      }
+      running=true;
+    }
+    
+    function tick(){
+      if(!running) return;
+      ctx.clearRect(0,0,W,H);
+      parts.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; p.r+=p.vr;
+        p.vy*=0.995; p.vy+=0.03;
+        p.a*=0.998;
+        ctx.save();
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.r);
+        ctx.globalAlpha = Math.max(0,p.a);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.72);
+        ctx.restore();
+      });
+      parts = parts.filter(p=>p.y<H+50 && p.a>0.06);
+      if(parts.length===0) running=false;
+      requestAnimationFrame(tick);
+    }
+
+    function boom(){
+      spawn(280);
+      tick();
+    }
+
+    document.getElementById('btnBoom').addEventListener('click', boom);
+    document.getElementById('btnConfetti').addEventListener('click', boom);
+    document.getElementById('btnConfetti2').addEventListener('click', boom);
+
+    /* ===== Modal video ===== */
+    const backdrop = document.getElementById('backdrop');
+    const openVideo = () => { backdrop.style.display='flex'; backdrop.setAttribute('aria-hidden','false'); };
+    const closeVideo = () => { backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true'); };
+
+    document.getElementById('btnOpenVideo').addEventListener('click', openVideo);
+    document.getElementById('btnOpenVideo2').addEventListener('click', openVideo);
+    document.getElementById('btnClose').addEventListener('click', closeVideo);
+    backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeVideo(); });
+    addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeVideo(); });
+
+    /* ===== Easter egg ===== */
+    const secret = document.getElementById('secretNote');
+    const toggleSecret = () => {
+      secret.style.display = (secret.style.display==='block') ? 'none' : 'block';
+    };
+    document.querySelector('.brand').addEventListener('dblclick', toggleSecret);
+    document.getElementById('title').addEventListener('dblclick', toggleSecret);
+
+    /* ===== Quiz scoring ===== */
+    document.getElementById('btnCheck').addEventListener('click', ()=>{
+      const pick = (name)=>{
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        return el ? Number(el.value) : null;
+      };
+      const a = pick('q1'), b = pick('q2'), c = pick('q3');
+      const res = document.getElementById('quizResult');
+
+      if(a===null || b===null || c===null){
+        res.style.display='block';
+        res.textContent = "Bạn chọn đủ 3 câu rồi hãy chấm điểm nha 😄";
+        return;
+      }
+
+      const score = a+b+c;
+      res.style.display='block';
+
+      if(score===3){
+        res.textContent = "🔥 3/3! Team hiểu sếp quá chuẩn. Chúc mừng — và chúc sếp tuổi mới rực rỡ hơn nữa!";
+        boom(); // Celebrate!
+      }else if(score===2){
+        res.textContent = "✨ 2/3! Rất ổn. Team hiểu sếp khá đúng vibe rồi đó!";
+      }else{
+        res.textContent = "😄 0–1/3! Không sao — quan trọng là lời chúc chân thành và năng lượng tích cực nha!";
+      }
+    });
+  </script>
+</body>
+</html>
