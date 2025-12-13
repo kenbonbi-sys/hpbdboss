@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday, Boss ✨</title>
-  <!-- Favicon emoji -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
   <style>
     :root{
@@ -35,7 +34,6 @@
     }
     a{color:inherit}
 
-    /* layout */
     .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
     .nav{
       position:sticky;top:0;z-index:10;
@@ -83,7 +81,6 @@
     .grid2{grid-template-columns: 1.2fr .8fr}
     .grid3{grid-template-columns:repeat(3,1fr)}
     
-    /* Mobile responsive */
     @media (max-width: 900px){ 
       .grid2,.grid3{grid-template-columns:1fr} 
       .brand .badge{display:none}
@@ -91,7 +88,6 @@
       h1{font-size:32px !important}
     }
     
-    /* Mobile menu toggle */
     .menuToggle{
       display:none;
       background:transparent;
@@ -134,7 +130,6 @@
     p{margin:8px 0;color:var(--muted);line-height:1.6}
     .hr{height:1px;background:rgba(255,255,255,.10);margin:14px 0;border:0}
 
-    /* hero */
     .hero{
       padding:26px;
       position:relative;
@@ -152,16 +147,6 @@
       0%,100%{opacity:0.8;transform:scale(1)}
       50%{opacity:1;transform:scale(1.05)}
     }
-    .avatar{
-      width:100%;aspect-ratio: 4/3;border-radius:18px;
-      border:1px dashed rgba(255,255,255,.25);
-      background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-      display:grid;place-items:center;
-      color:rgba(255,255,255,.65);
-      font-weight:700;
-      text-align:center;
-      padding:12px;
-    }
     .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     .pill{
       font-size:12px;padding:8px 10px;border-radius:999px;
@@ -170,7 +155,6 @@
       color:rgba(255,255,255,.78);
     }
 
-    /* spotlight cards */
     .stat{
       display:flex;gap:12px;align-items:flex-start;
       padding:14px;border-radius:18px;
@@ -188,7 +172,6 @@
       margin-top:6px;flex:0 0 auto;
     }
 
-    /* message wall */
     .msgGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     @media (max-width: 900px){ .msgGrid{grid-template-columns:1fr} }
     .msgCard{
@@ -205,30 +188,32 @@
     .tag{font-size:12px;color:rgba(255,255,255,.72)}
     .quote{margin-top:8px;color:rgba(255,255,255,.78)}
 
-    /* Gallery grid */
+    /* ===== GALLERY FIX ===== */
     .galleryGrid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
       margin-top:12px;
     }
-    @media (max-width: 700px){.galleryGrid{grid-template-columns:repeat(2,1fr)}}
-    .galleryItem{
-      aspect-ratio:1;
-      border-radius:16px;
-      border:1px dashed rgba(255,255,255,.2);
-      background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      display:grid;
-      place-items:center;
-      color:rgba(255,255,255,.5);
-      font-size:13px;
-      text-align:center;
-      padding:12px;
-      transition: border-color 0.2s ease;
+    @media (max-width: 600px){
+      .galleryGrid{grid-template-columns:1fr}
     }
-    .galleryItem:hover{border-color:rgba(255,179,200,.4)}
+    .galleryItem{
+      width:100%;
+      aspect-ratio:4/3;
+      border-radius:16px;
+      border:2px solid rgba(255,255,255,.15);
+      background:rgba(0,0,0,.2);
+      object-fit:cover;
+      object-position:center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .galleryItem:hover{
+      border-color:rgba(255,179,200,.5);
+      transform:scale(1.02);
+      box-shadow:0 12px 40px rgba(0,0,0,.4);
+    }
 
-    /* modal */
     .backdrop{
       position:fixed;inset:0;background:rgba(0,0,0,.62);
       display:none;align-items:center;justify-content:center;
@@ -258,10 +243,8 @@
       background:rgba(0,0,0,.18);
     }
 
-    /* confetti canvas */
     canvas{position:fixed;inset:0;pointer-events:none;z-index:100}
 
-    /* easter egg note */
     .secret{
       display:none;margin-top:12px;
       padding:12px 14px;border-radius:16px;
@@ -271,7 +254,6 @@
       animation: fadeIn 0.3s ease;
     }
 
-    /* quiz */
     .q{
       padding:14px;border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
@@ -289,7 +271,6 @@
       animation: fadeIn 0.3s ease;
     }
     
-    /* Loading animation */
     .loading{
       position:fixed;inset:0;
       background:var(--bg1);
@@ -310,14 +291,12 @@
 </head>
 
 <body>
-  <!-- Loading screen -->
   <div class="loading" id="loading">
     <div class="loadingText">🎂 Đang chuẩn bị bất ngờ...</div>
   </div>
 
   <canvas id="confetti"></canvas>
 
-  <!-- NAV -->
   <div class="nav">
     <div class="navIn">
       <div class="brand" title="Double click để mở secret">
@@ -340,7 +319,6 @@
 
   <div class="wrap">
 
-    <!-- HERO -->
     <section class="grid grid2" id="spotlight" style="margin-top:18px">
       <div class="card hero">
         <div class="glow"></div>
@@ -403,11 +381,10 @@
       </div>
     </section>
 
-    <!-- AWARDS -->
     <section class="card" id="awards" style="margin-top:14px">
       <div class="kicker">DẤU ẤN</div>
       <h2>Awards & Achievements</h2>
-      <p>Vui nhẹ, sang là chính. Bạn thay nội dung cho đúng "chất sếp".</p>
+      <p>Vui nhẹ, sang là chính.</p>
 
       <div class="grid grid3" style="margin-top:12px">
         <div class="msgCard">
@@ -428,31 +405,29 @@
       </div>
     </section>
 
-    <!-- VIDEO -->
     <section class="card" id="video" style="margin-top:14px">
       <div class="kicker">REVEAL</div>
       <h2>Video bất ngờ</h2>
-      <p>Nhấn nút để mở video dạng popup. Bạn sẽ chèn link/iframe sau.</p>
+      <p>Nhấn nút để mở video dạng popup.</p>
       <button class="btn btnPrimary" id="btnOpenVideo2">Mở video ngay</button>
     </section>
 
-    <!-- GALLERY -->
+    <!-- GALLERY VỚI 2 ẢNH -->
     <section class="card" id="gallery" style="margin-top:14px">
       <div class="kicker">MOMENTS</div>
       <h2>Khoảnh khắc nổi bật</h2>
-      <p>Chèn 6 ảnh team/sếp vào đây (thay thế placeholder bên dưới)</p>
+      <p>Những kỷ niệm đáng nhớ cùng team 💕</p>
       
-<div class="galleryGrid">
-  <img src="./anh1.JPG" class="galleryItem" style="object-fit:cover" alt="Ảnh team">
-  <img src="./anh2.JPG" class="galleryItem" style="object-fit:cover" alt="Ảnh tiệc">
-</div>
+      <div class="galleryGrid">
+        <img src="./anh1.JPG" class="galleryItem" alt="Khoảnh khắc 1">
+        <img src="./anh2.JPG" class="galleryItem" alt="Khoảnh khắc 2">
+      </div>
     </section>
 
-    <!-- MESSAGES -->
     <section class="card" id="messages" style="margin-top:14px">
       <div class="kicker">FROM TEAM</div>
-      <h2>Lời chúc (ấm 15%, sang 65%)</h2>
-      <p>Mỗi card 1–2 câu là đủ "đắt". Tránh dài quá.</p>
+      <h2>Lời chúc từ team</h2>
+      <p>Mỗi card 1–2 câu là đủ "đắt".</p>
 
       <div class="msgGrid" style="margin-top:12px">
         <div class="msgCard">
@@ -488,7 +463,6 @@
       </div>
     </section>
 
-    <!-- QUIZ -->
     <section class="card" id="quiz" style="margin-top:14px">
       <div class="kicker">FUN CHECK</div>
       <h2>Mini Quiz: Team hiểu sếp tới đâu?</h2>
@@ -519,7 +493,6 @@
       <div class="result" id="quizResult"></div>
     </section>
 
-    <!-- FINALE -->
     <section class="card" id="finale" style="margin-top:14px">
       <div class="kicker">FINALE</div>
       <h2>Kết lại một câu "đắt"</h2>
@@ -535,7 +508,6 @@
 
   </div>
 
-  <!-- VIDEO MODAL -->
   <div class="backdrop" id="backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modalTop">
@@ -548,35 +520,30 @@
           Chèn iframe YouTube/Drive ở đây
         </div>
         <p style="margin:10px 0 0;color:rgba(255,255,255,.72);font-size:13px">
-          💡 Tip: Không auto-play âm thanh để lịch sự (sếp có thể đang ở văn phòng).
+          💡 Tip: Không auto-play âm thanh để lịch sự.
         </p>
       </div>
     </div>
   </div>
 
   <script>
-    /* ===== Loading screen ===== */
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loading').classList.add('hide');
-        // Auto fire confetti on load
         setTimeout(boom, 300);
       }, 800);
     });
 
-    /* ===== Mobile menu toggle ===== */
     document.getElementById('menuToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('show');
     });
     
-    // Close menu when clicking a link
     document.querySelectorAll('.links a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById('navLinks').classList.remove('show');
       });
     });
 
-    /* ===== Confetti ===== */
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     let W,H,parts=[],running=false;
@@ -631,7 +598,6 @@
     document.getElementById('btnConfetti').addEventListener('click', boom);
     document.getElementById('btnConfetti2').addEventListener('click', boom);
 
-    /* ===== Modal video ===== */
     const backdrop = document.getElementById('backdrop');
     const openVideo = () => { backdrop.style.display='flex'; backdrop.setAttribute('aria-hidden','false'); };
     const closeVideo = () => { backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true'); };
@@ -642,7 +608,6 @@
     backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeVideo(); });
     addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeVideo(); });
 
-    /* ===== Easter egg ===== */
     const secret = document.getElementById('secretNote');
     const toggleSecret = () => {
       secret.style.display = (secret.style.display==='block') ? 'none' : 'block';
@@ -650,7 +615,6 @@
     document.querySelector('.brand').addEventListener('dblclick', toggleSecret);
     document.getElementById('title').addEventListener('dblclick', toggleSecret);
 
-    /* ===== Quiz scoring ===== */
     document.getElementById('btnCheck').addEventListener('click', ()=>{
       const pick = (name)=>{
         const el = document.querySelector(`input[name="${name}"]:checked`);
@@ -670,7 +634,7 @@
 
       if(score===3){
         res.textContent = "🔥 3/3! Team hiểu sếp quá chuẩn. Chúc mừng — và chúc sếp tuổi mới rực rỡ hơn nữa!";
-        boom(); // Celebrate!
+        boom();
       }else if(score===2){
         res.textContent = "✨ 2/3! Rất ổn. Team hiểu sếp khá đúng vibe rồi đó!";
       }else{
@@ -679,5 +643,4 @@
     });
   </script>
 </body>
-
 </html>
