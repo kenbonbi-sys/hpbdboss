@@ -245,6 +245,29 @@
 
     canvas{position:fixed;inset:0;pointer-events:none;z-index:100}
 
+    /* ===== BÁNH KEM THEO CHUỘT ===== */
+    .confetti-icon{
+      position:fixed;
+      bottom:30px;
+      left:30px;
+      font-size:55px;
+      z-index:99;
+      transition: transform 0.1s ease-out;
+      cursor:pointer;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,.4));
+      user-select:none;
+    }
+    .confetti-icon:hover{
+      transform:scale(1.2);
+    }
+    @media (max-width: 600px){
+      .confetti-icon{
+        font-size:42px;
+        bottom:20px;
+        left:20px;
+      }
+    }
+
     .secret{
       display:none;margin-top:12px;
       padding:12px 14px;border-radius:16px;
@@ -297,10 +320,13 @@
 
   <canvas id="confetti"></canvas>
 
+  <!-- CONFETTI ICON -->
+  <div class="confetti-icon" id="confettiIcon" title="Click để bắn pháo hoa!">🎊</div>
+
   <div class="nav">
     <div class="navIn">
       <div class="brand" title="Double click để mở secret">
-        ✨ Birthday Spotlight <span class="badge">Sang 65 · Hài 20 · Ấm 15</span>
+        ✨ Birthday Spotlight 
       </div>
       <button class="menuToggle" id="menuToggle">☰ Menu</button>
       <div class="links" id="navLinks">
@@ -597,6 +623,38 @@
     document.getElementById('btnBoom').addEventListener('click', boom);
     document.getElementById('btnConfetti').addEventListener('click', boom);
     document.getElementById('btnConfetti2').addEventListener('click', boom);
+
+    /* ===== CONFETTI ICON XOAY THEO CHUỘT ===== */
+    const confettiIcon = document.getElementById('confettiIcon');
+    
+    document.addEventListener('mousemove', (e) => {
+      const iconRect = confettiIcon.getBoundingClientRect();
+      const iconCenterX = iconRect.left + iconRect.width / 2;
+      const iconCenterY = iconRect.top + iconRect.height / 2;
+      
+      const deltaX = e.clientX - iconCenterX;
+      const deltaY = e.clientY - iconCenterY;
+      
+      // Tính góc xoay (radian -> degree)
+      const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+      
+      // Thêm hiệu ứng nghiêng nhẹ dựa trên khoảng cách
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const tilt = Math.min(distance / 30, 15);
+      
+      // Xoay confetti về hướng chuột
+      confettiIcon.style.transform = `rotate(${angle - 90}deg) translateY(${-tilt}px)`;
+    });
+    
+    // Click vào confetti để bắn pháo hoa
+    confettiIcon.addEventListener('click', () => {
+      boom();
+      // Thêm animation nhảy
+      confettiIcon.style.transform += ' scale(1.3)';
+      setTimeout(() => {
+        confettiIcon.style.transform = confettiIcon.style.transform.replace(' scale(1.3)', '');
+      }, 200);
+    });
 
     const backdrop = document.getElementById('backdrop');
     const openVideo = () => { backdrop.style.display='flex'; backdrop.setAttribute('aria-hidden','false'); };
