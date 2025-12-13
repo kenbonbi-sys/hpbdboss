@@ -37,7 +37,7 @@
     .galleryGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:12px}@media(max-width:600px){.galleryGrid{grid-template-columns:1fr}}
     .galleryItem{width:100%;aspect-ratio:4/3;border-radius:16px;border:2px solid rgba(255,255,255,.15);object-fit:cover;transition:transform 0.3s}
     .galleryItem:hover{transform:scale(1.02)}
-    canvas{position:fixed;inset:0;pointer-events:none;z-index:100}
+    canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:100}
     .confetti-icon{position:fixed;bottom:30px;left:30px;font-size:55px;z-index:99;cursor:pointer;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4));transition:transform 0.1s}
     .sparkle{position:fixed;pointer-events:none;font-size:20px;z-index:98;animation:sparkleAnim 0.8s forwards}
     @keyframes sparkleAnim{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0) translateY(-30px)}}
@@ -53,7 +53,7 @@
     .countdown-text{font-size:24px;color:var(--muted);margin-top:20px}@keyframes countPop{0%{transform:scale(0.5);opacity:0}50%{transform:scale(1.2)}100%{transform:scale(1)}}
     .scratch-container{position:relative;width:100%;max-width:400px;height:120px;margin:16px auto 0;border-radius:16px;overflow:hidden;cursor:crosshair}
     .scratch-reveal{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font-size:18px;font-weight:700;background:linear-gradient(135deg,rgba(255,179,200,.2),rgba(205,180,255,.2));border:2px solid rgba(255,255,255,.2);border-radius:16px}
-    .scratch-canvas{position:absolute;inset:0;border-radius:16px}
+    .scratch-canvas{position:absolute;inset:0;border-radius:16px;cursor:crosshair;touch-action:none}
     .slot-machine{background:rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.15);border-radius:18px;padding:20px;text-align:center;margin-top:16px}
     .slot-display{display:flex;justify-content:center;gap:10px;margin:16px 0}
     .slot-item{width:80px;height:80px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:40px}
@@ -81,7 +81,7 @@
   <audio id="birthdayMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
 
   <div class="nav"><div class="navIn">
-    <div class="brand" id="brand">✨ Birthday Spotlight <span class="badge">Sang 65 · Hài 20 · Ấm 15</span></div>
+    <div class="brand" id="brand">✨ Birthday Spotlight </div>
     <button class="menuToggle" id="menuToggle">☰</button>
     <div class="links" id="navLinks"><a href="#spotlight">Spotlight</a><a href="#awards">Dấu ấn</a><a href="#gallery">Gallery</a><a href="#messages">Lời chúc</a><a href="#scratch">Cào</a><a href="#slot">Quay số</a><a href="#finale">Finale</a></div>
     <div class="spacer"></div><button class="btn" id="btnConfetti2">🎊 Bắn pháo</button>
@@ -194,13 +194,78 @@
     const musicBtn=document.getElementById('musicBtn'),music=document.getElementById('birthdayMusic');let isPlaying=false;
     musicBtn.onclick=()=>{if(isPlaying){music.pause();musicBtn.textContent='🎵';musicBtn.classList.remove('playing')}else{music.volume=.3;music.play();musicBtn.textContent='🔊';musicBtn.classList.add('playing')}isPlaying=!isPlaying};
 
-    // SCRATCH
-    const scratchCanvas=document.getElementById('scratchCanvas'),scratchCtx=scratchCanvas.getContext('2d'),scratchContainer=document.getElementById('scratchContainer');
-    function initScratch(){const r=scratchContainer.getBoundingClientRect();scratchCanvas.width=r.width;scratchCanvas.height=r.height;const g=scratchCtx.createLinearGradient(0,0,r.width,r.height);g.addColorStop(0,'#ffb3c8');g.addColorStop(.5,'#cdb4ff');g.addColorStop(1,'#ffd6a5');scratchCtx.fillStyle=g;scratchCtx.fillRect(0,0,r.width,r.height);scratchCtx.fillStyle='rgba(255,255,255,.9)';scratchCtx.font='bold 18px system-ui';scratchCtx.textAlign='center';scratchCtx.fillText('🎁 Cào tại đây!',r.width/2,r.height/2)}
-    let isScratching=false;function scratch(e){if(!isScratching)return;const r=scratchCanvas.getBoundingClientRect(),x=(e.clientX||e.touches[0].clientX)-r.left,y=(e.clientY||e.touches[0].clientY)-r.top;scratchCtx.globalCompositeOperation='destination-out';scratchCtx.beginPath();scratchCtx.arc(x,y,25,0,Math.PI*2);scratchCtx.fill()}
-    scratchCanvas.onmousedown=()=>isScratching=true;scratchCanvas.onmouseup=()=>isScratching=false;scratchCanvas.onmouseleave=()=>isScratching=false;scratchCanvas.onmousemove=scratch;
-    scratchCanvas.ontouchstart=e=>{isScratching=true;e.preventDefault()};scratchCanvas.ontouchend=()=>isScratching=false;scratchCanvas.ontouchmove=e=>{scratch(e);e.preventDefault()};
-    setTimeout(initScratch,100);window.addEventListener('resize',initScratch);
+    // SCRATCH CARD - Fixed version
+    const scratchCanvas=document.getElementById('scratchCanvas');
+    const scratchCtx=scratchCanvas.getContext('2d');
+    const scratchContainer=document.getElementById('scratchContainer');
+    let isScratching=false;
+    let scratchReady=false;
+
+    function initScratch(){
+      const rect=scratchContainer.getBoundingClientRect();
+      if(rect.width===0||rect.height===0)return;
+      
+      scratchCanvas.width=rect.width;
+      scratchCanvas.height=rect.height;
+      
+      // Reset composite operation
+      scratchCtx.globalCompositeOperation='source-over';
+      
+      // Draw gradient background
+      const gradient=scratchCtx.createLinearGradient(0,0,rect.width,rect.height);
+      gradient.addColorStop(0,'#ffb3c8');
+      gradient.addColorStop(0.5,'#cdb4ff');
+      gradient.addColorStop(1,'#ffd6a5');
+      scratchCtx.fillStyle=gradient;
+      scratchCtx.fillRect(0,0,rect.width,rect.height);
+      
+      // Draw text
+      scratchCtx.fillStyle='rgba(255,255,255,0.95)';
+      scratchCtx.font='bold 20px system-ui';
+      scratchCtx.textAlign='center';
+      scratchCtx.textBaseline='middle';
+      scratchCtx.fillText('🎁 Cào tại đây để xem!',rect.width/2,rect.height/2);
+      
+      scratchReady=true;
+    }
+
+    function doScratch(x,y){
+      if(!scratchReady)return;
+      scratchCtx.globalCompositeOperation='destination-out';
+      scratchCtx.beginPath();
+      scratchCtx.arc(x,y,30,0,Math.PI*2);
+      scratchCtx.fill();
+    }
+
+    function handleScratch(e){
+      if(!isScratching)return;
+      e.preventDefault();
+      const rect=scratchCanvas.getBoundingClientRect();
+      let x,y;
+      if(e.touches){
+        x=e.touches[0].clientX-rect.left;
+        y=e.touches[0].clientY-rect.top;
+      }else{
+        x=e.clientX-rect.left;
+        y=e.clientY-rect.top;
+      }
+      doScratch(x,y);
+    }
+
+    // Mouse events
+    scratchCanvas.addEventListener('mousedown',e=>{isScratching=true;handleScratch(e)});
+    scratchCanvas.addEventListener('mouseup',()=>isScratching=false);
+    scratchCanvas.addEventListener('mouseleave',()=>isScratching=false);
+    scratchCanvas.addEventListener('mousemove',handleScratch);
+
+    // Touch events
+    scratchCanvas.addEventListener('touchstart',e=>{isScratching=true;handleScratch(e)},{passive:false});
+    scratchCanvas.addEventListener('touchend',()=>isScratching=false);
+    scratchCanvas.addEventListener('touchmove',handleScratch,{passive:false});
+
+    // Initialize after page is fully loaded
+    window.addEventListener('load',()=>setTimeout(initScratch,500));
+    window.addEventListener('resize',()=>{scratchReady=false;setTimeout(initScratch,100)});
 
     // SLOT
     const slotEmojis=['🎂','🎁','🎉','🎈','💖','⭐','🎊','💎'],slotMsgs=['🔥 JACKPOT! Chúc sếp GIÀU SỤ!','✨ Chúc sếp TỎA SÁNG!','💖 Chúc sếp được YÊU THƯƠNG!','🎯 Chúc sếp ĐẠT MỌI MỤC TIÊU!','💪 Chúc sếp SỨC KHỎE dồi dào!','🚀 Chúc sếp THĂNG TIẾN!','😄 Chúc sếp HẠNH PHÚC!','👑 Chúc sếp luôn là QUEEN!'];
