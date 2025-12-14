@@ -85,6 +85,35 @@
     .marquee:hover .marqueeTrack{ animation-play-state: paused; }
     @media(max-width:600px){.marqueeImg{ width:240px; height:170px; }.marqueeTrack{ animation-duration: 55s; }}
     .highlight-box{background:linear-gradient(135deg,rgba(255,179,200,.15),rgba(205,180,255,.15));border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:16px;margin-top:16px}
+
+    /* ===== Kalimba ===== */
+    .kalimbaWrap{border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.14);border-radius:18px;padding:14px;}
+    .kalimbaTop{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;}
+    @media(max-width:900px){.kalimbaTop{grid-template-columns:1fr;}}
+    .kalimbaHint{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.12);border-radius:16px;padding:12px;color:rgba(255,255,255,.85);}
+    .songLine{font-size:16px;margin-top:6px;letter-spacing:.08em;}
+    .songNote{font-size:12px;color:rgba(255,255,255,.7);}
+    .kalimbaNow{border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg,rgba(255,179,200,.12),rgba(205,180,255,.12));border-radius:16px;padding:12px;}
+    .nowTitle{font-size:12px;color:rgba(255,255,255,.75);letter-spacing:.12em;text-transform:uppercase}
+    .nowKey{font-size:34px;font-weight:900;margin-top:6px}
+    .nowSub{font-size:12px;color:rgba(255,255,255,.72);margin-top:4px}
+
+    .kalimbaBoard{margin-top:12px;display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:18px 6px 6px;-webkit-overflow-scrolling:touch;position:relative;}
+    .kalimbaBoard::before{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:rgba(255,255,255,.06);border-radius:999px;pointer-events:none;}
+
+    .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:54px;min-width:54px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));}
+    .kKey:active{transform:translateY(calc(var(--drop, 0px) + 2px)) scale(.99);}
+    .kKey::after{content:"";position:absolute;left:10px;right:10px;top:14px;height:2px;background:rgba(255,255,255,.08);border-radius:999px;pointer-events:none;}
+
+    .kKey .kLabel{font-weight:900;font-size:14px;line-height:1.1;text-align:center;}
+    .kKey .kSub{display:block;margin-top:4px;font-size:11px;color:rgba(255,255,255,.72);font-weight:700;}
+
+    .kKey.guide{border-color: rgba(255,214,165,.7);background: rgba(255,214,165,.14);box-shadow:0 0 0 4px rgba(255,214,165,.10), 0 18px 60px rgba(0,0,0,.35);}
+    .kKey.wrong{animation: kShake .22s;border-color: rgba(244,114,182,.75);}
+    @keyframes kShake{0%{transform:translateY(var(--drop, 0px)) translateX(0)}25%{transform:translateY(var(--drop, 0px)) translateX(-3px)}50%{transform:translateY(var(--drop, 0px)) translateX(3px)}100%{transform:translateY(var(--drop, 0px)) translateX(0)}}
+    @media(max-width:600px){.kKey{width:50px;min-width:50px}.songLine{font-size:15px}.nowKey{font-size:30px}}
+    @media (prefers-reduced-motion: reduce){.kKey.wrong{animation:none}}
+
   </style>
 </head>
 <body>
@@ -97,7 +126,7 @@
   <div class="nav"><div class="navIn">
     <div class="brand" id="brand">✨ Birthday Spotlight</div>
     <button class="menuToggle" id="menuToggle">☰</button>
-    <div class="links" id="navLinks"><a href="#spotlight">Spotlight</a><a href="#awards">Dấu ấn</a><a href="#gallery">Gallery</a><a href="#messages">Lời chúc</a><a href="#voice">Voice</a><a href="#scratch">Cào</a><a href="#slot">Quay số</a><a href="#finale">Finale</a></div>
+    <div class="links" id="navLinks"><a href="#spotlight">Spotlight</a><a href="#awards">Dấu ấn</a><a href="#gallery">Gallery</a><a href="#messages">Lời chúc</a><a href="#voice">Voice</a><a href="#kalimba">Kalimba</a><a href="#scratch">Cào</a><a href="#slot">Quay số</a><a href="#finale">Finale</a></div>
     <div class="spacer"></div><button class="btn" id="btnConfetti2">🎊 Bắn pháo</button>
   </div></div>
   <div class="wrap">
@@ -150,9 +179,44 @@
         <div class="msgCard audioCard"><div class="who">Quế Như</div><div class="quote">"QN chúc bảo bối sinh nhật thật zuiiiii, tuổi mới thật giàuuuuu 💖"</div><audio controls style="width:100%;margin-top:10px"><source src="./audio/voice_01.mp3" type="audio/mpeg"></audio></div>
         <div class="msgCard audioCard"><div class="who">Mr. Đệ</div><div class="quote">"Chúc chị Trân tuổi mới khỏe re"</div><audio controls style="width:100%;margin-top:10px"><source src="./audio/voice_02.mp3" type="audio/mpeg"></audio></div>
       </div>
+    
+    <section class="card" id="kalimba" style="margin-top:14px">
+      <div class="kicker">KALIMBA</div>
+      <h2>🎶 Kalimba – Happy Birthday</h2>
+      <p>Chạm vào từng phím để phát âm. Bật “Hướng dẫn” để web highlight phím cần bấm 🎁</p>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+        <button class="btn btnPrimary" id="btnAudioOn">🔊 Bật âm thanh</button>
+        <button class="btn" id="btnGuide">🧭 Hướng dẫn: OFF</button>
+        <button class="btn" id="btnResetSong">↺ Reset bài</button>
+      </div>
+
+      <div class="kalimbaWrap" style="margin-top:14px">
+        <div class="kalimbaTop">
+          <div class="kalimbaHint">
+            <b>Gợi ý bấm (số – nốt):</b>
+            <div class="songLine">5 5 6 5 1’ 7</div>
+            <div class="songLine">5 5 6 5 2’ 1’</div>
+            <div class="songLine">5 5 5’ 3’ 1’ 7 6</div>
+            <div class="songLine">4’ 4’ 3’ 1’ 2’ 1’</div>
+            <div class="songNote" style="margin-top:8px">
+              (Trong Đô trưởng: 1=C,2=D,3=E,4=F,5=G,6=A,7=B; dấu ’ là lên 1 quãng 8)
+            </div>
+          </div>
+
+          <div class="kalimbaNow" id="kalimbaNow">
+            <div class="nowTitle">🎯 Phím cần bấm:</div>
+            <div class="nowKey" id="nowKey">—</div>
+            <div class="nowSub" id="nowSub">Bật Hướng dẫn để bắt đầu</div>
+          </div>
+        </div>
+
+        <div class="kalimbaBoard" id="kalimbaBoard" aria-label="Kalimba keys"></div>
+      </div>
     </section>
 
-    <section class="card" id="scratch" style="margin-top:14px"><div class="kicker">BÍ MẬT</div><h2>🎫 Cào lộ lời chúc</h2><p>Dùng chuột cào để xem!</p><div class="scratch-container" id="scratchContainer"><div class="scratch-reveal">🎁 Chúc Jenny GIÀU - ĐẸP - KHỎE! 💖</div><canvas class="scratch-canvas" id="scratchCanvas"></canvas></div></section>
+
+    <section class=\"card\" id=\"scratch\" style="margin-top:14px"><div class="kicker">BÍ MẬT</div><h2>🎫 Cào lộ lời chúc</h2><p>Dùng chuột cào để xem!</p><div class="scratch-container" id="scratchContainer"><div class="scratch-reveal">🎁 Chúc Jenny GIÀU - ĐẸP - KHỎE! 💖</div><canvas class="scratch-canvas" id="scratchCanvas"></canvas></div></section>
 
     <section class="card" id="slot" style="margin-top:14px"><div class="kicker">VẬN MAY</div><h2>🎰 Quay số lời chúc</h2><div class="slot-machine"><div class="slot-display"><div class="slot-item" id="slot1">🎂</div><div class="slot-item" id="slot2">🎁</div><div class="slot-item" id="slot3">🎉</div></div><button class="btn btnPrimary" id="btnSpin">🎰 Quay ngay!</button><div class="slot-result" id="slotResult">Bấm để nhận lời chúc!</div></div></section>
 
@@ -208,6 +272,171 @@
     document.getElementById('btnCheck').onclick=()=>{const pick=n=>{const el=document.querySelector('input[name="'+n+'"]:checked');return el?Number(el.value):null};const a=pick('q1'),b=pick('q2'),c=pick('q3'),res=document.getElementById('quizResult');if(a===null||b===null||c===null){res.style.display='block';res.textContent='Chọn đủ 3 câu nha 😄';return}const score=a+b+c;res.style.display='block';if(score===3){res.textContent='🔥 3/3! Team hiểu Jenny quá chuẩn!';boom()}else if(score===2)res.textContent='✨ 2/3! Khá đúng vibe!';else res.textContent='😄 0–1/3! Quan trọng là chân thành!'};
     const messages=[{name:"Quin Quin",text:"Dù nhìu moment hơi ups and downs, nhưng vẫn mong làm chung team thật lâu nha! Mãi bên nhau bạn nhóe!!"},{name:"Mr. Đệ",text:"Sếp gì ạ. MÃI ĐỈNH MÃI KHỎE"}];
     const msgGrid=document.getElementById("msgGrid");if(msgGrid){msgGrid.innerHTML=messages.map(m=>'<div class="msgCard"><div class="who">'+m.name+'</div>'+(m.tag?'<div class="tag">'+m.tag+'</div>':'')+'<div class="quote">"'+m.text+'"</div></div>').join("");}
+
+    // ===== Kalimba (touch/click to play) =====
+    (function(){
+      const board = document.getElementById('kalimbaBoard');
+      const btnAudioOn = document.getElementById('btnAudioOn');
+      const btnGuide = document.getElementById('btnGuide');
+      const btnResetSong = document.getElementById('btnResetSong');
+      const nowKey = document.getElementById('nowKey');
+      const nowSub = document.getElementById('nowSub');
+      if(!board || !btnAudioOn) return;
+
+      const keys = [
+        {id:'C4', note:'C4', freq:261.63, deg:"1"},
+        {id:'D4', note:'D4', freq:293.66, deg:"2"},
+        {id:'E4', note:'E4', freq:329.63, deg:"3"},
+        {id:'F4', note:'F4', freq:349.23, deg:"4"},
+        {id:'G4', note:'G4', freq:392.00, deg:"5"},
+        {id:'A4', note:'A4', freq:440.00, deg:"6"},
+        {id:'B4', note:'B4', freq:493.88, deg:"7"},
+        {id:'C5', note:'C5', freq:523.25, deg:"1’"},
+        {id:'D5', note:'D5', freq:587.33, deg:"2’"},
+        {id:'E5', note:'E5', freq:659.25, deg:"3’"},
+        {id:'F5', note:'F5', freq:698.46, deg:"4’"},
+        {id:'G5', note:'G5', freq:783.99, deg:"5’"},
+        {id:'A5', note:'A5', freq:880.00, deg:"6’"},
+        {id:'B5', note:'B5', freq:987.77, deg:"7’"},
+        {id:'C6', note:'C6', freq:1046.50, deg:"1’’"},
+        {id:'D6', note:'D6', freq:1174.66, deg:"2’’"},
+        {id:'E6', note:'E6', freq:1318.51, deg:"3’’"},
+      ];
+
+      const center = Math.floor(keys.length/2);
+      board.innerHTML = keys.map((k,i)=>{
+        const dist = Math.abs(i - center);
+        const height = Math.max(120, 210 - dist*10);
+        const drop = dist*5;
+        return `<button class="kKey" data-id="${k.id}" style="height:${height}px; --drop:${drop}px">
+          <div class="kLabel">${k.deg}<span class="kSub">${k.note}</span></div>
+        </button>`;
+      }).join('');
+
+      let audioCtx = null;
+      function ensureAudio(){
+        if(audioCtx) return audioCtx;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AC();
+        return audioCtx;
+      }
+      function pluck(freq){
+        const ctx = ensureAudio();
+        if(ctx.state === 'suspended') ctx.resume();
+        const t = ctx.currentTime;
+
+        const osc = ctx.createOscillator();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, t);
+
+        const osc2 = ctx.createOscillator();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(freq*2.01, t);
+
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.58, t + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.25);
+
+        const lp = ctx.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.setValueAtTime(4600, t);
+        lp.Q.setValueAtTime(0.75, t);
+
+        const delay = ctx.createDelay(0.25);
+        delay.delayTime.setValueAtTime(0.075, t);
+        const fb = ctx.createGain();
+        fb.gain.setValueAtTime(0.17, t);
+
+        osc.connect(g); osc2.connect(g);
+        g.connect(lp);
+
+        lp.connect(ctx.destination);
+        lp.connect(delay);
+        delay.connect(fb);
+        fb.connect(delay);
+        delay.connect(ctx.destination);
+
+        osc.start(t); osc2.start(t);
+        osc.stop(t + 1.35); osc2.stop(t + 1.35);
+      }
+
+      const song = [
+        'G4','G4','A4','G4','C5','B4',
+        'G4','G4','A4','G4','D5','C5',
+        'G4','G4','G5','E5','C5','B4','A4',
+        'F5','F5','E5','C5','D5','C5'
+      ];
+
+      let guideOn = false;
+      let step = 0;
+
+      function clearGuide(){
+        board.querySelectorAll('.kKey').forEach(b=>b.classList.remove('guide','wrong'));
+      }
+      function setGuide(){
+        clearGuide();
+        if(!guideOn){
+          nowKey.textContent = '—';
+          nowSub.textContent = 'Bật Hướng dẫn để bắt đầu';
+          return;
+        }
+        const targetId = song[step];
+        const target = keys.find(k=>k.id===targetId);
+        nowKey.textContent = target ? `${target.deg} (${target.note})` : targetId;
+        nowSub.textContent = `Bước ${step+1}/${song.length}`;
+        const btn = board.querySelector(`.kKey[data-id="${targetId}"]`);
+        if(btn) btn.classList.add('guide');
+      }
+
+      function hit(id){
+        const k = keys.find(x=>x.id===id);
+        if(k) pluck(k.freq);
+        btnAudioOn.textContent = '🔊 Âm thanh: ON';
+
+        if(!guideOn) return;
+
+        const targetId = song[step];
+        if(id === targetId){
+          step = (step + 1) % song.length;
+          setGuide();
+        }else{
+          const btn = board.querySelector(`.kKey[data-id="${id}"]`);
+          if(btn){
+            btn.classList.add('wrong');
+            setTimeout(()=>btn.classList.remove('wrong'), 220);
+          }
+        }
+      }
+
+      board.addEventListener('pointerdown', (e)=>{
+        const btn = e.target.closest('.kKey');
+        if(!btn) return;
+        e.preventDefault();
+        hit(btn.dataset.id);
+      });
+
+      btnAudioOn.addEventListener('click', ()=>{
+        ensureAudio();
+        if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        btnAudioOn.textContent = '🔊 Âm thanh: ON';
+      });
+
+      btnGuide.addEventListener('click', ()=>{
+        guideOn = !guideOn;
+        btnGuide.textContent = guideOn ? '🧭 Hướng dẫn: ON' : '🧭 Hướng dẫn: OFF';
+        if(guideOn) ensureAudio();
+        setGuide();
+      });
+
+      btnResetSong.addEventListener('click', ()=>{
+        step = 0;
+        setGuide();
+      });
+
+      setGuide();
+    })();
+
   </script>
 </body>
 </html>
