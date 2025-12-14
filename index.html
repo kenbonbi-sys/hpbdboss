@@ -103,7 +103,25 @@
 
     .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:54px;min-width:54px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));}
     .kKey:active{transform:translateY(calc(var(--drop, 0px) + 2px)) scale(.99);}
-    .kKey::after{content:"";position:absolute;left:10px;right:10px;top:14px;height:2px;background:rgba(255,255,255,.08);border-radius:999px;pointer-events:none;}
+    
+    /* --- Kalimba mobile helpers --- */
+    .kalimbaSwipeHint{margin-top:10px;font-size:12px;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start}
+    .kalimbaSwipeHint .swipeIcon{font-size:16px;line-height:1;opacity:.95}
+    .kalimbaSwipeHint b{color:rgba(255,255,255,.88)}
+    .noScroll{overflow:hidden}
+
+    .kalimbaFullscreen{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:420;padding:14px}
+    .kalimbaFullscreen.show{display:flex}
+    .kalimbaFullscreenCard{width:min(980px,100%);background:rgba(15,16,26,.92);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 26px 90px rgba(0,0,0,.6);overflow:hidden}
+    .kalimbaFullscreenTop{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.10)}
+    .kalimbaFullscreenTop .tip{font-size:12px;color:rgba(255,255,255,.70)}
+    .kalimbaFullscreenBody{padding:14px}
+    .kalimbaFullscreenBody .kalimbaBoard{margin-top:0}
+    @media(max-width:600px){
+      .kalimbaFullscreenCard{height:92vh;display:flex;flex-direction:column}
+      .kalimbaFullscreenBody{flex:1;overflow:auto}
+    }
+.kKey::after{content:"";position:absolute;left:10px;right:10px;top:14px;height:2px;background:rgba(255,255,255,.08);border-radius:999px;pointer-events:none;}
 
     .kKey .kLabel{font-weight:900;font-size:14px;line-height:1.1;text-align:center;}
     .kKey .kSub{display:block;margin-top:4px;font-size:11px;color:rgba(255,255,255,.72);font-weight:700;}
@@ -189,7 +207,8 @@
         <button class="btn btnPrimary" id="btnAudioOn">🔊 Bật âm thanh</button>
         <button class="btn" id="btnGuide">🧭 Hướng dẫn: OFF</button>
         <button class="btn" id="btnResetSong">↺ Reset bài</button>
-      </div>
+              <button class="btn" id="btnKalimbaFull">⛶ Toàn màn hình</button>
+</div>
 
       <div class="kalimbaWrap" style="margin-top:14px">
         <div class="kalimbaTop">
@@ -212,6 +231,7 @@
         </div>
 
         <div class="kalimbaBoard" id="kalimbaBoard" aria-label="Kalimba keys"></div>
+        <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div><b>Mẹo:</b> Vuốt ngang trên Kalimba để xem đủ phím. Khi bật <b>Hướng dẫn</b>, web sẽ tự canh phím cần bấm vào giữa 👌</div></div>
       </div>
     </section>
 
@@ -230,6 +250,22 @@
     <section class="card" id="finale" style="margin-top:14px"><div class="kicker">FINALE</div><h2>Lời kết</h2><p style="font-size:18px;color:var(--text)">Chúc Jenny tuổi mới thật nhiều năng lượng và luôn rực rỡ! 💖</p><div style="display:flex;gap:10px;margin-top:16px"><button class="btn btnPrimary" id="btnConfetti">🎉 Bắn pháo</button><a class="btn" href="#spotlight" style="text-decoration:none">⬆️ Lên đầu</a></div></section>
   </div>
   <div class="backdrop" id="backdrop"><div class="modal"><div class="modalTop"><b>🎬 Video bất ngờ</b><button class="btn closeX" id="btnClose">✕</button></div><div class="modalBody"><div class="videoBox">VIDEO PLACEHOLDER</div></div></div></div>
+  <!-- Kalimba Fullscreen -->
+  <div class="kalimbaFullscreen" id="kalimbaFullscreen" aria-hidden="true">
+    <div class="kalimbaFullscreenCard" role="dialog" aria-label="Kalimba fullscreen">
+      <div class="kalimbaFullscreenTop">
+        <b>🎶 Kalimba – Toàn màn hình</b>
+        <span class="tip">Tip: Xoay ngang điện thoại để chơi thoải mái hơn</span>
+        <div class="spacer"></div>
+        <button class="btn" id="btnKalimbaClose">✕</button>
+      </div>
+      <div class="kalimbaFullscreenBody">
+        <div class="kalimbaBoard" id="kalimbaBoardFull" aria-label="Kalimba keys fullscreen"></div>
+        <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div>Vuốt ngang để xem đủ phím (Guide sẽ highlight đồng bộ).</div></div>
+      </div>
+    </div>
+  </div>
+
 
   <script>
     const isCoarse=window.matchMedia&&window.matchMedia("(pointer: coarse)").matches;
@@ -276,6 +312,10 @@
     // ===== Kalimba (touch/click to play) =====
     (function(){
       const board = document.getElementById('kalimbaBoard');
+      const boardFull = document.getElementById('kalimbaBoardFull');
+      const btnKalimbaFull = document.getElementById('btnKalimbaFull');
+      const kalimbaFullscreen = document.getElementById('kalimbaFullscreen');
+      const btnKalimbaClose = document.getElementById('btnKalimbaClose');
       const btnAudioOn = document.getElementById('btnAudioOn');
       const btnGuide = document.getElementById('btnGuide');
       const btnResetSong = document.getElementById('btnResetSong');
@@ -304,16 +344,31 @@
       ];
 
       const center = Math.floor(keys.length/2);
-      board.innerHTML = keys.map((k,i)=>{
-        const dist = Math.abs(i - center);
-        const height = Math.max(120, 210 - dist*10);
-        const drop = dist*5;
-        return `<button class="kKey" data-id="${k.id}" style="height:${height}px; --drop:${drop}px">
-          <div class="kLabel">${k.deg}<span class="kSub">${k.note}</span></div>
-        </button>`;
-      }).join('');
 
-      let audioCtx = null;
+      function renderBoard(el){
+        if(!el) return;
+        el.innerHTML = keys.map((k,i)=>{
+          const dist = Math.abs(i - center);
+          const height = Math.max(120, 210 - dist*10);
+          const drop = dist*5;
+          return `<button class="kKey" data-id="${k.id}" style="height:${height}px; --drop:${drop}px">
+            <div class="kLabel">${k.deg}<span class="kSub">${k.note}</span></div>
+          </button>`;
+        }).join('');
+      }
+
+      renderBoard(board);
+      renderBoard(boardFull);
+
+      function getAllBoards(){ return [board, boardFull].filter(Boolean); }
+
+      function centerBtn(container, btn){
+        try{
+          const left = btn.offsetLeft - container.clientWidth/2 + btn.clientWidth/2;
+          container.scrollTo({ left, behavior:'smooth' });
+        }catch(_){}
+      }
+let audioCtx = null;
       function ensureAudio(){
         if(audioCtx) return audioCtx;
         const AC = window.AudioContext || window.webkitAudioContext;
@@ -375,21 +430,27 @@
         board.querySelectorAll('.kKey').forEach(b=>b.classList.remove('guide','wrong'));
       }
       function setGuide(){
-        clearGuide();
+        getAllBoards().forEach(b=>b.querySelectorAll('.kKey').forEach(x=>x.classList.remove('guide','wrong')));
         if(!guideOn){
           nowKey.textContent = '—';
           nowSub.textContent = 'Bật Hướng dẫn để bắt đầu';
           return;
         }
         const targetId = song[step];
-        const target = keys.find(k=>k.id===targetId);
+        const target = keys.find(x=>x.id===targetId);
         nowKey.textContent = target ? `${target.deg} (${target.note})` : targetId;
         nowSub.textContent = `Bước ${step+1}/${song.length}`;
-        const btn = board.querySelector(`.kKey[data-id="${targetId}"]`);
-        if(btn) btn.classList.add('guide');
+        getAllBoards().forEach(b=>{
+          const btn = b.querySelector(`.kKey[data-id="${targetId}"]`);
+          if(btn){
+            btn.classList.add('guide');
+            // Auto-center the guided key so mobile always sees it
+            centerBtn(b, btn);
+          }
+        });
       }
 
-      function hit(id){
+      function hit(id, fromBtn){
         const k = keys.find(x=>x.id===id);
         if(k) pluck(k.freq);
         btnAudioOn.textContent = '🔊 Âm thanh: ON';
@@ -401,7 +462,7 @@
           step = (step + 1) % song.length;
           setGuide();
         }else{
-          const btn = board.querySelector(`.kKey[data-id="${id}"]`);
+          const btn = fromBtn || (getAllBoards()[0] && getAllBoards()[0].querySelector(`.kKey[data-id="${id}"]`));
           if(btn){
             btn.classList.add('wrong');
             setTimeout(()=>btn.classList.remove('wrong'), 220);
@@ -409,20 +470,44 @@
         }
       }
 
-      board.addEventListener('pointerdown', (e)=>{
-        const btn = e.target.closest('.kKey');
-        if(!btn) return;
-        e.preventDefault();
-        hit(btn.dataset.id);
-      });
-
-      btnAudioOn.addEventListener('click', ()=>{
+      function bindBoard(el){
+        if(!el) return;
+        el.addEventListener('pointerdown', (e)=>{
+          const btn = e.target.closest('.kKey');
+          if(!btn) return;
+          e.preventDefault();
+          hit(btn.dataset.id, btn);
+        }, {passive:false});
+      }
+      bindBoard(board);
+      bindBoard(boardFull);
+btnAudioOn.addEventListener('click', ()=>{
         ensureAudio();
         if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
         btnAudioOn.textContent = '🔊 Âm thanh: ON';
       });
 
-      btnGuide.addEventListener('click', ()=>{
+      
+      // Fullscreen (better on mobile)
+      function openKalimbaFull(){
+        if(!kalimbaFullscreen) return;
+        kalimbaFullscreen.classList.add('show');
+        kalimbaFullscreen.setAttribute('aria-hidden','false');
+        document.body.classList.add('noScroll');
+        // ensure guide highlight is synced & centered in fullscreen
+        setTimeout(setGuide, 50);
+      }
+      function closeKalimbaFull(){
+        if(!kalimbaFullscreen) return;
+        kalimbaFullscreen.classList.remove('show');
+        kalimbaFullscreen.setAttribute('aria-hidden','true');
+        document.body.classList.remove('noScroll');
+      }
+      if(btnKalimbaFull) btnKalimbaFull.addEventListener('click', openKalimbaFull);
+      if(btnKalimbaClose) btnKalimbaClose.addEventListener('click', closeKalimbaFull);
+      if(kalimbaFullscreen) kalimbaFullscreen.addEventListener('click', (e)=>{ if(e.target===kalimbaFullscreen) closeKalimbaFull(); });
+
+btnGuide.addEventListener('click', ()=>{
         guideOn = !guideOn;
         btnGuide.textContent = guideOn ? '🧭 Hướng dẫn: ON' : '🧭 Hướng dẫn: OFF';
         if(guideOn) ensureAudio();
