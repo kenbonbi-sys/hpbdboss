@@ -101,10 +101,33 @@
     .kalimbaBoard{margin-top:12px;display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:18px 6px 6px;-webkit-overflow-scrolling:touch;position:relative;}
     .kalimbaBoard::before{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:rgba(255,255,255,.06);border-radius:999px;pointer-events:none;}
 
-    .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:54px;min-width:54px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));}
+    .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:48px;min-width:48px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));}
     .kKey:active{transform:translateY(calc(var(--drop, 0px) + 2px)) scale(.99);}
     
     /* --- Kalimba mobile helpers --- */
+    /* --- Kalimba sizing for phones --- */
+    @media(max-width:600px){
+      .kalimbaWrap{padding:12px}
+      .kalimbaHint,.kalimbaNow{padding:10px}
+      .nowKey{font-size:28px}
+      .songLine{font-size:14px}
+      .kKey{width:42px;padding:8px 5px;border-radius:14px}
+      .kLabel{font-size:12px}
+      .kSub{font-size:9.5px;margin-top:3px}
+      .kalimbaBoard{padding:14px 6px 6px;gap:7px}
+    }
+    @media(max-width:380px){
+      .kKey{width:38px;padding:7px 4px}
+      .kLabel{font-size:11px}
+      .kSub{font-size:9px}
+    }
+
+    /* --- "Xoay ngang" ngay trong web (không phụ thuộc auto-rotate của máy) --- */
+    .kalimbaStage{display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .kalimbaFullscreen.landscape .kalimbaStage{padding:6px 0}
+    .kalimbaFullscreen.landscape #kalimbaBoardFull{transform:rotate(90deg) scale(.92);transform-origin:center;}
+    .kalimbaFullscreen.landscape .kalimbaSwipeHint{display:none}
+
     .kalimbaSwipeHint{margin-top:10px;font-size:12px;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start}
     .kalimbaSwipeHint .swipeIcon{font-size:16px;line-height:1;opacity:.95}
     .kalimbaSwipeHint b{color:rgba(255,255,255,.88)}
@@ -207,7 +230,8 @@
         <button class="btn btnPrimary" id="btnAudioOn">🔊 Bật âm thanh</button>
         <button class="btn" id="btnGuide">🧭 Hướng dẫn: OFF</button>
         <button class="btn" id="btnResetSong">↺ Reset bài</button>
-              <button class="btn" id="btnKalimbaFull">⛶ Toàn màn hình</button>
+              <button class="btn" id="btnKalimbaRotate">📱 Xoay ngang</button>
+        <button class="btn" id="btnKalimbaFull">⛶ Toàn màn hình</button>
 </div>
 
       <div class="kalimbaWrap" style="margin-top:14px">
@@ -257,10 +281,13 @@
         <b>🎶 Kalimba – Toàn màn hình</b>
         <span class="tip">Tip: Xoay ngang điện thoại để chơi thoải mái hơn</span>
         <div class="spacer"></div>
+        <button class="btn" id="btnKalimbaRotateFs">📱 Xoay ngang</button>
         <button class="btn" id="btnKalimbaClose">✕</button>
       </div>
       <div class="kalimbaFullscreenBody">
-        <div class="kalimbaBoard" id="kalimbaBoardFull" aria-label="Kalimba keys fullscreen"></div>
+        <div class="kalimbaStage" id="kalimbaStage">
+          <div class="kalimbaBoard" id="kalimbaBoardFull" aria-label="Kalimba keys fullscreen"></div>
+        </div>
         <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div>Vuốt ngang để xem đủ phím (Guide sẽ highlight đồng bộ).</div></div>
       </div>
     </div>
@@ -316,6 +343,8 @@
       const btnKalimbaFull = document.getElementById('btnKalimbaFull');
       const kalimbaFullscreen = document.getElementById('kalimbaFullscreen');
       const btnKalimbaClose = document.getElementById('btnKalimbaClose');
+      const btnKalimbaRotate = document.getElementById('btnKalimbaRotate');
+      const btnKalimbaRotateFs = document.getElementById('btnKalimbaRotateFs');
       const btnAudioOn = document.getElementById('btnAudioOn');
       const btnGuide = document.getElementById('btnGuide');
       const btnResetSong = document.getElementById('btnResetSong');
@@ -489,22 +518,56 @@ btnAudioOn.addEventListener('click', ()=>{
 
       
       // Fullscreen (better on mobile)
+      function tryLockLandscape(){
+        try{
+          if(screen.orientation && screen.orientation.lock){
+            screen.orientation.lock('landscape').catch(()=>{});
+          }
+        }catch(_){}
+      }
+      function requestFs(){
+        // iOS Safari có thể không hỗ trợ; fail thì thôi
+        try{
+          const el = kalimbaFullscreen;
+          if(el && el.requestFullscreen){
+            el.requestFullscreen().catch(()=>{});
+          }else if(document.documentElement && document.documentElement.requestFullscreen){
+            document.documentElement.requestFullscreen().catch(()=>{});
+          }
+        }catch(_){}
+      }
       function openKalimbaFull(){
         if(!kalimbaFullscreen) return;
         kalimbaFullscreen.classList.add('show');
         kalimbaFullscreen.setAttribute('aria-hidden','false');
         document.body.classList.add('noScroll');
+        requestFs();
         // ensure guide highlight is synced & centered in fullscreen
         setTimeout(setGuide, 50);
       }
       function closeKalimbaFull(){
         if(!kalimbaFullscreen) return;
         kalimbaFullscreen.classList.remove('show');
+        kalimbaFullscreen.classList.remove('landscape');
         kalimbaFullscreen.setAttribute('aria-hidden','true');
         document.body.classList.remove('noScroll');
+        try{
+          if(document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+        }catch(_){}
       }
       if(btnKalimbaFull) btnKalimbaFull.addEventListener('click', openKalimbaFull);
       if(btnKalimbaClose) btnKalimbaClose.addEventListener('click', closeKalimbaFull);
+      function toggleLandscape(force){
+        if(!kalimbaFullscreen) return;
+        if(force===true) kalimbaFullscreen.classList.add('landscape');
+        else if(force===false) kalimbaFullscreen.classList.remove('landscape');
+        else kalimbaFullscreen.classList.toggle('landscape');
+        if(kalimbaFullscreen.classList.contains('landscape')) tryLockLandscape();
+        // re-center highlight after layout change
+        setTimeout(setGuide, 80);
+      }
+      if(btnKalimbaRotate) btnKalimbaRotate.addEventListener('click', ()=>{ openKalimbaFull(); toggleLandscape(true); });
+      if(btnKalimbaRotateFs) btnKalimbaRotateFs.addEventListener('click', ()=>{ toggleLandscape(); });
       if(kalimbaFullscreen) kalimbaFullscreen.addEventListener('click', (e)=>{ if(e.target===kalimbaFullscreen) closeKalimbaFull(); });
 
 btnGuide.addEventListener('click', ()=>{
