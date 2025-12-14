@@ -98,10 +98,10 @@
     .nowKey{font-size:34px;font-weight:900;margin-top:6px}
     .nowSub{font-size:12px;color:rgba(255,255,255,.72);margin-top:4px}
 
-    .kalimbaBoard{margin-top:12px;display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:18px 6px 6px;-webkit-overflow-scrolling:touch;position:relative;}
+    .kalimbaBoard{margin-top:12px;display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:18px 6px 6px;-webkit-overflow-scrolling:touch;position:relative;touch-action:pan-x;overscroll-behavior-x:contain}
     .kalimbaBoard::before{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:rgba(255,255,255,.06);border-radius:999px;pointer-events:none;}
 
-    .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:48px;min-width:48px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));}
+    .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:48px;min-width:48px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));-webkit-user-select:none}
     .kKey:active{transform:translateY(calc(var(--drop, 0px) + 2px)) scale(.99);}
     
     /* --- Kalimba mobile helpers --- */
@@ -124,11 +124,17 @@
 
     /* --- "Xoay ngang" ngay trong web (không phụ thuộc auto-rotate của máy) --- */
     .kalimbaStage{display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .kalimbaFullscreen.landscape .kalimbaStage{padding:6px 0}
-    .kalimbaFullscreen.landscape #kalimbaBoardFull{transform:rotate(90deg) scale(.92);transform-origin:center;}
-    .kalimbaFullscreen.landscape .kalimbaSwipeHint{display:none}
-
-    .kalimbaSwipeHint{margin-top:10px;font-size:12px;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start}
+    .kalimbaRotateStage{width:100%;height:auto;}
+.kalimbaFullscreen.landscape .kalimbaFullscreenCard{width:100%;height:100%;border-radius:0}
+.kalimbaFullscreen.landscape .kalimbaFullscreenBody{padding:0}
+.kalimbaFullscreen.landscape .kalimbaStage{position:relative;width:100%;height:calc(100dvh - 64px);height:calc(100vh - 64px);min-height:0;overflow:visible;padding:0}
+.kalimbaFullscreen.landscape .kalimbaRotateStage{position:absolute;top:50%;left:50%;width:calc(100dvh - 110px);width:calc(100vh - 110px);height:calc(100vw - 40px);transform:translate(-50%,-50%) rotate(90deg) scale(.92);transform-origin:center;display:flex;align-items:flex-end;justify-content:center}
+.kalimbaFullscreen.landscape #kalimbaBoardFull{width:100%;height:100%;transform:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+.kalimbaFullscreen.landscape .kalimbaSwipeHint{display:none}
+.kalimbaFullscreen.landscape .kalimbaBoard{padding:12px 6px 6px;gap:6px}
+.kalimbaFullscreen.landscape .kKey{width:34px;padding:7px 4px;border-radius:12px}
+@media(max-width:600px){.kalimbaFullscreen.landscape .kKey{width:30px}.kalimbaFullscreen.landscape .kLabel{font-size:11px}.kalimbaFullscreen.landscape .kSub{font-size:9px}}
+.kalimbaSwipeHint{margin-top:10px;font-size:12px;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start}
     .kalimbaSwipeHint .swipeIcon{font-size:16px;line-height:1;opacity:.95}
     .kalimbaSwipeHint b{color:rgba(255,255,255,.88)}
     .noScroll{overflow:hidden}
@@ -286,7 +292,9 @@
       </div>
       <div class="kalimbaFullscreenBody">
         <div class="kalimbaStage" id="kalimbaStage">
-          <div class="kalimbaBoard" id="kalimbaBoardFull" aria-label="Kalimba keys fullscreen"></div>
+          <div class="kalimbaRotateStage" id="kalimbaRotateStage">
+            <div class="kalimbaBoard" id="kalimbaBoardFull" aria-label="Kalimba keys fullscreen"></div>
+          </div>
         </div>
         <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div>Vuốt ngang để xem đủ phím (Guide sẽ highlight đồng bộ).</div></div>
       </div>
@@ -501,12 +509,26 @@ let audioCtx = null;
 
       function bindBoard(el){
         if(!el) return;
+        // Cho phép vuốt để scroll (cả 2 chiều). Chỉ phát âm khi thật sự 'tap'.
+        let down = null;
         el.addEventListener('pointerdown', (e)=>{
           const btn = e.target.closest('.kKey');
           if(!btn) return;
-          e.preventDefault();
-          hit(btn.dataset.id, btn);
-        }, {passive:false});
+          down = { id: btn.dataset.id, x: e.clientX, y: e.clientY, t: performance.now(), btn };
+        });
+        el.addEventListener('pointerup', (e)=>{
+          if(!down) return;
+          const btn = e.target.closest('.kKey');
+          const dx = Math.abs(e.clientX - down.x);
+          const dy = Math.abs(e.clientY - down.y);
+          const dt = performance.now() - down.t;
+          // Nếu người dùng đang vuốt/scroll thì không phát.
+          if(btn && btn.dataset.id === down.id && dx < 10 && dy < 10 && dt < 500){
+            hit(down.id, down.btn);
+          }
+          down = null;
+        });
+        el.addEventListener('pointercancel', ()=>{ down = null; });
       }
       bindBoard(board);
       bindBoard(boardFull);
