@@ -596,7 +596,7 @@
         <div class="stat"><div class="dot"></div><div><b>🗣️ Không cần nói nhiều…</b><p>Nhưng mỗi lần lên tiếng là mọi người đều lắng nghe.</p></div></div>
         <div class="stat"><div class="dot"></div><div><b>🔮 Dự đoán tương lai kkkk</b><p>"Phán đoán" sự việc nào cũng đúng.</p></div></div>
         <div class="stat"><div class="dot"></div><div><b>📋 Luôn chuẩn bị nhiều plan</b><p>Cho một tình huống.</p></div></div>
-        <hr class="hr"/><p style="font-size:13px;margin:0">🔮 Double-click title để xem lời tiên tri!</p>
+        <hr class="hr"/><p style="font-size:13px;margin:0">🔮 Nhấn vào title để xem lời tiên tri!</p>
         <div class="fortune-box" id="fortuneBox" style="display:none;margin-top:14px;padding:16px;border-radius:16px;border:1px solid rgba(212,184,255,.3);background:linear-gradient(135deg,rgba(212,184,255,.12),rgba(255,229,180,.08));text-align:center">
           <div style="font-size:28px;margin-bottom:8px">🔮✨</div>
           <div id="fortuneText" style="font-size:15px;font-weight:600;color:var(--text)"></div>
@@ -1039,16 +1039,18 @@
       const fortuneBox=document.getElementById('fortuneBox');
       const fortuneText=document.getElementById('fortuneText');
       if(spotlightTitle&&fortuneBox&&fortuneText){
-        spotlightTitle.ondblclick=()=>{
+        spotlightTitle.addEventListener('click',(e)=>{
+          e.preventDefault();
+          e.stopPropagation();
           const randomFortune=fortunes[Math.floor(Math.random()*fortunes.length)];
           fortuneText.textContent=randomFortune;
           fortuneBox.style.display='block';
           fortuneBox.style.animation='none';
-          fortuneBox.offsetHeight;
+          void fortuneBox.offsetHeight;
           fortuneBox.style.animation='fortunePop 0.4s ease';
           boom();
           __toast('🔮 Lời tiên tri đã xuất hiện!');
-        };
+        });
       }
     })();
   </script>
