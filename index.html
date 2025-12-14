@@ -77,7 +77,7 @@
     .loading{position:fixed;inset:0;background:var(--bg1);display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity 0.5s}.loading.hide{opacity:0;pointer-events:none}
     .loadingText{font-size:24px;font-weight:800;animation:blink 1s infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.5}}
 
-    /* ✅ Mobile menu: toggle .show */
+    /* Mobile menu: toggle .show */
     @media(max-width:900px){
       .links.show{
         display:flex !important;
@@ -92,13 +92,12 @@
       }
     }
 
-    /* ✅ Voice wall styling */
+    /* Voice wall styling */
     .audioCard audio{width:100%;margin-top:10px}
     .audioMeta{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
     .audioChip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--muted)}
-  
 
-    /* ===== Marquee / Filmstrip gallery ===== */
+    /* Marquee / Filmstrip gallery */
     .marquee{
       position:relative;
       overflow:hidden;
@@ -222,24 +221,30 @@
     <section class="card" id="gallery" style="margin-top:14px"><div class="kicker">MOMENTS</div><h2>Khoảnh khắc nổi bật</h2><p>Những kỷ niệm đáng nhớ 💕</p>
       <div class="marquee" aria-label="Ảnh chạy dạng dải băng">
       <div class="marqueeTrack">
-        <!-- set 1 -->
+        <!-- set 1 - 7 ảnh -->
         <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 1">
         <img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 2">
-        <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 3">
-        <img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 4">
+        <img src="./anh3.jpg" class="marqueeImg" alt="Ảnh 3">
+        <img src="./anh6.jpg" class="marqueeImg" alt="Ảnh 6">
+        <img src="./anh7.jpg" class="marqueeImg" alt="Ảnh 7">
+        <img src="./anh8.jpg" class="marqueeImg" alt="Ảnh 8">
+        <img src="./anh9.jpg" class="marqueeImg" alt="Ảnh 9">
 
         <!-- set 2 (duplicate để chạy loop mượt) -->
         <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 1b">
         <img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 2b">
-        <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 3b">
-        <img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 4b">
+        <img src="./anh3.jpg" class="marqueeImg" alt="Ảnh 3b">
+        <img src="./anh6.jpg" class="marqueeImg" alt="Ảnh 6b">
+        <img src="./anh7.jpg" class="marqueeImg" alt="Ảnh 7b">
+        <img src="./anh8.jpg" class="marqueeImg" alt="Ảnh 8b">
+        <img src="./anh9.jpg" class="marqueeImg" alt="Ảnh 9b">
       </div>
     </div>
 
     <p style="margin-top:10px;font-size:13px">Tip: Chạm/hover để tạm dừng.</p>
     </section>
 
-    <!-- ✅ TEXT GUESTBOOK (rendered by JS) -->
+    <!-- TEXT GUESTBOOK (rendered by JS) -->
     <section class="card" id="messages" style="margin-top:14px">
       <div class="kicker">FROM TEAM</div>
       <h2>Lời chúc từ team</h2>
@@ -247,11 +252,11 @@
       <div class="msgGrid" id="msgGrid" style="margin-top:12px"></div>
     </section>
 
-    <!-- ✅ VOICE WALL -->
+    <!-- VOICE WALL -->
     <section class="card" id="voice" style="margin-top:14px">
       <div class="kicker">VOICE NOTES</div>
       <h2>🎙️ Lời chúc bằng giọng nói</h2>
-      <p>Nhấn play để nghe. (Mỗi voice 10–20s là “đắt” nhất)</p>
+      <p>Nhấn play để nghe. (Mỗi voice 10–20s là "đắt" nhất)</p>
       <div class="msgGrid" id="voiceGrid" style="margin-top:12px"></div>
       <p style="margin-top:10px;font-size:13px">
         📁 Gợi ý: để file trong <b>./audio/</b> (ví dụ: <i>audio/01_member1.mp3</i>)
@@ -338,7 +343,6 @@
     let musicOpen=false;
     musicBtn.onclick=()=>{
       if(!musicOpen){
-        // ✅ loop cần playlist=videoId
         ytPlayer.src=`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&loop=1&playlist=${youtubeVideoId}`;
         musicModal.classList.add('show');
         musicBtn.textContent='🔊';
@@ -445,7 +449,7 @@
     // QUIZ
     document.getElementById('btnCheck').onclick=()=>{const pick=n=>{const el=document.querySelector(`input[name="${n}"]:checked`);return el?Number(el.value):null};const a=pick('q1'),b=pick('q2'),c=pick('q3'),res=document.getElementById('quizResult');if(a===null||b===null||c===null){res.style.display='block';res.textContent='Chọn đủ 3 câu nha 😄';return}const score=a+b+c;res.style.display='block';if(score===3){res.textContent='🔥 3/3! Team hiểu sếp quá chuẩn!';boom()}else if(score===2)res.textContent='✨ 2/3! Khá đúng vibe!';else res.textContent='😄 0–1/3! Quan trọng là chân thành!'};
 
-    // ✅ DATA-DRIVEN TEXT GUESTBOOK
+    // DATA-DRIVEN TEXT GUESTBOOK
     const messages = [
       { name: "Member 1", tag: "Chân thành", text: "Chúc sếp tuổi mới nhiều sức khỏe!" },
       { name: "Member 2", tag: "Tôn vinh", text: "Cảm ơn sếp luôn tạo không gian tiến bộ." },
@@ -467,7 +471,7 @@
       `).join("");
     }
 
-    // ✅ VOICE WALL (host audio files in ./audio/)
+    // VOICE WALL (host audio files in ./audio/)
     const voiceNotes = [
       { name: "Member 1", tag: "Warm", src: "./audio/01_member1.mp3", text: "Chúc sếp luôn rực rỡ 💖" },
       { name: "Member 2", tag: "Sang", src: "./audio/02_member2.mp3", text: "Cảm ơn sếp vì luôn lắng nghe và dẫn dắt." },
@@ -500,4 +504,3 @@
   </script>
 </body>
 </html>
-
