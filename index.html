@@ -253,15 +253,32 @@
     </section>
 
     <!-- VOICE WALL -->
-    <section class="card" id="voice" style="margin-top:14px">
-      <div class="kicker">VOICE NOTES</div>
-      <h2>🎙️ Lời chúc bằng giọng nói</h2>
-      <p>Nhấn play để nghe. (Mỗi voice 10–20s là "đắt" nhất)</p>
-      <div class="msgGrid" id="voiceGrid" style="margin-top:12px"></div>
-      <p style="margin-top:10px;font-size:13px">
-        📁 Gợi ý: để file trong <b>./audio/</b> (ví dụ: <i>audio/voice_01.mp3</i>)
-      </p>
-    </section>
+<section class="card" id="voice" style="margin-top:14px">
+  <div class="kicker">VOICE NOTES</div>
+  <h2>🎙️ Lời chúc bằng giọng nói</h2>
+  <p>Nhấn play để nghe 💖</p>
+  <div class="msgGrid" style="margin-top:12px">
+    
+    <!-- Voice 1 -->
+    <div class="msgCard audioCard">
+      <div class="who">Quế Như</div>
+      <div class="quote">"QN chúc bảo bối sinh nhật thật zuiiiii, tuổi mới thật giàuuuuu 💖"</div>
+      <audio controls style="width:100%;margin-top:10px">
+        <source src="./audio/voice_01.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <!-- Voice 2 - thêm ở đây -->
+    <div class="msgCard audioCard">
+      <div class="who">Tên người 2</div>
+      <div class="quote">"Lời chúc của người 2"</div>
+      <audio controls style="width:100%;margin-top:10px">
+        <source src="./audio/voice_02.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+  </div>
+</section>
 
     <section class="card" id="scratch" style="margin-top:14px"><div class="kicker">BÍ MẬT</div><h2>🎫 Cào lộ lời chúc</h2><p>Dùng chuột cào để xem!</p>
       <div class="scratch-container" id="scratchContainer"><div class="scratch-reveal">🎁 Chúc sếp GIÀU - ĐẸP - KHỎE! 💖</div><canvas class="scratch-canvas" id="scratchCanvas"></canvas></div>
@@ -473,7 +490,7 @@
 
     // VOICE WALL (host audio files in ./audio/)
     const voiceNotes = [
-      { name: "Quế Như", src: "voice_01.mp3", text: "QN chúc bảo bối sinh nhật thật zuiiiiiiiii, tuổi mới thật giàuuuuu💖" },
+      { name: "Quế Như", src: "./audio/voice_01.mp3", text: "QN chúc bảo bối sinh nhật thật zuiiiiiiiii, tuổi mới thật giàuuuuu💖" },
       { name: "Member 2", tag: "Sang", src: "./audio/02_member2.mp3", text: "Cảm ơn sếp vì luôn lắng nghe và dẫn dắt." },
       // TODO: thêm voice ở đây
     ];
@@ -504,6 +521,7 @@
   </script>
 </body>
 </html>
+
 
 
 
