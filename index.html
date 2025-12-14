@@ -5,199 +5,741 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday, Jenny ✨</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+  <!-- Google Fonts - Elegant pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--bg1:#0b1020;--bg2:#1a0f2b;--card:rgba(255,255,255,.08);--text:rgba(255,255,255,.92);--muted:rgba(255,255,255,.72);--accent1:#ffb3c8;--accent2:#ffd6a5;--accent3:#cdb4ff}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}html,body{height:100%}
-    body{margin:0;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 700px at 20% 10%,rgba(255,179,200,.20),transparent 55%),radial-gradient(900px 700px at 90% 25%,rgba(205,180,255,.18),transparent 52%),radial-gradient(1100px 700px at 50% 110%,rgba(255,214,165,.12),transparent 55%),linear-gradient(180deg,var(--bg1),var(--bg2));overflow-x:hidden}
-    a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
-    .nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(10px);background:rgba(10,12,25,.55);border-bottom:1px solid rgba(255,255,255,.08)}
-    .navIn{max-width:1120px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;cursor:pointer}
-    .links{display:flex;gap:10px;flex-wrap:wrap}.links a{text-decoration:none;font-size:13px;color:var(--muted);padding:8px 10px;border-radius:12px}
-    .spacer{flex:1}.btn{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--text);padding:10px 12px;border-radius:14px;font-weight:750;cursor:pointer;transition:all 0.2s}
-    .btnPrimary{background:linear-gradient(135deg,rgba(255,179,200,.95),rgba(255,214,165,.90));color:#12131a;border:none;box-shadow:0 16px 40px rgba(0,0,0,.35)}
-    .grid{display:grid;gap:14px}.grid2{grid-template-columns:1.2fr .8fr}.grid3{grid-template-columns:repeat(3,1fr)}
-    @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}.links{display:none}h1{font-size:32px!important}.menuToggle{display:block!important}}
-    .menuToggle{display:none;background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
-    .card{background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:18px;box-shadow:0 22px 70px rgba(0,0,0,.35)}
-    .kicker{color:var(--muted);font-size:13px;letter-spacing:.18em;text-transform:uppercase}
-    h1{margin:10px 0 8px;font-size:44px;line-height:1.05}h2{margin:0 0 10px;font-size:26px}p{margin:8px 0;color:var(--muted);line-height:1.6}
-    .hr{height:1px;background:rgba(255,255,255,.10);margin:14px 0;border:0}
-    .hero{padding:26px;position:relative;overflow:hidden}
-    .glow{position:absolute;inset:-120px -120px auto auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,179,200,.35),transparent 55%);pointer-events:none;animation:pulse 4s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:0.8;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
-    .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-    .pill{font-size:12px;padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.18);color:rgba(255,255,255,.78)}
-    .stat{display:flex;gap:12px;padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.18);transition:transform 0.2s}
-    .stat:hover{transform:translateX(4px)}.dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));margin-top:6px}
-    .msgGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.msgGrid{grid-template-columns:1fr}}
-    .msgCard{border-radius:18px;padding:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.16);transition:transform 0.2s}
-    .msgCard:hover{transform:translateY(-4px)}.who{font-weight:800}.tag{font-size:12px;color:var(--muted)}.quote{margin-top:8px;color:rgba(255,255,255,.78)}
+    :root{
+      --bg1:#0d0f1a;
+      --bg2:#1a0f24;
+      --card:rgba(255,255,255,.06);
+      --card-hover:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.94);
+      --muted:rgba(255,255,255,.68);
+      --accent1:#ffc2d1;
+      --accent2:#ffe5b4;
+      --accent3:#d4b8ff;
+      --accent4:#b8e0ff;
+      --glass:rgba(255,255,255,.04);
+      --border:rgba(255,255,255,.08);
+      --border-light:rgba(255,255,255,.12);
+      --shadow-color:rgba(0,0,0,.4);
+      --glow1:rgba(255,194,209,.25);
+      --glow2:rgba(212,184,255,.2);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      color:var(--text);
+      font-family:'DM Sans',system-ui,sans-serif;
+      background:
+        radial-gradient(ellipse 1400px 900px at 15% 5%,var(--glow1),transparent 60%),
+        radial-gradient(ellipse 1000px 800px at 85% 20%,var(--glow2),transparent 55%),
+        radial-gradient(ellipse 1200px 700px at 50% 100%,rgba(255,229,180,.08),transparent 50%),
+        linear-gradient(175deg,var(--bg1) 0%,var(--bg2) 100%);
+      background-attachment:fixed;
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+
+    /* Subtle animated grain overlay */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity:.018;
+      pointer-events:none;
+      z-index:1000;
+    }
+
+    a{color:inherit;text-decoration:none}
+    
+    .wrap{max-width:1140px;margin:0 auto;padding:28px 20px 100px}
+
+    /* ===== Navigation ===== */
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(20px) saturate(1.4);
+      -webkit-backdrop-filter:blur(20px) saturate(1.4);
+      background:rgba(13,15,26,.75);
+      border-bottom:1px solid var(--border);
+      transition:all .3s ease;
+    }
+    .navIn{
+      max-width:1140px;margin:0 auto;padding:12px 20px;
+      display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-family:'Playfair Display',serif;font-weight:700;font-size:18px;
+      cursor:pointer;letter-spacing:.02em;
+      background:linear-gradient(135deg,var(--accent1),var(--accent3));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .links{display:flex;gap:6px;flex-wrap:wrap}
+    .links a{
+      font-size:13px;font-weight:500;color:var(--muted);
+      padding:8px 12px;border-radius:10px;
+      transition:all .2s ease;
+    }
+    .links a:hover{color:var(--text);background:var(--glass)}
+    .spacer{flex:1}
+    
+    @media(max-width:900px){
+      .links{display:none}
+      .menuToggle{display:flex!important}
+      h1{font-size:36px!important}
+    }
+    .menuToggle{
+      display:none;align-items:center;justify-content:center;
+      width:40px;height:40px;
+      background:var(--glass);border:1px solid var(--border);
+      color:var(--text);border-radius:10px;cursor:pointer;
+      font-size:18px;transition:all .2s;
+    }
+    .menuToggle:hover{background:var(--card-hover)}
+    .links.show{
+      display:flex!important;width:100%;flex-direction:column;gap:4px;
+      padding:12px 0 4px;
+    }
+    .links.show a{
+      border:1px solid var(--border);background:var(--glass);
+      border-radius:12px;
+    }
+
+    /* ===== Buttons ===== */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      border:1px solid var(--border-light);
+      background:var(--glass);
+      color:var(--text);
+      padding:11px 16px;border-radius:14px;
+      font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;
+      cursor:pointer;transition:all .25s ease;
+      backdrop-filter:blur(8px);
+    }
+    .btn:hover{
+      background:var(--card-hover);
+      border-color:rgba(255,255,255,.2);
+      transform:translateY(-2px);
+      box-shadow:0 8px 25px var(--shadow-color);
+    }
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 50%,var(--accent3) 100%);
+      background-size:200% 200%;
+      animation:gradientShift 4s ease infinite;
+      color:#1a1a2e;border:none;
+      font-weight:700;
+      box-shadow:0 8px 32px rgba(255,194,209,.3);
+    }
+    .btnPrimary:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 12px 40px rgba(255,194,209,.4);
+    }
+    @keyframes gradientShift{
+      0%,100%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+    }
+
+    /* ===== Cards ===== */
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:0 24px 80px var(--shadow-color);
+      backdrop-filter:blur(12px);
+      transition:all .35s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 50%);
+      pointer-events:none;
+    }
+    .card:hover{
+      border-color:var(--border-light);
+      transform:translateY(-4px);
+      box-shadow:0 32px 100px var(--shadow-color);
+    }
+
+    .kicker{
+      font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--accent1);
+      margin-bottom:8px;
+    }
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:48px;font-weight:800;line-height:1.1;
+      margin-bottom:16px;
+      background:linear-gradient(135deg,#fff 0%,var(--accent1) 50%,var(--accent3) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    h2{
+      font-family:'Playfair Display',serif;
+      font-size:28px;font-weight:700;margin-bottom:12px;
+      color:var(--text);
+    }
+    p{color:var(--muted);margin:10px 0;font-size:15px}
+
+    .hr{
+      height:1px;border:0;margin:20px 0;
+      background:linear-gradient(90deg,transparent,var(--border-light),transparent);
+    }
+
+    /* ===== Hero Section ===== */
+    .grid{display:grid;gap:20px}
+    .grid2{grid-template-columns:1.25fr .75fr}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+
+    .hero{padding:32px;position:relative}
+    .glow{
+      position:absolute;top:-150px;right:-150px;
+      width:550px;height:550px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,var(--glow1),transparent 60%);
+      pointer-events:none;
+      animation:pulseGlow 5s ease-in-out infinite;
+      filter:blur(40px);
+    }
+    @keyframes pulseGlow{
+      0%,100%{opacity:.7;transform:scale(1)}
+      50%{opacity:1;transform:scale(1.08)}
+    }
+
+    .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .pill{
+      font-size:12px;font-weight:600;
+      padding:8px 14px;border-radius:50px;
+      border:1px solid var(--border);
+      background:var(--glass);
+      color:var(--muted);
+      backdrop-filter:blur(8px);
+      transition:all .2s;
+    }
+    .pill:hover{
+      border-color:var(--accent1);
+      color:var(--accent1);
+      transform:scale(1.05);
+    }
+
+    .stat{
+      display:flex;gap:14px;padding:16px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:var(--glass);
+      transition:all .25s ease;
+      margin-bottom:12px;
+    }
+    .stat:last-child{margin-bottom:0}
+    .stat:hover{
+      border-color:var(--border-light);
+      transform:translateX(6px);
+      background:var(--card-hover);
+    }
+    .dot{
+      width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      box-shadow:0 0 12px var(--accent1);
+    }
+    .stat b{font-size:15px;color:var(--text)}
+    .stat p{margin:4px 0 0;font-size:14px}
+
+    .secret{
+      display:none;margin-top:16px;padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(255,194,209,.2);
+      background:rgba(255,194,209,.06);
+      font-size:14px;
+    }
+
+    /* ===== Message Grid ===== */
+    .msgGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:900px){.msgGrid{grid-template-columns:1fr}}
+    
+    .msgCard{
+      border-radius:18px;padding:18px;
+      border:1px solid var(--border);
+      background:var(--glass);
+      backdrop-filter:blur(8px);
+      transition:all .3s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .msgCard::after{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+      opacity:0;transition:opacity .3s;
+    }
+    .msgCard:hover{
+      transform:translateY(-6px);
+      border-color:var(--border-light);
+      box-shadow:0 20px 50px var(--shadow-color);
+    }
+    .msgCard:hover::after{opacity:1}
+    .who{font-weight:700;font-size:15px;margin-bottom:4px}
+    .tag{font-size:11px;color:var(--accent3);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+    .quote{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.55;font-style:italic}
+
+    /* ===== Highlight Box ===== */
+    .highlight-box{
+      background:linear-gradient(135deg,rgba(255,194,209,.1),rgba(212,184,255,.1));
+      border:1px solid rgba(255,194,209,.2);
+      border-radius:18px;padding:20px;margin-top:20px;
+      position:relative;overflow:hidden;
+    }
+    .highlight-box::before{
+      content:"";position:absolute;top:-50%;left:-50%;
+      width:200%;height:200%;
+      background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 60%);
+      animation:shimmer 8s linear infinite;
+    }
+    @keyframes shimmer{
+      0%{transform:rotate(0deg)}
+      100%{transform:rotate(360deg)}
+    }
+    .highlight-box p{position:relative;z-index:1}
+
+    /* ===== Marquee Gallery ===== */
+    .marquee{
+      position:relative;overflow:hidden;
+      border-radius:20px;
+      border:1px solid var(--border);
+      background:var(--glass);
+      padding:16px 12px;
+    }
+    .marquee::before,.marquee::after{
+      content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+    }
+    .marquee::before{left:0;background:linear-gradient(90deg,var(--bg1),transparent)}
+    .marquee::after{right:0;background:linear-gradient(270deg,var(--bg1),transparent)}
+    .marqueeTrack{
+      display:flex;gap:16px;width:max-content;
+      animation:marqueeMove 45s linear infinite;
+    }
+    @keyframes marqueeMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .marqueeImg{
+      width:300px;height:200px;
+      object-fit:cover;border-radius:16px;
+      border:2px solid var(--border);
+      box-shadow:0 16px 50px var(--shadow-color);
+      transition:all .35s ease;
+    }
+    .marqueeImg:hover{transform:scale(1.04);border-color:var(--accent1)}
+    .marquee:hover .marqueeTrack{animation-play-state:paused}
+    @media(max-width:600px){.marqueeImg{width:240px;height:160px}.marqueeTrack{animation-duration:60s}}
+
+    /* ===== Audio Cards ===== */
+    .audioCard audio{
+      width:100%;margin-top:12px;
+      border-radius:10px;
+      filter:sepia(.1) saturate(1.2);
+    }
+
+    /* ===== Kalimba Section ===== */
+    .kalimbaWrap{
+      border:1px solid var(--border);
+      background:var(--glass);
+      border-radius:20px;padding:20px;
+      backdrop-filter:blur(8px);
+    }
+    .kalimbaTop{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    @media(max-width:900px){.kalimbaTop{grid-template-columns:1fr}}
+    
+    .kalimbaHint{
+      border:1px solid var(--border);
+      background:var(--glass);
+      border-radius:16px;padding:16px;
+    }
+    .songLine{
+      font-size:18px;font-weight:600;margin-top:8px;
+      letter-spacing:.1em;
+      font-family:'DM Sans',monospace;
+      color:var(--accent2);
+    }
+    .songNote{font-size:12px;color:var(--muted);margin-top:10px}
+    
+    .kalimbaNow{
+      border:1px solid rgba(255,194,209,.2);
+      background:linear-gradient(135deg,rgba(255,194,209,.08),rgba(212,184,255,.08));
+      border-radius:16px;padding:16px;text-align:center;
+    }
+    .nowTitle{font-size:11px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+    .nowKey{
+      font-family:'Playfair Display',serif;
+      font-size:42px;font-weight:800;margin-top:8px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent3));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .nowSub{font-size:12px;color:var(--muted);margin-top:6px}
+
+    .kalimbaBoard{
+      margin-top:16px;display:flex;justify-content:center;align-items:flex-end;
+      gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:20px 8px 8px;
+      position:relative;touch-action:pan-x;
+    }
+    .kalimbaBoard::before{
+      content:"";position:absolute;left:0;right:0;bottom:0;
+      height:12px;background:rgba(255,255,255,.04);border-radius:999px;
+    }
+    
+    .kKey{
+      position:relative;
+      border:1px solid var(--border-light);
+      background:linear-gradient(180deg,var(--glass) 0%,rgba(0,0,0,.2) 100%);
+      color:var(--text);border-radius:14px;
+      width:50px;min-width:50px;cursor:pointer;
+      user-select:none;touch-action:manipulation;
+      box-shadow:0 12px 30px var(--shadow-color);
+      transition:all .12s ease;
+      display:flex;align-items:flex-end;justify-content:center;
+      padding:12px 6px;
+      transform:translateY(var(--drop,0));
+    }
+    .kKey::after{
+      content:"";position:absolute;left:10px;right:10px;top:14px;
+      height:2px;background:rgba(255,255,255,.06);border-radius:999px;
+    }
+    .kKey:hover{
+      border-color:var(--accent1);
+      background:linear-gradient(180deg,rgba(255,194,209,.1) 0%,rgba(0,0,0,.2) 100%);
+    }
+    .kKey:active{transform:translateY(calc(var(--drop,0) + 3px)) scale(.98)}
+    .kKey.guide{
+      border-color:var(--accent2);
+      background:linear-gradient(180deg,rgba(255,229,180,.15) 0%,rgba(0,0,0,.2) 100%);
+      box-shadow:0 0 20px rgba(255,229,180,.3),0 12px 30px var(--shadow-color);
+    }
+    .kKey.wrong{animation:kShake .2s ease}
+    @keyframes kShake{
+      0%,100%{transform:translateY(var(--drop,0)) translateX(0)}
+      25%{transform:translateY(var(--drop,0)) translateX(-4px)}
+      75%{transform:translateY(var(--drop,0)) translateX(4px)}
+    }
+    .kLabel{font-weight:800;font-size:14px;text-align:center}
+    .kSub{display:block;margin-top:4px;font-size:10px;color:var(--muted);font-weight:600}
+
+    .kalimbaSwipeHint{
+      margin-top:12px;font-size:12px;color:var(--muted);
+      display:flex;gap:8px;align-items:flex-start;
+    }
+    .swipeIcon{font-size:16px;opacity:.8}
+
+    /* ===== Scratch Card ===== */
+    .scratch-container{
+      position:relative;width:100%;max-width:420px;height:130px;
+      margin:20px auto 0;border-radius:18px;overflow:hidden;
+      box-shadow:0 16px 50px var(--shadow-color);
+    }
+    .scratch-reveal{
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      padding:20px;font-size:20px;font-weight:700;
+      background:linear-gradient(135deg,rgba(255,194,209,.15),rgba(212,184,255,.15));
+      border:2px solid var(--border-light);border-radius:18px;
+    }
+    .scratch-canvas{
+      position:absolute;inset:0;border-radius:18px;
+      cursor:crosshair;touch-action:none;
+    }
+
+    /* ===== Slot Machine ===== */
+    .slot-machine{
+      background:var(--glass);
+      border:2px solid var(--border);
+      border-radius:20px;padding:24px;text-align:center;
+      margin-top:20px;
+    }
+    .slot-display{display:flex;justify-content:center;gap:12px;margin:20px 0}
+    .slot-item{
+      width:85px;height:85px;
+      background:linear-gradient(180deg,var(--glass) 0%,rgba(0,0,0,.3) 100%);
+      border:2px solid var(--border-light);border-radius:16px;
+      display:flex;align-items:center;justify-content:center;font-size:44px;
+      box-shadow:inset 0 2px 10px rgba(0,0,0,.3);
+      transition:all .2s;
+    }
+    .slot-item.spinning{animation:slotSpin .1s infinite}
+    @keyframes slotSpin{0%{transform:translateY(-4px)}50%{transform:translateY(4px)}100%{transform:translateY(-4px)}}
+    .slot-result{
+      min-height:55px;padding:14px;
+      border-radius:14px;background:var(--glass);
+      margin-top:16px;color:var(--muted);font-size:15px;
+      border:1px solid var(--border);
+    }
+
+    /* ===== Quiz ===== */
+    .q{
+      padding:18px;border-radius:18px;
+      border:1px solid var(--border);background:var(--glass);
+      margin-top:14px;
+    }
+    .q b{font-size:15px}
+    .opt{display:block;margin-top:12px;cursor:pointer;font-size:14px;color:var(--muted)}
+    .opt:hover{color:var(--text)}
+    .opt input{margin-right:10px}
+    .result{
+      display:none;margin-top:16px;padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(167,243,208,.3);
+      background:rgba(167,243,208,.08);
+      font-size:15px;
+    }
+
+    /* ===== Effects ===== */
     canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:100}
-    .confetti-icon{position:fixed;bottom:30px;left:30px;font-size:55px;z-index:99;cursor:pointer;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4));transition:transform 0.1s}
-    .sparkle{position:fixed;pointer-events:none;font-size:20px;z-index:98;animation:sparkleAnim 0.8s forwards}
+    .confetti-icon{
+      position:fixed;bottom:30px;left:30px;font-size:50px;z-index:99;
+      cursor:pointer;filter:drop-shadow(0 6px 20px rgba(0,0,0,.4));
+      transition:transform .15s;
+    }
+    .confetti-icon:hover{transform:scale(1.15) rotate(10deg)}
+    .sparkle{position:fixed;pointer-events:none;font-size:22px;z-index:98;animation:sparkleAnim .8s forwards}
     @keyframes sparkleAnim{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0) translateY(-30px)}}
-    .balloon{position:fixed;bottom:-100px;font-size:45px;z-index:97;animation:floatUp 6s forwards;pointer-events:none}
+    .balloon{position:fixed;bottom:-100px;font-size:48px;z-index:97;animation:floatUp 7s forwards;pointer-events:none}
     @keyframes floatUp{0%{bottom:-100px}100%{bottom:110vh;opacity:0}}
-    .floating-heart{position:fixed;font-size:28px;z-index:98;pointer-events:none;animation:heartFloat 1.5s forwards}
-    @keyframes heartFloat{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-100px)}}
-    .music-btn{position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font-size:22px;cursor:pointer;z-index:99;display:flex;align-items:center;justify-content:center}
-    .music-btn:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
-    .music-btn.playing{animation:pulse-music 1s infinite;border-color:var(--accent1)}
-    @keyframes pulse-music{0%,100%{box-shadow:0 0 0 0 rgba(255,179,200,.4)}50%{box-shadow:0 0 0 15px rgba(255,179,200,0)}}
+    .floating-heart{position:fixed;font-size:30px;z-index:98;pointer-events:none;animation:heartFloat 1.6s forwards}
+    @keyframes heartFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-120px) scale(.6)}}
+    .firework{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:101;animation:fireworkBurst .9s forwards}
+    @keyframes fireworkBurst{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--tx),var(--ty));opacity:0}}
+
+    /* ===== Music Button ===== */
+    .music-btn{
+      position:fixed;bottom:30px;right:30px;
+      width:54px;height:54px;border-radius:50%;
+      border:2px solid var(--border-light);
+      background:var(--glass);backdrop-filter:blur(12px);
+      color:#fff;font-size:24px;cursor:pointer;z-index:99;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 8px 30px var(--shadow-color);
+      transition:all .25s ease;
+    }
+    .music-btn:hover{transform:scale(1.1);border-color:var(--accent1)}
+    .music-btn.playing{animation:pulse-music 1.2s infinite;border-color:var(--accent1)}
+    @keyframes pulse-music{0%,100%{box-shadow:0 0 0 0 rgba(255,194,209,.4)}50%{box-shadow:0 0 0 18px rgba(255,194,209,0)}}
     .music-modal{display:none;position:fixed;bottom:100px;right:30px;z-index:99}
     .music-modal.show{display:block}
-    .music-modal-content{background:rgba(15,16,26,.95);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-    .music-close{position:absolute;top:-10px;right:-10px;width:28px;height:28px;border-radius:50%;border:none;background:var(--accent1);color:#000;font-weight:bold;cursor:pointer;font-size:14px}
-    .countdown-overlay{position:fixed;inset:0;background:var(--bg1);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:300;transition:opacity 0.5s}
+    .music-modal-content{
+      background:rgba(13,15,26,.95);backdrop-filter:blur(20px);
+      border:1px solid var(--border-light);border-radius:18px;
+      padding:14px;box-shadow:0 20px 60px rgba(0,0,0,.6);
+    }
+    .music-close{
+      position:absolute;top:-12px;right:-12px;
+      width:30px;height:30px;border-radius:50%;border:none;
+      background:var(--accent1);color:#1a1a2e;font-weight:bold;
+      cursor:pointer;font-size:16px;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .2s;
+    }
+    .music-close:hover{transform:scale(1.1)}
+
+    /* ===== Loading & Countdown ===== */
+    .loading{
+      position:fixed;inset:0;background:var(--bg1);
+      display:flex;align-items:center;justify-content:center;z-index:200;
+      transition:opacity .5s;
+    }
+    .loading.hide{opacity:0;pointer-events:none}
+    .loadingText{
+      font-family:'Playfair Display',serif;
+      font-size:26px;font-weight:700;
+      animation:blink 1s infinite;
+    }
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+
+    .countdown-overlay{
+      position:fixed;inset:0;background:var(--bg1);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      z-index:300;transition:opacity .5s;
+    }
     .countdown-overlay.hide{opacity:0;pointer-events:none}
-    .countdown-number{font-size:150px;font-weight:900;background:linear-gradient(135deg,var(--accent1),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:countPop 0.5s}
-    .countdown-text{font-size:24px;color:var(--muted);margin-top:20px}@keyframes countPop{0%{transform:scale(0.5);opacity:0}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-    .scratch-container{position:relative;width:100%;max-width:400px;height:120px;margin:16px auto 0;border-radius:16px;overflow:hidden;cursor:crosshair}
-    .scratch-reveal{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font-size:18px;font-weight:700;background:linear-gradient(135deg,rgba(255,179,200,.2),rgba(205,180,255,.2));border:2px solid rgba(255,255,255,.2);border-radius:16px}
-    .scratch-canvas{position:absolute;inset:0;border-radius:16px;cursor:crosshair;touch-action:none}
-    .slot-machine{background:rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.15);border-radius:18px;padding:20px;text-align:center;margin-top:16px}
-    .slot-display{display:flex;justify-content:center;gap:10px;margin:16px 0}
-    .slot-item{width:80px;height:80px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:40px}
-    .slot-item.spinning{animation:slotSpin 0.1s infinite}@keyframes slotSpin{0%{transform:translateY(-5px)}50%{transform:translateY(5px)}100%{transform:translateY(-5px)}}
-    .slot-result{min-height:50px;padding:12px;border-radius:12px;background:rgba(255,255,255,.05);margin-top:12px;color:var(--muted)}
-    .firework{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:101;animation:fireworkBurst 0.8s forwards}
-    @keyframes fireworkBurst{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--tx),var(--ty));opacity:0}}
-    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
-    .modal{width:min(960px,100%);border-radius:22px;border:1px solid rgba(255,255,255,.16);background:rgba(15,16,26,.88);backdrop-filter:blur(10px);overflow:hidden}
-    .modalTop{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.10)}.closeX{margin-left:auto}
-    .modalBody{padding:14px}.videoBox{width:100%;aspect-ratio:16/9;border-radius:16px;border:1px dashed rgba(255,255,255,.22);display:grid;place-items:center;color:rgba(255,255,255,.70);background:rgba(0,0,0,.18)}
-    .secret{display:none;margin-top:12px;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
-    .q{padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.16);margin-top:12px}
-    .opt{display:block;margin-top:10px;cursor:pointer}.result{display:none;margin-top:12px;padding:12px 14px;border-radius:16px;border:1px solid rgba(167,243,208,.35);background:rgba(167,243,208,.10)}
-    .loading{position:fixed;inset:0;background:var(--bg1);display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity 0.5s}.loading.hide{opacity:0;pointer-events:none}
-    .loadingText{font-size:24px;font-weight:800;animation:blink 1s infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.5}}
-    @media(max-width:900px){.links.show{display:flex !important;width:100%;flex-direction:column;gap:6px;padding:10px 0 2px;}.links.show a{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.12);}}
-    .audioCard audio{width:100%;margin-top:10px}
-    .marquee{position:relative;overflow:hidden;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.14);padding:14px 10px;}
-    .marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
-    .marquee::before{left:0;background:linear-gradient(90deg, rgba(10,12,25,.9), rgba(10,12,25,0));}
-    .marquee::after{right:0;background:linear-gradient(270deg, rgba(10,12,25,.9), rgba(10,12,25,0));}
-    .marqueeTrack{display:flex;gap:14px;width:max-content;animation: marqueeMove 40s linear infinite;will-change: transform;}
-    @keyframes marqueeMove{from{ transform: translateX(0); }to{ transform: translateX(-50%); }}
-    .marqueeImg{width:300px;height:210px;object-fit:cover;border-radius:16px;border:2px solid rgba(255,255,255,.14);box-shadow:0 18px 50px rgba(0,0,0,.35);flex:0 0 auto;transform: translateZ(0);transition: transform .25s;}
-    .marqueeImg:hover{ transform: scale(1.03); }
-    .marquee:hover .marqueeTrack{ animation-play-state: paused; }
-    @media(max-width:600px){.marqueeImg{ width:240px; height:170px; }.marqueeTrack{ animation-duration: 55s; }}
-    .highlight-box{background:linear-gradient(135deg,rgba(255,179,200,.15),rgba(205,180,255,.15));border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:16px;margin-top:16px}
-
-    /* ===== Kalimba ===== */
-    .kalimbaWrap{border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.14);border-radius:18px;padding:14px;}
-    .kalimbaTop{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;}
-    @media(max-width:900px){.kalimbaTop{grid-template-columns:1fr;}}
-    .kalimbaHint{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.12);border-radius:16px;padding:12px;color:rgba(255,255,255,.85);}
-    .songLine{font-size:16px;margin-top:6px;letter-spacing:.08em;}
-    .songNote{font-size:12px;color:rgba(255,255,255,.7);}
-    .kalimbaNow{border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg,rgba(255,179,200,.12),rgba(205,180,255,.12));border-radius:16px;padding:12px;}
-    .nowTitle{font-size:12px;color:rgba(255,255,255,.75);letter-spacing:.12em;text-transform:uppercase}
-    .nowKey{font-size:34px;font-weight:900;margin-top:6px}
-    .nowSub{font-size:12px;color:rgba(255,255,255,.72);margin-top:4px}
-
-    .kalimbaBoard{margin-top:12px;display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:18px 6px 6px;-webkit-overflow-scrolling:touch;position:relative;touch-action:pan-x;overscroll-behavior-x:contain}
-    .kalimbaBoard::before{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:rgba(255,255,255,.06);border-radius:999px;pointer-events:none;}
-
-    .kKey{position:relative;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border-radius:14px;width:48px;min-width:48px;cursor:pointer;user-select:none;touch-action:manipulation;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:transform .08s, background .2s, border-color .2s, box-shadow .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px 6px;transform: translateY(var(--drop, 0px));-webkit-user-select:none}
-    .kKey:active{transform:translateY(calc(var(--drop, 0px) + 2px)) scale(.99);}
-    
-    /* --- Kalimba mobile helpers --- */
-    /* --- Kalimba sizing for phones --- */
-    @media(max-width:600px){
-      .kalimbaWrap{padding:12px}
-      .kalimbaHint,.kalimbaNow{padding:10px}
-      .nowKey{font-size:28px}
-      .songLine{font-size:14px}
-      .kKey{width:42px;padding:8px 5px;border-radius:14px}
-      .kLabel{font-size:12px}
-      .kSub{font-size:9.5px;margin-top:3px}
-      .kalimbaBoard{padding:14px 6px 6px;gap:7px}
+    .countdown-number{
+      font-family:'Playfair Display',serif;
+      font-size:160px;font-weight:900;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2),var(--accent3));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:countPop .5s ease;
     }
-    @media(max-width:380px){
-      .kKey{width:38px;padding:7px 4px}
-      .kLabel{font-size:11px}
-      .kSub{font-size:9px}
+    .countdown-text{font-size:22px;color:var(--muted);margin-top:24px}
+    @keyframes countPop{0%{transform:scale(.5);opacity:0}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+    /* ===== Modals ===== */
+    .backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.7);
+      display:none;align-items:center;justify-content:center;
+      padding:20px;z-index:50;backdrop-filter:blur(8px);
+    }
+    .modal{
+      width:min(960px,100%);border-radius:24px;
+      border:1px solid var(--border-light);
+      background:rgba(13,15,26,.95);backdrop-filter:blur(20px);overflow:hidden;
+      box-shadow:0 30px 100px rgba(0,0,0,.7);
+    }
+    .modalTop{
+      display:flex;align-items:center;gap:12px;padding:16px 20px;
+      border-bottom:1px solid var(--border);
+      font-weight:600;
+    }
+    .closeX{margin-left:auto}
+    .modalBody{padding:20px}
+    .videoBox{
+      width:100%;aspect-ratio:16/9;border-radius:16px;
+      border:2px dashed var(--border-light);
+      display:grid;place-items:center;color:var(--muted);
+      background:var(--glass);font-size:15px;
     }
 
-    /* --- "Xoay ngang" ngay trong web (không phụ thuộc auto-rotate của máy) --- */
-    .kalimbaStage{display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .kalimbaRotateStage{width:100%;height:auto;}
-.kalimbaFullscreen.landscape .kalimbaFullscreenCard{width:100%;height:100%;border-radius:0}
-.kalimbaFullscreen.landscape .kalimbaFullscreenBody{padding:0}
-.kalimbaFullscreen.landscape .kalimbaStage{position:relative;width:100%;height:calc(100dvh - 64px);height:calc(100vh - 64px);min-height:0;overflow:visible;padding:0}
-.kalimbaFullscreen.landscape .kalimbaRotateStage{position:absolute;top:50%;left:50%;width:calc(100dvh - 110px);width:calc(100vh - 110px);height:calc(100vw - 40px);transform:translate(-50%,-50%) rotate(90deg) scale(.92);transform-origin:center;display:flex;align-items:flex-end;justify-content:center}
-.kalimbaFullscreen.landscape #kalimbaBoardFull{width:100%;height:100%;transform:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
-.kalimbaFullscreen.landscape .kalimbaSwipeHint{display:none}
-.kalimbaFullscreen.landscape .kalimbaBoard{padding:12px 6px 6px;gap:6px}
-.kalimbaFullscreen.landscape .kKey{width:34px;padding:7px 4px;border-radius:12px}
-@media(max-width:600px){.kalimbaFullscreen.landscape .kKey{width:30px}.kalimbaFullscreen.landscape .kLabel{font-size:11px}.kalimbaFullscreen.landscape .kSub{font-size:9px}}
-.kalimbaSwipeHint{margin-top:10px;font-size:12px;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start}
-    .kalimbaSwipeHint .swipeIcon{font-size:16px;line-height:1;opacity:.95}
-    .kalimbaSwipeHint b{color:rgba(255,255,255,.88)}
+    /* ===== Kalimba Fullscreen ===== */
+    .kalimbaFullscreen{
+      position:fixed;inset:0;background:rgba(0,0,0,.8);
+      display:none;align-items:center;justify-content:center;
+      z-index:420;padding:16px;backdrop-filter:blur(12px);
+    }
+    .kalimbaFullscreen.show{display:flex}
+    .kalimbaFullscreenCard{
+      width:min(1000px,100%);
+      background:rgba(13,15,26,.95);
+      border:1px solid var(--border-light);
+      border-radius:24px;overflow:hidden;
+      box-shadow:0 30px 100px rgba(0,0,0,.7);
+    }
+    .kalimbaFullscreenTop{
+      display:flex;align-items:center;gap:12px;padding:14px 20px;
+      border-bottom:1px solid var(--border);
+    }
+    .kalimbaFullscreenTop b{font-family:'Playfair Display',serif}
+    .kalimbaFullscreenTop .tip{font-size:12px;color:var(--muted)}
+    .kalimbaFullscreenBody{padding:20px}
     .noScroll{overflow:hidden}
 
-    .kalimbaFullscreen{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:420;padding:14px}
-    .kalimbaFullscreen.show{display:flex}
-    .kalimbaFullscreenCard{width:min(980px,100%);background:rgba(15,16,26,.92);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 26px 90px rgba(0,0,0,.6);overflow:hidden}
-    .kalimbaFullscreenTop{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.10)}
-    .kalimbaFullscreenTop .tip{font-size:12px;color:rgba(255,255,255,.70)}
-    .kalimbaFullscreenBody{padding:14px}
-    .kalimbaFullscreenBody .kalimbaBoard{margin-top:0}
-    @media(max-width:600px){
-      .kalimbaFullscreenCard{height:92vh;display:flex;flex-direction:column}
-      .kalimbaFullscreenBody{flex:1;overflow:auto}
+    /* Landscape mode for kalimba */
+    .kalimbaStage{display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .kalimbaRotateStage{width:100%;height:auto}
+    .kalimbaFullscreen.landscape .kalimbaFullscreenCard{width:100%;height:100%;border-radius:0}
+    .kalimbaFullscreen.landscape .kalimbaFullscreenBody{padding:0}
+    .kalimbaFullscreen.landscape .kalimbaStage{
+      position:relative;width:100%;height:calc(100vh - 64px);
+      overflow:visible;padding:0;
     }
-.kKey::after{content:"";position:absolute;left:10px;right:10px;top:14px;height:2px;background:rgba(255,255,255,.08);border-radius:999px;pointer-events:none;}
+    .kalimbaFullscreen.landscape .kalimbaRotateStage{
+      position:absolute;top:50%;left:50%;
+      width:calc(100vh - 110px);height:calc(100vw - 40px);
+      transform:translate(-50%,-50%) rotate(90deg) scale(.92);
+      transform-origin:center;
+      display:flex;align-items:flex-end;justify-content:center;
+    }
+    .kalimbaFullscreen.landscape #kalimbaBoardFull{
+      width:100%;height:100%;overflow-x:auto;overflow-y:hidden;
+    }
+    .kalimbaFullscreen.landscape .kalimbaSwipeHint{display:none}
+    .kalimbaFullscreen.landscape .kKey{width:36px;padding:8px 4px;border-radius:12px}
 
-    .kKey .kLabel{font-weight:900;font-size:14px;line-height:1.1;text-align:center;}
-    .kKey .kSub{display:block;margin-top:4px;font-size:11px;color:rgba(255,255,255,.72);font-weight:700;}
+    @media(max-width:600px){
+      .kalimbaWrap{padding:14px}
+      .nowKey{font-size:32px}
+      .songLine{font-size:16px}
+      .kKey{width:44px;min-width:44px;padding:10px 5px}
+      .kLabel{font-size:13px}
+      .kSub{font-size:9px}
+      .kalimbaFullscreen.landscape .kKey{width:32px}
+    }
 
-    .kKey.guide{border-color: rgba(255,214,165,.7);background: rgba(255,214,165,.14);box-shadow:0 0 0 4px rgba(255,214,165,.10), 0 18px 60px rgba(0,0,0,.35);}
-    .kKey.wrong{animation: kShake .22s;border-color: rgba(244,114,182,.75);}
-    @keyframes kShake{0%{transform:translateY(var(--drop, 0px)) translateX(0)}25%{transform:translateY(var(--drop, 0px)) translateX(-3px)}50%{transform:translateY(var(--drop, 0px)) translateX(3px)}100%{transform:translateY(var(--drop, 0px)) translateX(0)}}
-    @media(max-width:600px){.kKey{width:50px;min-width:50px}.songLine{font-size:15px}.nowKey{font-size:30px}}
-    @media (prefers-reduced-motion: reduce){.kKey.wrong{animation:none}}
-
+    /* ===== Reduced motion ===== */
+    @media(prefers-reduced-motion:reduce){
+      *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    }
   </style>
 </head>
 <body>
   <div class="loading" id="loading"><div class="loadingText">🎂 Đang chuẩn bị bất ngờ...</div></div>
-  <div class="countdown-overlay" id="countdownOverlay"><div class="countdown-number" id="countdownNum">3</div><div class="countdown-text">Chuẩn bị đón bất ngờ...</div></div>
+  <div class="countdown-overlay" id="countdownOverlay">
+    <div class="countdown-number" id="countdownNum">3</div>
+    <div class="countdown-text">Chuẩn bị đón bất ngờ...</div>
+  </div>
   <canvas id="confetti"></canvas>
   <div class="confetti-icon" id="confettiIcon">🎊</div>
   <button class="music-btn" id="musicBtn" title="Bật nhạc sinh nhật">🎵</button>
-  <div class="music-modal" id="musicModal"><div class="music-modal-content"><button class="music-close" id="musicClose">✕</button><iframe id="ytPlayer" width="300" height="200" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div></div>
-  <div class="nav"><div class="navIn">
-    <div class="brand" id="brand">✨ Birthday Spotlight</div>
-    <button class="menuToggle" id="menuToggle">☰</button>
-    <div class="links" id="navLinks"><a href="#spotlight">Spotlight</a><a href="#awards">Dấu ấn</a><a href="#gallery">Gallery</a><a href="#messages">Lời chúc</a><a href="#voice">Voice</a><a href="#kalimba">Kalimba</a><a href="#scratch">Cào</a><a href="#slot">Quay số</a><a href="#finale">Finale</a></div>
-    <div class="spacer"></div><button class="btn" id="btnConfetti2">🎊 Bắn pháo</button>
-  </div></div>
+  <div class="music-modal" id="musicModal">
+    <div class="music-modal-content">
+      <button class="music-close" id="musicClose">✕</button>
+      <iframe id="ytPlayer" width="300" height="200" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius:12px"></iframe>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div class="navIn">
+      <div class="brand" id="brand">✨ Birthday Spotlight</div>
+      <button class="menuToggle" id="menuToggle">☰</button>
+      <div class="links" id="navLinks">
+        <a href="#spotlight">Spotlight</a>
+        <a href="#awards">Dấu ấn</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#messages">Lời chúc</a>
+        <a href="#voice">Voice</a>
+        <a href="#kalimba">Kalimba</a>
+        <a href="#scratch">Cào</a>
+        <a href="#slot">Quay số</a>
+        <a href="#finale">Finale</a>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" id="btnConfetti2">🎊 Bắn pháo</button>
+    </div>
+  </div>
+
   <div class="wrap">
-    <section class="grid grid2" id="spotlight" style="margin-top:18px">
-      <div class="card hero"><div class="glow"></div><div class="kicker">JENNY & TEAM</div>
+    <!-- Hero Section -->
+    <section class="grid grid2" id="spotlight" style="margin-top:24px">
+      <div class="card hero">
+        <div class="glow"></div>
+        <div class="kicker">Jenny & Team</div>
         <h1 id="title">Welcome Jenny to the world of love! 🎂</h1>
         <p><b>Chúc Jenny bước sang tuổi mới:</b></p>
         <p>✨ Có nhiều trải nghiệm thú vị ở những miền đất mới, gặp thêm nhiều người dễ thương, dễ mến và nhiều năng lượng tích cực</p>
         <p>✨ Gặp những điều tử tế suốt cả năm, mỗi ngày, mỗi giờ.</p>
-        <div class="pillRow"><span class="pill">👑 Spotlight: ON</span><span class="pill">🌸 Birthday Girl</span><span class="pill">💖 World of Love</span></div>
+        <div class="pillRow">
+          <span class="pill">👑 Spotlight: ON</span>
+          <span class="pill">🌸 Birthday Girl</span>
+          <span class="pill">💖 World of Love</span>
+        </div>
         <hr class="hr"/>
-        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btnPrimary" id="btnBoom">Bấm mở bất ngờ</button><button class="btn" id="btnOpenVideo">Mở video</button><a class="btn" href="#messages" style="text-decoration:none">Xem lời chúc</a></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btnPrimary" id="btnBoom">✨ Bấm mở bất ngờ</button>
+          <button class="btn" id="btnOpenVideo">🎬 Mở video</button>
+          <a class="btn" href="#messages">💌 Xem lời chúc</a>
+        </div>
         <div class="secret" id="secretNote">🤫 Secret: "Jenny khó tính để team giỏi hơn — còn ngoài giờ thì Jenny muốn mọi người vui."</div>
       </div>
-      <div class="card"><h2>Spotlight Story</h2>
-        <div class="stat"><div class="dot"></div><div><b>🗣️ Không cần nói nhiều…</b><p style="margin:6px 0 0">Nhưng mỗi lần lên tiếng là mọi người đều lắng nghe.</p></div></div>
-        <div class="stat" style="margin-top:12px"><div class="dot"></div><div><b>🔮 Dự đoán tương lai kkkk</b><p style="margin:6px 0 0">"Phán đoán" sự việc nào cũng đúng.</p></div></div>
-        <div class="stat" style="margin-top:12px"><div class="dot"></div><div><b>📋 Luôn chuẩn bị nhiều plan</b><p style="margin:6px 0 0">Cho một tình huống.</p></div></div>
-        <hr class="hr"/><p style="margin:0;font-size:13px">💡 Double-click title để xem secret!</p>
+      <div class="card">
+        <h2>Spotlight Story</h2>
+        <div class="stat">
+          <div class="dot"></div>
+          <div><b>🗣️ Không cần nói nhiều…</b><p>Nhưng mỗi lần lên tiếng là mọi người đều lắng nghe.</p></div>
+        </div>
+        <div class="stat">
+          <div class="dot"></div>
+          <div><b>🔮 Dự đoán tương lai kkkk</b><p>"Phán đoán" sự việc nào cũng đúng.</p></div>
+        </div>
+        <div class="stat">
+          <div class="dot"></div>
+          <div><b>📋 Luôn chuẩn bị nhiều plan</b><p>Cho một tình huống.</p></div>
+        </div>
+        <hr class="hr"/>
+        <p style="font-size:13px;margin:0">💡 Double-click title để xem secret!</p>
       </div>
     </section>
 
-    <section class="card" id="awards" style="margin-top:14px"><div class="kicker">DẤU ẤN</div><h2>Awards & Achievements</h2>
-      <div class="grid grid3" style="margin-top:12px">
+    <!-- Awards Section -->
+    <section class="card" id="awards" style="margin-top:20px">
+      <div class="kicker">Dấu ấn</div>
+      <h2>Awards & Achievements</h2>
+      <div class="grid grid3" style="margin-top:16px">
         <div class="msgCard"><div class="who">⏰ Time Master</div><div class="quote">"Quản lý thời gian xịn, không bao giờ thấy rush hoặc hối hả."</div></div>
         <div class="msgCard"><div class="who">😌 Calm & Confident</div><div class="quote">"Bình tĩnh và tự tin trong mọi hoàn cảnh."</div></div>
         <div class="msgCard"><div class="who">💖 High EQ</div><div class="quote">"Nhận biết cảm xúc của đối phương chuẩn xác."</div></div>
@@ -206,86 +748,162 @@
         <div class="msgCard"><div class="who">🌟 Role Model</div><div class="quote">"Trong cách làm việc và ra quyết định."</div></div>
       </div>
       <div class="highlight-box">
-        <p style="margin:0;font-size:16px;color:var(--text)">👉 <b>Và đặc biệt là khi làm việc với Jenny:</b></p>
-        <p style="margin:8px 0 0">Mọi người thấy yên tâm hơn, làm việc rõ ràng hơn, và… tin rằng mọi thứ sẽ ổn! 💖</p>
+        <p style="margin:0;font-size:16px;color:var(--text)"><b>👉 Và đặc biệt là khi làm việc với Jenny:</b></p>
+        <p style="margin:10px 0 0">Mọi người thấy yên tâm hơn, làm việc rõ ràng hơn, và… tin rằng mọi thứ sẽ ổn! 💖</p>
       </div>
     </section>
 
-    <section class="card" id="gallery" style="margin-top:14px"><div class="kicker">MOMENTS</div><h2>Khoảnh khắc nổi bật</h2><p>Những kỷ niệm đáng nhớ 💕</p>
-      <div class="marquee"><div class="marqueeTrack">
-        <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 1"><img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 2"><img src="./anh3.jpg" class="marqueeImg" alt="Ảnh 3"><img src="./anh6.jpg" class="marqueeImg" alt="Ảnh 6"><img src="./anh7.jpg" class="marqueeImg" alt="Ảnh 7"><img src="./anh8.jpg" class="marqueeImg" alt="Ảnh 8"><img src="./anh9.jpg" class="marqueeImg" alt="Ảnh 9"><img src="./anh11.jpg" class="marqueeImg" alt="Ảnh 11">
-        <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 1b"><img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 2b"><img src="./anh3.jpg" class="marqueeImg" alt="Ảnh 3b"><img src="./anh6.jpg" class="marqueeImg" alt="Ảnh 6b"><img src="./anh7.jpg" class="marqueeImg" alt="Ảnh 7b"><img src="./anh8.jpg" class="marqueeImg" alt="Ảnh 8b"><img src="./anh9.jpg" class="marqueeImg" alt="Ảnh 9b"><img src="./anh11.jpg" class="marqueeImg" alt="Ảnh 11b">
-      </div></div>
-      <p style="margin-top:10px;font-size:13px">Tip: Chạm/hover để tạm dừng.</p>
+    <!-- Gallery Section -->
+    <section class="card" id="gallery" style="margin-top:20px">
+      <div class="kicker">Moments</div>
+      <h2>Khoảnh khắc nổi bật</h2>
+      <p>Những kỷ niệm đáng nhớ 💕</p>
+      <div class="marquee" style="margin-top:16px">
+        <div class="marqueeTrack">
+          <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 1">
+          <img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 2">
+          <img src="./anh3.jpg" class="marqueeImg" alt="Ảnh 3">
+          <img src="./anh6.jpg" class="marqueeImg" alt="Ảnh 6">
+          <img src="./anh7.jpg" class="marqueeImg" alt="Ảnh 7">
+          <img src="./anh8.jpg" class="marqueeImg" alt="Ảnh 8">
+          <img src="./anh9.jpg" class="marqueeImg" alt="Ảnh 9">
+          <img src="./anh11.jpg" class="marqueeImg" alt="Ảnh 11">
+          <img src="./anh1.JPG" class="marqueeImg" alt="Ảnh 1b">
+          <img src="./anh2.JPG" class="marqueeImg" alt="Ảnh 2b">
+          <img src="./anh3.jpg" class="marqueeImg" alt="Ảnh 3b">
+          <img src="./anh6.jpg" class="marqueeImg" alt="Ảnh 6b">
+          <img src="./anh7.jpg" class="marqueeImg" alt="Ảnh 7b">
+          <img src="./anh8.jpg" class="marqueeImg" alt="Ảnh 8b">
+          <img src="./anh9.jpg" class="marqueeImg" alt="Ảnh 9b">
+          <img src="./anh11.jpg" class="marqueeImg" alt="Ảnh 11b">
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:13px">💡 Tip: Chạm/hover để tạm dừng.</p>
     </section>
 
-    <section class="card" id="messages" style="margin-top:14px"><div class="kicker">FROM Friends with love</div><h2>Lời chúc từ những người dễ thương</h2><p style="margin-top:6px">Những lời chúc ấm áp 💖</p><div class="msgGrid" id="msgGrid" style="margin-top:12px"></div></section>
+    <!-- Messages Section -->
+    <section class="card" id="messages" style="margin-top:20px">
+      <div class="kicker">From Friends with love</div>
+      <h2>Lời chúc từ những người dễ thương</h2>
+      <p>Những lời chúc ấm áp 💖</p>
+      <div class="msgGrid" id="msgGrid" style="margin-top:16px"></div>
+    </section>
 
-    <section class="card" id="voice" style="margin-top:14px"><div class="kicker">VOICE NOTES</div><h2>🎙️ Lời chúc bằng giọng nói</h2><p>Nhấn play để nghe 💖</p>
-      <div class="msgGrid" style="margin-top:12px">
-        <div class="msgCard audioCard"><div class="who">Quế Như</div><div class="quote">"QN chúc bảo bối sinh nhật thật zuiiiii, tuổi mới thật giàuuuuu 💖"</div><audio controls style="width:100%;margin-top:10px"><source src="./audio/voice_01.mp3" type="audio/mpeg"></audio></div>
-        <div class="msgCard audioCard"><div class="who">Mr. Đệ</div><div class="quote">"Chúc chị Trân tuổi mới khỏe re"</div><audio controls style="width:100%;margin-top:10px"><source src="./audio/voice_02.mp3" type="audio/mpeg"></audio></div>
+    <!-- Voice Section -->
+    <section class="card" id="voice" style="margin-top:20px">
+      <div class="kicker">Voice Notes</div>
+      <h2>🎙️ Lời chúc bằng giọng nói</h2>
+      <p>Nhấn play để nghe 💖</p>
+      <div class="msgGrid" style="margin-top:16px">
+        <div class="msgCard audioCard">
+          <div class="who">Quế Như</div>
+          <div class="quote">"QN chúc bảo bối sinh nhật thật zuiiiii, tuổi mới thật giàuuuuu 💖"</div>
+          <audio controls><source src="./audio/voice_01.mp3" type="audio/mpeg"></audio>
+        </div>
+        <div class="msgCard audioCard">
+          <div class="who">Mr. Đệ</div>
+          <div class="quote">"Chúc chị Trân tuổi mới khỏe re"</div>
+          <audio controls><source src="./audio/voice_02.mp3" type="audio/mpeg"></audio>
+        </div>
       </div>
-    
-    <section class="card" id="kalimba" style="margin-top:14px">
-      <div class="kicker">KALIMBA</div>
+    </section>
+
+    <!-- Kalimba Section -->
+    <section class="card" id="kalimba" style="margin-top:20px">
+      <div class="kicker">Kalimba</div>
       <h2>🎶 Kalimba – Happy Birthday</h2>
-      <p>Chạm vào từng phím để phát âm. Bật “Hướng dẫn” để web highlight phím cần bấm 🎁</p>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+      <p>Chạm vào từng phím để phát âm. Bật "Hướng dẫn" để web highlight phím cần bấm 🎁</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
         <button class="btn btnPrimary" id="btnAudioOn">🔊 Bật âm thanh</button>
         <button class="btn" id="btnGuide">🧭 Hướng dẫn: OFF</button>
         <button class="btn" id="btnResetSong">↺ Reset bài</button>
-              <button class="btn" id="btnKalimbaRotate">📱 Xoay ngang</button>
+        <button class="btn" id="btnKalimbaRotate">📱 Xoay ngang</button>
         <button class="btn" id="btnKalimbaFull">⛶ Toàn màn hình</button>
-</div>
-
-      <div class="kalimbaWrap" style="margin-top:14px">
+      </div>
+      <div class="kalimbaWrap" style="margin-top:16px">
         <div class="kalimbaTop">
           <div class="kalimbaHint">
             <b>Gợi ý bấm (số – nốt):</b>
-            <div class="songLine">5 5 6 5 1’ 7</div>
-            <div class="songLine">5 5 6 5 2’ 1’</div>
-            <div class="songLine">5 5 5’ 3’ 1’ 7 6</div>
-            <div class="songLine">4’ 4’ 3’ 1’ 2’ 1’</div>
-            <div class="songNote" style="margin-top:8px">
-              (Trong Đô trưởng: 1=C,2=D,3=E,4=F,5=G,6=A,7=B; dấu ’ là lên 1 quãng 8)
-            </div>
+            <div class="songLine">5 5 6 5 1' 7</div>
+            <div class="songLine">5 5 6 5 2' 1'</div>
+            <div class="songLine">5 5 5' 3' 1' 7 6</div>
+            <div class="songLine">4' 4' 3' 1' 2' 1'</div>
+            <div class="songNote">(Trong Đô trưởng: 1=C, 2=D, 3=E, 4=F, 5=G, 6=A, 7=B; dấu ' là lên 1 quãng 8)</div>
           </div>
-
           <div class="kalimbaNow" id="kalimbaNow">
             <div class="nowTitle">🎯 Phím cần bấm:</div>
             <div class="nowKey" id="nowKey">—</div>
             <div class="nowSub" id="nowSub">Bật Hướng dẫn để bắt đầu</div>
           </div>
         </div>
-
-        <div class="kalimbaBoard" id="kalimbaBoard" aria-label="Kalimba keys"></div>
-        <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div><b>Mẹo:</b> Vuốt ngang trên Kalimba để xem đủ phím. Khi bật <b>Hướng dẫn</b>, web sẽ tự canh phím cần bấm vào giữa 👌</div></div>
+        <div class="kalimbaBoard" id="kalimbaBoard"></div>
+        <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div><b>Mẹo:</b> Vuốt ngang trên Kalimba để xem đủ phím.</div></div>
       </div>
     </section>
 
+    <!-- Scratch Section -->
+    <section class="card" id="scratch" style="margin-top:20px">
+      <div class="kicker">Bí mật</div>
+      <h2>🎫 Cào lộ lời chúc</h2>
+      <p>Dùng chuột/ngón tay cào để xem!</p>
+      <div class="scratch-container" id="scratchContainer">
+        <div class="scratch-reveal">🎁 Chúc Jenny GIÀU - ĐẸP - KHỎE! 💖</div>
+        <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+      </div>
+    </section>
 
-    <section class=\"card\" id=\"scratch\" style="margin-top:14px"><div class="kicker">BÍ MẬT</div><h2>🎫 Cào lộ lời chúc</h2><p>Dùng chuột cào để xem!</p><div class="scratch-container" id="scratchContainer"><div class="scratch-reveal">🎁 Chúc Jenny GIÀU - ĐẸP - KHỎE! 💖</div><canvas class="scratch-canvas" id="scratchCanvas"></canvas></div></section>
+    <!-- Slot Section -->
+    <section class="card" id="slot" style="margin-top:20px">
+      <div class="kicker">Vận may</div>
+      <h2>🎰 Quay số lời chúc</h2>
+      <div class="slot-machine">
+        <div class="slot-display">
+          <div class="slot-item" id="slot1">🎂</div>
+          <div class="slot-item" id="slot2">🎁</div>
+          <div class="slot-item" id="slot3">🎉</div>
+        </div>
+        <button class="btn btnPrimary" id="btnSpin">🎰 Quay ngay!</button>
+        <div class="slot-result" id="slotResult">Bấm để nhận lời chúc!</div>
+      </div>
+    </section>
 
-    <section class="card" id="slot" style="margin-top:14px"><div class="kicker">VẬN MAY</div><h2>🎰 Quay số lời chúc</h2><div class="slot-machine"><div class="slot-display"><div class="slot-item" id="slot1">🎂</div><div class="slot-item" id="slot2">🎁</div><div class="slot-item" id="slot3">🎉</div></div><button class="btn btnPrimary" id="btnSpin">🎰 Quay ngay!</button><div class="slot-result" id="slotResult">Bấm để nhận lời chúc!</div></div></section>
-
-    <section class="card" id="quiz" style="margin-top:14px"><div class="kicker">QUIZ</div><h2>Team hiểu Jenny tới đâu?</h2>
+    <!-- Quiz Section -->
+    <section class="card" id="quiz" style="margin-top:20px">
+      <div class="kicker">Quiz</div>
+      <h2>Team hiểu Jenny tới đâu?</h2>
       <div class="q"><b>Câu 1:</b> Mood của Jenny khi căng?<label class="opt"><input type="radio" name="q1" value="0"> Hơi gắt</label><label class="opt"><input type="radio" name="q1" value="1"> Điềm tĩnh</label><label class="opt"><input type="radio" name="q1" value="0"> Im lặng</label></div>
       <div class="q"><b>Câu 2:</b> Jenny muốn team làm tốt?<label class="opt"><input type="radio" name="q2" value="0"> Nói hay</label><label class="opt"><input type="radio" name="q2" value="1"> Thực thi xuất sắc</label><label class="opt"><input type="radio" name="q2" value="0"> Reply nhanh</label></div>
       <div class="q"><b>Câu 3:</b> Signature của Jenny?<label class="opt"><input type="radio" name="q3" value="1"> Chuẩn cao + hỗ trợ</label><label class="opt"><input type="radio" name="q3" value="0"> Vui tính</label><label class="opt"><input type="radio" name="q3" value="0"> Không feedback</label></div>
-      <button class="btn btnPrimary" id="btnCheck">Chấm điểm</button><div class="result" id="quizResult"></div>
+      <button class="btn btnPrimary" id="btnCheck" style="margin-top:16px">✨ Chấm điểm</button>
+      <div class="result" id="quizResult"></div>
     </section>
 
-    <section class="card" id="finale" style="margin-top:14px"><div class="kicker">FINALE</div><h2>Lời kết</h2><p style="font-size:18px;color:var(--text)">Chúc Jenny tuổi mới thật nhiều năng lượng và luôn rực rỡ! 💖</p><div style="display:flex;gap:10px;margin-top:16px"><button class="btn btnPrimary" id="btnConfetti">🎉 Bắn pháo</button><a class="btn" href="#spotlight" style="text-decoration:none">⬆️ Lên đầu</a></div></section>
+    <!-- Finale Section -->
+    <section class="card" id="finale" style="margin-top:20px">
+      <div class="kicker">Finale</div>
+      <h2>Lời kết</h2>
+      <p style="font-size:18px;color:var(--text)">Chúc Jenny tuổi mới thật nhiều năng lượng và luôn rực rỡ! 💖</p>
+      <div style="display:flex;gap:12px;margin-top:20px">
+        <button class="btn btnPrimary" id="btnConfetti">🎉 Bắn pháo</button>
+        <a class="btn" href="#spotlight">⬆️ Lên đầu</a>
+      </div>
+    </section>
   </div>
-  <div class="backdrop" id="backdrop"><div class="modal"><div class="modalTop"><b>🎬 Video bất ngờ</b><button class="btn closeX" id="btnClose">✕</button></div><div class="modalBody"><div class="videoBox">VIDEO PLACEHOLDER</div></div></div></div>
-  <!-- Kalimba Fullscreen -->
-  <div class="kalimbaFullscreen" id="kalimbaFullscreen" aria-hidden="true">
-    <div class="kalimbaFullscreenCard" role="dialog" aria-label="Kalimba fullscreen">
+
+  <!-- Video Modal -->
+  <div class="backdrop" id="backdrop">
+    <div class="modal">
+      <div class="modalTop"><b>🎬 Video bất ngờ</b><button class="btn closeX" id="btnClose">✕</button></div>
+      <div class="modalBody"><div class="videoBox">VIDEO PLACEHOLDER</div></div>
+    </div>
+  </div>
+
+  <!-- Kalimba Fullscreen Modal -->
+  <div class="kalimbaFullscreen" id="kalimbaFullscreen">
+    <div class="kalimbaFullscreenCard">
       <div class="kalimbaFullscreenTop">
         <b>🎶 Kalimba – Toàn màn hình</b>
-        <span class="tip">Tip: Xoay ngang điện thoại để chơi thoải mái hơn</span>
+        <span class="tip">Xoay ngang để chơi thoải mái hơn</span>
         <div class="spacer"></div>
         <button class="btn" id="btnKalimbaRotateFs">📱 Xoay ngang</button>
         <button class="btn" id="btnKalimbaClose">✕</button>
@@ -293,320 +911,228 @@
       <div class="kalimbaFullscreenBody">
         <div class="kalimbaStage" id="kalimbaStage">
           <div class="kalimbaRotateStage" id="kalimbaRotateStage">
-            <div class="kalimbaBoard" id="kalimbaBoardFull" aria-label="Kalimba keys fullscreen"></div>
+            <div class="kalimbaBoard" id="kalimbaBoardFull"></div>
           </div>
         </div>
-        <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div>Vuốt ngang để xem đủ phím (Guide sẽ highlight đồng bộ).</div></div>
+        <div class="kalimbaSwipeHint"><span class="swipeIcon">⇆</span><div>Vuốt ngang để xem đủ phím.</div></div>
       </div>
     </div>
   </div>
 
-
   <script>
-    const isCoarse=window.matchMedia&&window.matchMedia("(pointer: coarse)").matches;
-    let count=3;const countdownOverlay=document.getElementById('countdownOverlay'),countdownNum=document.getElementById('countdownNum');
-    function startCountdown(){document.getElementById('loading').classList.add('hide');const i=setInterval(()=>{count--;if(count>0){countdownNum.style.animation='none';countdownNum.offsetHeight;countdownNum.style.animation='countPop 0.5s';countdownNum.textContent=count}else if(count===0){countdownNum.textContent='🎉';countdownNum.style.fontSize='120px'}else{clearInterval(i);countdownOverlay.classList.add('hide');setTimeout(boom,300);startBalloons()}},800)}
+    const isCoarse=window.matchMedia&&window.matchMedia("(pointer:coarse)").matches;
+
+    // Countdown
+    let count=3;
+    const countdownOverlay=document.getElementById('countdownOverlay'),countdownNum=document.getElementById('countdownNum');
+    function startCountdown(){
+      document.getElementById('loading').classList.add('hide');
+      const i=setInterval(()=>{
+        count--;
+        if(count>0){countdownNum.style.animation='none';countdownNum.offsetHeight;countdownNum.style.animation='countPop 0.5s';countdownNum.textContent=count}
+        else if(count===0){countdownNum.textContent='🎉';countdownNum.style.fontSize='140px'}
+        else{clearInterval(i);countdownOverlay.classList.add('hide');setTimeout(boom,300);startBalloons()}
+      },800);
+    }
     window.addEventListener('load',()=>setTimeout(startCountdown,500));
+
+    // Menu toggle
     document.getElementById('menuToggle').onclick=()=>document.getElementById('navLinks').classList.toggle('show');
-    const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');let W,H,parts=[],running=false;
-    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}addEventListener('resize',resize);resize();
-    function spawn(n=220){const colors=['#ffb3c8','#ffd6a5','#cdb4ff','#a7f3d0','#fbbf24','#f472b6'];for(let i=0;i<n;i++)parts.push({x:Math.random()*W,y:-20-Math.random()*H*.25,vx:(Math.random()-.5)*2.2,vy:2.8+Math.random()*5.2,s:4+Math.random()*7,r:Math.random()*Math.PI,vr:(Math.random()-.5)*.22,a:1,color:colors[Math.floor(Math.random()*colors.length)]});running=true}
-    function tick(){if(!running)return;ctx.clearRect(0,0,W,H);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vy*=.995;p.vy+=.03;p.a*=.998;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.max(0,p.a);ctx.fillStyle=p.color;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.72);ctx.restore()});parts=parts.filter(p=>p.y<H+50&&p.a>.06);if(parts.length===0)running=false;requestAnimationFrame(tick)}
-    function boom(){spawn(280);tick()}
-    document.getElementById('btnBoom').onclick=boom;document.getElementById('btnConfetti').onclick=boom;document.getElementById('btnConfetti2').onclick=boom;
+
+    // Confetti
+    const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');
+    let W,H,parts=[],running=false;
+    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+    addEventListener('resize',resize);resize();
+    function spawn(n=240){
+      const colors=['#ffc2d1','#ffe5b4','#d4b8ff','#b8e0ff','#a7f3d0','#f472b6'];
+      for(let i=0;i<n;i++)parts.push({x:Math.random()*W,y:-20-Math.random()*H*.3,vx:(Math.random()-.5)*2.5,vy:3+Math.random()*5,s:4+Math.random()*8,r:Math.random()*Math.PI,vr:(Math.random()-.5)*.25,a:1,color:colors[Math.floor(Math.random()*colors.length)]});
+      running=true;
+    }
+    function tick(){
+      if(!running)return;ctx.clearRect(0,0,W,H);
+      parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vy*=.996;p.vy+=.025;p.a*=.997;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.max(0,p.a);ctx.fillStyle=p.color;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.7);ctx.restore()});
+      parts=parts.filter(p=>p.y<H+50&&p.a>.05);if(parts.length===0)running=false;requestAnimationFrame(tick);
+    }
+    function boom(){spawn(300);tick()}
+    document.getElementById('btnBoom').onclick=boom;
+    document.getElementById('btnConfetti').onclick=boom;
+    document.getElementById('btnConfetti2').onclick=boom;
+
+    // Confetti icon rotation
     const confettiIcon=document.getElementById('confettiIcon');
     if(!isCoarse){document.addEventListener('mousemove',e=>{const r=confettiIcon.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),angle=Math.atan2(dy,dx)*(180/Math.PI);confettiIcon.style.transform='rotate('+(angle-90)+'deg)'});}
     confettiIcon.onclick=boom;
+
+    // Sparkles
     const sparkles=['✨','⭐','💫','🌟'];let sparkleT=0;
-    if(!isCoarse){document.addEventListener('mousemove',e=>{if(Date.now()-sparkleT<80||Math.random()>.4)return;sparkleT=Date.now();const s=document.createElement('div');s.className='sparkle';s.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];s.style.left=(e.clientX-10)+'px';s.style.top=(e.clientY-10)+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),800)});}
+    if(!isCoarse){document.addEventListener('mousemove',e=>{if(Date.now()-sparkleT<90||Math.random()>.35)return;sparkleT=Date.now();const s=document.createElement('div');s.className='sparkle';s.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];s.style.left=(e.clientX-11)+'px';s.style.top=(e.clientY-11)+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),800)});}
+
+    // Balloons
     const balloons=['🎈','🩷','💜','💛','🩵'];
-    function createBalloon(){const b=document.createElement('div');b.className='balloon';b.textContent=balloons[Math.floor(Math.random()*balloons.length)];b.style.left=Math.random()*(innerWidth-50)+'px';b.style.animationDuration=(5+Math.random()*4)+'s';document.body.appendChild(b);setTimeout(()=>b.remove(),10000)}
-    function startBalloons(){for(let i=0;i<10;i++)setTimeout(createBalloon,i*300);setInterval(createBalloon,3000)}
-    document.addEventListener('click',e=>{if(['BUTTON','INPUT','A'].includes(e.target.tagName))return;const hearts=['💖','💕','💗','🩷'];for(let i=0;i<3;i++)setTimeout(()=>{const h=document.createElement('div');h.className='floating-heart';h.textContent=hearts[Math.floor(Math.random()*hearts.length)];h.style.left=(e.clientX-14)+'px';h.style.top=(e.clientY-14)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),1500)},i*100)});
-    document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',e=>{if(['BUTTON','INPUT'].includes(e.target.tagName))return;const colors=['#ffb3c8','#ffd6a5','#cdb4ff','#a7f3d0'];for(let i=0;i<12;i++){const f=document.createElement('div');f.className='firework';f.style.left=e.clientX+'px';f.style.top=e.clientY+'px';f.style.background=colors[Math.floor(Math.random()*colors.length)];const angle=(i/12)*Math.PI*2,dist=50+Math.random()*50;f.style.setProperty('--tx',Math.cos(angle)*dist+'px');f.style.setProperty('--ty',Math.sin(angle)*dist+'px');document.body.appendChild(f);setTimeout(()=>f.remove(),800)}}));
+    function createBalloon(){const b=document.createElement('div');b.className='balloon';b.textContent=balloons[Math.floor(Math.random()*balloons.length)];b.style.left=Math.random()*(innerWidth-50)+'px';b.style.animationDuration=(6+Math.random()*4)+'s';document.body.appendChild(b);setTimeout(()=>b.remove(),11000)}
+    function startBalloons(){for(let i=0;i<12;i++)setTimeout(createBalloon,i*250);setInterval(createBalloon,3500)}
+
+    // Floating hearts on click
+    document.addEventListener('click',e=>{if(['BUTTON','INPUT','A','AUDIO'].includes(e.target.tagName))return;const hearts=['💖','💕','💗','🩷'];for(let i=0;i<3;i++)setTimeout(()=>{const h=document.createElement('div');h.className='floating-heart';h.textContent=hearts[Math.floor(Math.random()*hearts.length)];h.style.left=(e.clientX-15)+'px';h.style.top=(e.clientY-15)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),1600)},i*100)});
+
+    // Fireworks on card click
+    document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',e=>{if(['BUTTON','INPUT','AUDIO'].includes(e.target.tagName))return;const colors=['#ffc2d1','#ffe5b4','#d4b8ff','#b8e0ff'];for(let i=0;i<14;i++){const f=document.createElement('div');f.className='firework';f.style.left=e.clientX+'px';f.style.top=e.clientY+'px';f.style.background=colors[Math.floor(Math.random()*colors.length)];const angle=(i/14)*Math.PI*2,dist=55+Math.random()*55;f.style.setProperty('--tx',Math.cos(angle)*dist+'px');f.style.setProperty('--ty',Math.sin(angle)*dist+'px');document.body.appendChild(f);setTimeout(()=>f.remove(),900)}}));
+
+    // Music
     const musicBtn=document.getElementById('musicBtn'),musicModal=document.getElementById('musicModal'),musicClose=document.getElementById('musicClose'),ytPlayer=document.getElementById('ytPlayer');
     const youtubeVideoId='Uc7DfbBcfvk';let musicOpen=false;
     musicBtn.onclick=()=>{if(!musicOpen){ytPlayer.src='https://www.youtube.com/embed/'+youtubeVideoId+'?autoplay=1&loop=1&playlist='+youtubeVideoId;musicModal.classList.add('show');musicBtn.textContent='🔊';musicBtn.classList.add('playing');}else{ytPlayer.src='';musicModal.classList.remove('show');musicBtn.textContent='🎵';musicBtn.classList.remove('playing');}musicOpen=!musicOpen;};
     musicClose.onclick=()=>{ytPlayer.src='';musicModal.classList.remove('show');musicBtn.textContent='🎵';musicBtn.classList.remove('playing');musicOpen=false;};
-    const scratchCanvas=document.getElementById('scratchCanvas'),scratchCtx=scratchCanvas.getContext('2d'),scratchContainer=document.getElementById('scratchContainer');let isScratching=false,scratchReady=false;
-    function initScratch(){const rect=scratchContainer.getBoundingClientRect();if(rect.width===0||rect.height===0)return;scratchCanvas.width=rect.width;scratchCanvas.height=rect.height;scratchCtx.globalCompositeOperation='source-over';const gradient=scratchCtx.createLinearGradient(0,0,rect.width,rect.height);gradient.addColorStop(0,'#ffb3c8');gradient.addColorStop(0.5,'#cdb4ff');gradient.addColorStop(1,'#ffd6a5');scratchCtx.fillStyle=gradient;scratchCtx.fillRect(0,0,rect.width,rect.height);scratchCtx.fillStyle='rgba(255,255,255,0.95)';scratchCtx.font='bold 20px system-ui';scratchCtx.textAlign='center';scratchCtx.textBaseline='middle';scratchCtx.fillText('🎁 Cào tại đây để xem!',rect.width/2,rect.height/2);scratchReady=true;}
-    function doScratch(x,y){if(!scratchReady)return;scratchCtx.globalCompositeOperation='destination-out';scratchCtx.beginPath();scratchCtx.arc(x,y,30,0,Math.PI*2);scratchCtx.fill();}
+
+    // Scratch card
+    const scratchCanvas=document.getElementById('scratchCanvas'),scratchCtx=scratchCanvas.getContext('2d'),scratchContainer=document.getElementById('scratchContainer');
+    let isScratching=false,scratchReady=false;
+    function initScratch(){const rect=scratchContainer.getBoundingClientRect();if(rect.width===0||rect.height===0)return;scratchCanvas.width=rect.width;scratchCanvas.height=rect.height;scratchCtx.globalCompositeOperation='source-over';const gradient=scratchCtx.createLinearGradient(0,0,rect.width,rect.height);gradient.addColorStop(0,'#ffc2d1');gradient.addColorStop(0.5,'#d4b8ff');gradient.addColorStop(1,'#ffe5b4');scratchCtx.fillStyle=gradient;scratchCtx.fillRect(0,0,rect.width,rect.height);scratchCtx.fillStyle='rgba(255,255,255,0.95)';scratchCtx.font='bold 20px "DM Sans",system-ui';scratchCtx.textAlign='center';scratchCtx.textBaseline='middle';scratchCtx.fillText('🎁 Cào tại đây để xem!',rect.width/2,rect.height/2);scratchReady=true;}
+    function doScratch(x,y){if(!scratchReady)return;scratchCtx.globalCompositeOperation='destination-out';scratchCtx.beginPath();scratchCtx.arc(x,y,32,0,Math.PI*2);scratchCtx.fill();}
     function handleScratch(e){if(!isScratching)return;e.preventDefault();const rect=scratchCanvas.getBoundingClientRect();let x,y;if(e.touches){x=e.touches[0].clientX-rect.left;y=e.touches[0].clientY-rect.top;}else{x=e.clientX-rect.left;y=e.clientY-rect.top;}doScratch(x,y);}
-    scratchCanvas.addEventListener('mousedown',e=>{isScratching=true;handleScratch(e)});scratchCanvas.addEventListener('mouseup',()=>isScratching=false);scratchCanvas.addEventListener('mouseleave',()=>isScratching=false);scratchCanvas.addEventListener('mousemove',handleScratch);
-    scratchCanvas.addEventListener('touchstart',e=>{isScratching=true;handleScratch(e)},{passive:false});scratchCanvas.addEventListener('touchend',()=>isScratching=false);scratchCanvas.addEventListener('touchmove',handleScratch,{passive:false});
-    window.addEventListener('load',()=>setTimeout(initScratch,500));window.addEventListener('resize',()=>{scratchReady=false;setTimeout(initScratch,100)});
+    scratchCanvas.addEventListener('mousedown',e=>{isScratching=true;handleScratch(e)});
+    scratchCanvas.addEventListener('mouseup',()=>isScratching=false);
+    scratchCanvas.addEventListener('mouseleave',()=>isScratching=false);
+    scratchCanvas.addEventListener('mousemove',handleScratch);
+    scratchCanvas.addEventListener('touchstart',e=>{isScratching=true;handleScratch(e)},{passive:false});
+    scratchCanvas.addEventListener('touchend',()=>isScratching=false);
+    scratchCanvas.addEventListener('touchmove',handleScratch,{passive:false});
+    window.addEventListener('load',()=>setTimeout(initScratch,500));
+    window.addEventListener('resize',()=>{scratchReady=false;setTimeout(initScratch,100)});
+
+    // Slot machine
     const slotEmojis=['🎂','🎁','🎉','🎈','💖','⭐','🎊','💎'],slotMsgs=['🔥 JACKPOT! Chúc Jenny GIÀU SỤ!','✨ Chúc Jenny TỎA SÁNG!','💖 Chúc Jenny được YÊU THƯƠNG!','🎯 Chúc Jenny ĐẠT MỌI MỤC TIÊU!','💪 Chúc Jenny SỨC KHỎE dồi dào!','🚀 Chúc Jenny THĂNG TIẾN!','😄 Chúc Jenny HẠNH PHÚC!','👑 Chúc Jenny luôn là QUEEN!'];
     const slot1=document.getElementById('slot1'),slot2=document.getElementById('slot2'),slot3=document.getElementById('slot3'),slotResult=document.getElementById('slotResult');let isSpinning=false;
     document.getElementById('btnSpin').onclick=()=>{if(isSpinning)return;isSpinning=true;slot1.classList.add('spinning');slot2.classList.add('spinning');slot3.classList.add('spinning');slotResult.textContent='🎰 Đang quay...';const spin=setInterval(()=>{slot1.textContent=slotEmojis[Math.floor(Math.random()*slotEmojis.length)];slot2.textContent=slotEmojis[Math.floor(Math.random()*slotEmojis.length)];slot3.textContent=slotEmojis[Math.floor(Math.random()*slotEmojis.length)]},100);setTimeout(()=>{slot1.classList.remove('spinning');slot1.textContent=slotEmojis[Math.floor(Math.random()*slotEmojis.length)]},1000);setTimeout(()=>{slot2.classList.remove('spinning');slot2.textContent=slotEmojis[Math.floor(Math.random()*slotEmojis.length)]},1500);setTimeout(()=>{clearInterval(spin);slot3.classList.remove('spinning');slot3.textContent=slotEmojis[Math.floor(Math.random()*slotEmojis.length)];slotResult.textContent=slotMsgs[Math.floor(Math.random()*slotMsgs.length)];boom();isSpinning=false},2000)};
-    const backdrop=document.getElementById('backdrop');document.getElementById('btnOpenVideo').onclick=()=>backdrop.style.display='flex';document.getElementById('btnClose').onclick=()=>backdrop.style.display='none';backdrop.onclick=e=>{if(e.target===backdrop)backdrop.style.display='none'};
-    const secret=document.getElementById('secretNote');document.getElementById('title').ondblclick=()=>secret.style.display=secret.style.display==='block'?'none':'block';document.getElementById('brand').ondblclick=()=>secret.style.display=secret.style.display==='block'?'none':'block';
+
+    // Video modal
+    const backdrop=document.getElementById('backdrop');
+    document.getElementById('btnOpenVideo').onclick=()=>backdrop.style.display='flex';
+    document.getElementById('btnClose').onclick=()=>backdrop.style.display='none';
+    backdrop.onclick=e=>{if(e.target===backdrop)backdrop.style.display='none'};
+
+    // Secret
+    const secret=document.getElementById('secretNote');
+    document.getElementById('title').ondblclick=()=>secret.style.display=secret.style.display==='block'?'none':'block';
+    document.getElementById('brand').ondblclick=()=>secret.style.display=secret.style.display==='block'?'none':'block';
+
+    // Quiz
     document.getElementById('btnCheck').onclick=()=>{const pick=n=>{const el=document.querySelector('input[name="'+n+'"]:checked');return el?Number(el.value):null};const a=pick('q1'),b=pick('q2'),c=pick('q3'),res=document.getElementById('quizResult');if(a===null||b===null||c===null){res.style.display='block';res.textContent='Chọn đủ 3 câu nha 😄';return}const score=a+b+c;res.style.display='block';if(score===3){res.textContent='🔥 3/3! Team hiểu Jenny quá chuẩn!';boom()}else if(score===2)res.textContent='✨ 2/3! Khá đúng vibe!';else res.textContent='😄 0–1/3! Quan trọng là chân thành!'};
+
+    // Messages
     const messages=[{name:"Quin Quin",text:"Dù nhìu moment hơi ups and downs, nhưng vẫn mong làm chung team thật lâu nha! Mãi bên nhau bạn nhóe!!"},{name:"Mr. Đệ",text:"Sếp gì ạ. MÃI ĐỈNH MÃI KHỎE"}];
-    const msgGrid=document.getElementById("msgGrid");if(msgGrid){msgGrid.innerHTML=messages.map(m=>'<div class="msgCard"><div class="who">'+m.name+'</div>'+(m.tag?'<div class="tag">'+m.tag+'</div>':'')+'<div class="quote">"'+m.text+'"</div></div>').join("");}
+    const msgGrid=document.getElementById("msgGrid");
+    if(msgGrid){msgGrid.innerHTML=messages.map(m=>'<div class="msgCard"><div class="who">'+m.name+'</div>'+(m.tag?'<div class="tag">'+m.tag+'</div>':'')+'<div class="quote">"'+m.text+'"</div></div>').join("");}
 
-    // ===== Kalimba (touch/click to play) =====
+    // Kalimba
     (function(){
-      const board = document.getElementById('kalimbaBoard');
-      const boardFull = document.getElementById('kalimbaBoardFull');
-      const btnKalimbaFull = document.getElementById('btnKalimbaFull');
-      const kalimbaFullscreen = document.getElementById('kalimbaFullscreen');
-      const btnKalimbaClose = document.getElementById('btnKalimbaClose');
-      const btnKalimbaRotate = document.getElementById('btnKalimbaRotate');
-      const btnKalimbaRotateFs = document.getElementById('btnKalimbaRotateFs');
-      const btnAudioOn = document.getElementById('btnAudioOn');
-      const btnGuide = document.getElementById('btnGuide');
-      const btnResetSong = document.getElementById('btnResetSong');
-      const nowKey = document.getElementById('nowKey');
-      const nowSub = document.getElementById('nowSub');
-      if(!board || !btnAudioOn) return;
+      const board=document.getElementById('kalimbaBoard');
+      const boardFull=document.getElementById('kalimbaBoardFull');
+      const btnKalimbaFull=document.getElementById('btnKalimbaFull');
+      const kalimbaFullscreen=document.getElementById('kalimbaFullscreen');
+      const btnKalimbaClose=document.getElementById('btnKalimbaClose');
+      const btnKalimbaRotate=document.getElementById('btnKalimbaRotate');
+      const btnKalimbaRotateFs=document.getElementById('btnKalimbaRotateFs');
+      const btnAudioOn=document.getElementById('btnAudioOn');
+      const btnGuide=document.getElementById('btnGuide');
+      const btnResetSong=document.getElementById('btnResetSong');
+      const nowKey=document.getElementById('nowKey');
+      const nowSub=document.getElementById('nowSub');
+      if(!board||!btnAudioOn)return;
 
-      const keys = [
-        {id:'C4', note:'C4', freq:261.63, deg:"1"},
-        {id:'D4', note:'D4', freq:293.66, deg:"2"},
-        {id:'E4', note:'E4', freq:329.63, deg:"3"},
-        {id:'F4', note:'F4', freq:349.23, deg:"4"},
-        {id:'G4', note:'G4', freq:392.00, deg:"5"},
-        {id:'A4', note:'A4', freq:440.00, deg:"6"},
-        {id:'B4', note:'B4', freq:493.88, deg:"7"},
-        {id:'C5', note:'C5', freq:523.25, deg:"1’"},
-        {id:'D5', note:'D5', freq:587.33, deg:"2’"},
-        {id:'E5', note:'E5', freq:659.25, deg:"3’"},
-        {id:'F5', note:'F5', freq:698.46, deg:"4’"},
-        {id:'G5', note:'G5', freq:783.99, deg:"5’"},
-        {id:'A5', note:'A5', freq:880.00, deg:"6’"},
-        {id:'B5', note:'B5', freq:987.77, deg:"7’"},
-        {id:'C6', note:'C6', freq:1046.50, deg:"1’’"},
-        {id:'D6', note:'D6', freq:1174.66, deg:"2’’"},
-        {id:'E6', note:'E6', freq:1318.51, deg:"3’’"},
+      const keys=[
+        {id:'C4',note:'C4',freq:261.63,deg:"1"},
+        {id:'D4',note:'D4',freq:293.66,deg:"2"},
+        {id:'E4',note:'E4',freq:329.63,deg:"3"},
+        {id:'F4',note:'F4',freq:349.23,deg:"4"},
+        {id:'G4',note:'G4',freq:392.00,deg:"5"},
+        {id:'A4',note:'A4',freq:440.00,deg:"6"},
+        {id:'B4',note:'B4',freq:493.88,deg:"7"},
+        {id:'C5',note:'C5',freq:523.25,deg:"1'"},
+        {id:'D5',note:'D5',freq:587.33,deg:"2'"},
+        {id:'E5',note:'E5',freq:659.25,deg:"3'"},
+        {id:'F5',note:'F5',freq:698.46,deg:"4'"},
+        {id:'G5',note:'G5',freq:783.99,deg:"5'"},
+        {id:'A5',note:'A5',freq:880.00,deg:"6'"},
+        {id:'B5',note:'B5',freq:987.77,deg:"7'"},
+        {id:'C6',note:'C6',freq:1046.50,deg:"1''"},
+        {id:'D6',note:'D6',freq:1174.66,deg:"2''"},
+        {id:'E6',note:'E6',freq:1318.51,deg:"3''"},
       ];
-
-      const center = Math.floor(keys.length/2);
+      const center=Math.floor(keys.length/2);
 
       function renderBoard(el){
-        if(!el) return;
-        el.innerHTML = keys.map((k,i)=>{
-          const dist = Math.abs(i - center);
-          const height = Math.max(120, 210 - dist*10);
-          const drop = dist*5;
-          return `<button class="kKey" data-id="${k.id}" style="height:${height}px; --drop:${drop}px">
-            <div class="kLabel">${k.deg}<span class="kSub">${k.note}</span></div>
-          </button>`;
+        if(!el)return;
+        el.innerHTML=keys.map((k,i)=>{
+          const dist=Math.abs(i-center);
+          const height=Math.max(110,200-dist*10);
+          const drop=dist*5;
+          return '<button class="kKey" data-id="'+k.id+'" style="height:'+height+'px;--drop:'+drop+'px"><div class="kLabel">'+k.deg+'<span class="kSub">'+k.note+'</span></div></button>';
         }).join('');
       }
+      renderBoard(board);renderBoard(boardFull);
 
-      renderBoard(board);
-      renderBoard(boardFull);
+      function getAllBoards(){return[board,boardFull].filter(Boolean)}
+      function centerBtn(container,btn){try{const left=btn.offsetLeft-container.clientWidth/2+btn.clientWidth/2;container.scrollTo({left,behavior:'smooth'})}catch(_){}}
 
-      function getAllBoards(){ return [board, boardFull].filter(Boolean); }
-
-      function centerBtn(container, btn){
-        try{
-          const left = btn.offsetLeft - container.clientWidth/2 + btn.clientWidth/2;
-          container.scrollTo({ left, behavior:'smooth' });
-        }catch(_){}
-      }
-let audioCtx = null;
-      function ensureAudio(){
-        if(audioCtx) return audioCtx;
-        const AC = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AC();
-        return audioCtx;
-      }
+      let audioCtx=null;
+      function ensureAudio(){if(audioCtx)return audioCtx;const AC=window.AudioContext||window.webkitAudioContext;audioCtx=new AC();return audioCtx}
       function pluck(freq){
-        const ctx = ensureAudio();
-        if(ctx.state === 'suspended') ctx.resume();
-        const t = ctx.currentTime;
-
-        const osc = ctx.createOscillator();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, t);
-
-        const osc2 = ctx.createOscillator();
-        osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(freq*2.01, t);
-
-        const g = ctx.createGain();
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(0.58, t + 0.01);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.25);
-
-        const lp = ctx.createBiquadFilter();
-        lp.type = 'lowpass';
-        lp.frequency.setValueAtTime(4600, t);
-        lp.Q.setValueAtTime(0.75, t);
-
-        const delay = ctx.createDelay(0.25);
-        delay.delayTime.setValueAtTime(0.075, t);
-        const fb = ctx.createGain();
-        fb.gain.setValueAtTime(0.17, t);
-
-        osc.connect(g); osc2.connect(g);
-        g.connect(lp);
-
-        lp.connect(ctx.destination);
-        lp.connect(delay);
-        delay.connect(fb);
-        fb.connect(delay);
-        delay.connect(ctx.destination);
-
-        osc.start(t); osc2.start(t);
-        osc.stop(t + 1.35); osc2.stop(t + 1.35);
+        const ctx=ensureAudio();if(ctx.state==='suspended')ctx.resume();const t=ctx.currentTime;
+        const osc=ctx.createOscillator();osc.type='triangle';osc.frequency.setValueAtTime(freq,t);
+        const osc2=ctx.createOscillator();osc2.type='sine';osc2.frequency.setValueAtTime(freq*2.01,t);
+        const g=ctx.createGain();g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.55,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+1.2);
+        const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(4500,t);lp.Q.setValueAtTime(0.7,t);
+        const delay=ctx.createDelay(0.25);delay.delayTime.setValueAtTime(0.07,t);const fb=ctx.createGain();fb.gain.setValueAtTime(0.15,t);
+        osc.connect(g);osc2.connect(g);g.connect(lp);lp.connect(ctx.destination);lp.connect(delay);delay.connect(fb);fb.connect(delay);delay.connect(ctx.destination);
+        osc.start(t);osc2.start(t);osc.stop(t+1.3);osc2.stop(t+1.3);
       }
 
-      const song = [
-        'G4','G4','A4','G4','C5','B4',
-        'G4','G4','A4','G4','D5','C5',
-        'G4','G4','G5','E5','C5','B4','A4',
-        'F5','F5','E5','C5','D5','C5'
-      ];
+      const song=['G4','G4','A4','G4','C5','B4','G4','G4','A4','G4','D5','C5','G4','G4','G5','E5','C5','B4','A4','F5','F5','E5','C5','D5','C5'];
+      let guideOn=false,step=0;
 
-      let guideOn = false;
-      let step = 0;
-
-      function clearGuide(){
-        board.querySelectorAll('.kKey').forEach(b=>b.classList.remove('guide','wrong'));
-      }
       function setGuide(){
         getAllBoards().forEach(b=>b.querySelectorAll('.kKey').forEach(x=>x.classList.remove('guide','wrong')));
-        if(!guideOn){
-          nowKey.textContent = '—';
-          nowSub.textContent = 'Bật Hướng dẫn để bắt đầu';
-          return;
-        }
-        const targetId = song[step];
-        const target = keys.find(x=>x.id===targetId);
-        nowKey.textContent = target ? `${target.deg} (${target.note})` : targetId;
-        nowSub.textContent = `Bước ${step+1}/${song.length}`;
-        getAllBoards().forEach(b=>{
-          const btn = b.querySelector(`.kKey[data-id="${targetId}"]`);
-          if(btn){
-            btn.classList.add('guide');
-            // Auto-center the guided key so mobile always sees it
-            centerBtn(b, btn);
-          }
-        });
+        if(!guideOn){nowKey.textContent='—';nowSub.textContent='Bật Hướng dẫn để bắt đầu';return}
+        const targetId=song[step];const target=keys.find(x=>x.id===targetId);
+        nowKey.textContent=target?target.deg+' ('+target.note+')':targetId;
+        nowSub.textContent='Bước '+(step+1)+'/'+song.length;
+        getAllBoards().forEach(b=>{const btn=b.querySelector('.kKey[data-id="'+targetId+'"]');if(btn){btn.classList.add('guide');centerBtn(b,btn)}});
       }
 
-      function hit(id, fromBtn){
-        const k = keys.find(x=>x.id===id);
-        if(k) pluck(k.freq);
-        btnAudioOn.textContent = '🔊 Âm thanh: ON';
-
-        if(!guideOn) return;
-
-        const targetId = song[step];
-        if(id === targetId){
-          step = (step + 1) % song.length;
-          setGuide();
-        }else{
-          const btn = fromBtn || (getAllBoards()[0] && getAllBoards()[0].querySelector(`.kKey[data-id="${id}"]`));
-          if(btn){
-            btn.classList.add('wrong');
-            setTimeout(()=>btn.classList.remove('wrong'), 220);
-          }
-        }
+      function hit(id,fromBtn){
+        const k=keys.find(x=>x.id===id);if(k)pluck(k.freq);btnAudioOn.textContent='🔊 Âm thanh: ON';
+        if(!guideOn)return;
+        const targetId=song[step];
+        if(id===targetId){step=(step+1)%song.length;setGuide()}
+        else{const btn=fromBtn||(getAllBoards()[0]&&getAllBoards()[0].querySelector('.kKey[data-id="'+id+'"]'));if(btn){btn.classList.add('wrong');setTimeout(()=>btn.classList.remove('wrong'),200)}}
       }
 
       function bindBoard(el){
-        if(!el) return;
-        // Cho phép vuốt để scroll (cả 2 chiều). Chỉ phát âm khi thật sự 'tap'.
-        let down = null;
-        el.addEventListener('pointerdown', (e)=>{
-          const btn = e.target.closest('.kKey');
-          if(!btn) return;
-          down = { id: btn.dataset.id, x: e.clientX, y: e.clientY, t: performance.now(), btn };
-        });
-        el.addEventListener('pointerup', (e)=>{
-          if(!down) return;
-          const btn = e.target.closest('.kKey');
-          const dx = Math.abs(e.clientX - down.x);
-          const dy = Math.abs(e.clientY - down.y);
-          const dt = performance.now() - down.t;
-          // Nếu người dùng đang vuốt/scroll thì không phát.
-          if(btn && btn.dataset.id === down.id && dx < 10 && dy < 10 && dt < 500){
-            hit(down.id, down.btn);
-          }
-          down = null;
-        });
-        el.addEventListener('pointercancel', ()=>{ down = null; });
+        if(!el)return;let down=null;
+        el.addEventListener('pointerdown',e=>{const btn=e.target.closest('.kKey');if(!btn)return;down={id:btn.dataset.id,x:e.clientX,y:e.clientY,t:performance.now(),btn}});
+        el.addEventListener('pointerup',e=>{if(!down)return;const btn=e.target.closest('.kKey');const dx=Math.abs(e.clientX-down.x);const dy=Math.abs(e.clientY-down.y);const dt=performance.now()-down.t;if(btn&&btn.dataset.id===down.id&&dx<12&&dy<12&&dt<500){hit(down.id,down.btn)}down=null});
+        el.addEventListener('pointercancel',()=>{down=null});
       }
-      bindBoard(board);
-      bindBoard(boardFull);
-btnAudioOn.addEventListener('click', ()=>{
-        ensureAudio();
-        if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-        btnAudioOn.textContent = '🔊 Âm thanh: ON';
-      });
+      bindBoard(board);bindBoard(boardFull);
 
-      
-      // Fullscreen (better on mobile)
-      function tryLockLandscape(){
-        try{
-          if(screen.orientation && screen.orientation.lock){
-            screen.orientation.lock('landscape').catch(()=>{});
-          }
-        }catch(_){}
-      }
-      function requestFs(){
-        // iOS Safari có thể không hỗ trợ; fail thì thôi
-        try{
-          const el = kalimbaFullscreen;
-          if(el && el.requestFullscreen){
-            el.requestFullscreen().catch(()=>{});
-          }else if(document.documentElement && document.documentElement.requestFullscreen){
-            document.documentElement.requestFullscreen().catch(()=>{});
-          }
-        }catch(_){}
-      }
-      function openKalimbaFull(){
-        if(!kalimbaFullscreen) return;
-        kalimbaFullscreen.classList.add('show');
-        kalimbaFullscreen.setAttribute('aria-hidden','false');
-        document.body.classList.add('noScroll');
-        requestFs();
-        // ensure guide highlight is synced & centered in fullscreen
-        setTimeout(setGuide, 50);
-      }
-      function closeKalimbaFull(){
-        if(!kalimbaFullscreen) return;
-        kalimbaFullscreen.classList.remove('show');
-        kalimbaFullscreen.classList.remove('landscape');
-        kalimbaFullscreen.setAttribute('aria-hidden','true');
-        document.body.classList.remove('noScroll');
-        try{
-          if(document.fullscreenElement) document.exitFullscreen().catch(()=>{});
-        }catch(_){}
-      }
-      if(btnKalimbaFull) btnKalimbaFull.addEventListener('click', openKalimbaFull);
-      if(btnKalimbaClose) btnKalimbaClose.addEventListener('click', closeKalimbaFull);
-      function toggleLandscape(force){
-        if(!kalimbaFullscreen) return;
-        if(force===true) kalimbaFullscreen.classList.add('landscape');
-        else if(force===false) kalimbaFullscreen.classList.remove('landscape');
-        else kalimbaFullscreen.classList.toggle('landscape');
-        if(kalimbaFullscreen.classList.contains('landscape')) tryLockLandscape();
-        // re-center highlight after layout change
-        setTimeout(setGuide, 80);
-      }
-      if(btnKalimbaRotate) btnKalimbaRotate.addEventListener('click', ()=>{ openKalimbaFull(); toggleLandscape(true); });
-      if(btnKalimbaRotateFs) btnKalimbaRotateFs.addEventListener('click', ()=>{ toggleLandscape(); });
-      if(kalimbaFullscreen) kalimbaFullscreen.addEventListener('click', (e)=>{ if(e.target===kalimbaFullscreen) closeKalimbaFull(); });
+      btnAudioOn.addEventListener('click',()=>{ensureAudio();if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();btnAudioOn.textContent='🔊 Âm thanh: ON'});
 
-btnGuide.addEventListener('click', ()=>{
-        guideOn = !guideOn;
-        btnGuide.textContent = guideOn ? '🧭 Hướng dẫn: ON' : '🧭 Hướng dẫn: OFF';
-        if(guideOn) ensureAudio();
-        setGuide();
-      });
+      function openKalimbaFull(){if(!kalimbaFullscreen)return;kalimbaFullscreen.classList.add('show');document.body.classList.add('noScroll');setTimeout(setGuide,50)}
+      function closeKalimbaFull(){if(!kalimbaFullscreen)return;kalimbaFullscreen.classList.remove('show','landscape');document.body.classList.remove('noScroll')}
+      function toggleLandscape(force){if(!kalimbaFullscreen)return;if(force===true)kalimbaFullscreen.classList.add('landscape');else if(force===false)kalimbaFullscreen.classList.remove('landscape');else kalimbaFullscreen.classList.toggle('landscape');setTimeout(setGuide,80)}
 
-      btnResetSong.addEventListener('click', ()=>{
-        step = 0;
-        setGuide();
-      });
+      if(btnKalimbaFull)btnKalimbaFull.addEventListener('click',openKalimbaFull);
+      if(btnKalimbaClose)btnKalimbaClose.addEventListener('click',closeKalimbaFull);
+      if(btnKalimbaRotate)btnKalimbaRotate.addEventListener('click',()=>{openKalimbaFull();toggleLandscape(true)});
+      if(btnKalimbaRotateFs)btnKalimbaRotateFs.addEventListener('click',()=>{toggleLandscape()});
+      if(kalimbaFullscreen)kalimbaFullscreen.addEventListener('click',e=>{if(e.target===kalimbaFullscreen)closeKalimbaFull()});
 
+      btnGuide.addEventListener('click',()=>{guideOn=!guideOn;btnGuide.textContent=guideOn?'🧭 Hướng dẫn: ON':'🧭 Hướng dẫn: OFF';if(guideOn)ensureAudio();setGuide()});
+      btnResetSong.addEventListener('click',()=>{step=0;setGuide()});
       setGuide();
     })();
-
   </script>
 </body>
 </html>
