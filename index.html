@@ -530,7 +530,7 @@
 
     document.getElementById('btnCheck').onclick=()=>{const pick=n=>{const el=document.querySelector('input[name="'+n+'"]:checked');return el?Number(el.value):null};const a=pick('q1'),b=pick('q2'),c=pick('q3'),res=document.getElementById('quizResult');if(a===null||b===null||c===null){res.style.display='block';res.textContent='Chọn đủ 3 câu nha 😄';return}const score=a+b+c;res.style.display='block';if(score===3){res.textContent='🔥 3/3! Team hiểu Jenny quá chuẩn!';boom()}else if(score===2)res.textContent='✨ 2/3! Khá đúng vibe!';else res.textContent='😄 0–1/3! Quan trọng là chân thành!'};
 
-    const messages=[{name:"Quin Quin",text:"Dù nhìu moment hơi ups and downs, nhưng vẫn mong làm chung team thật lâu nha! Mãi bên nhau bạn nhóe!!"},{name:"Mr. Đệ",text:"Sếp gì ạ. MÃI ĐỈNH MÃI KHỎE"}];
+    const messages=[{name:"Quin Quin",text:"Dù nhìu moment hơi ups and downs, nhưng vẫn mong làm chung team thật lâu nha! Mãi bên nhau bạn nhóe!!"},{name:"Mr. Đệ",text:"Sếp gì ạ. MÃI ĐỈNH MÃI KHỎE"},{name:"Em Phương",text:"Chúc mừng sinh nhật chị Trân 😘 Chúc chị luôn phi thường giữa những điều (bất) bình thường 💪Ở nơi phương xa cách chị 2 lầu em vẫn luôn nhớ về chị 😭"}];
     const msgGrid=document.getElementById("msgGrid");
     if(msgGrid){msgGrid.innerHTML=messages.map(m=>'<div class="msgCard"><div class="who">'+m.name+'</div>'+(m.tag?'<div class="tag">'+m.tag+'</div>':'')+'<div class="quote">"'+m.text+'"</div></div>').join("")}
 
@@ -816,3 +816,4 @@
   </script>
 </body>
 </html>
+
